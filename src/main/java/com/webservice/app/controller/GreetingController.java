@@ -1,4 +1,4 @@
-package com.webservice.app;
+package com.webservice.app.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +17,7 @@ public class GreetingController {
     @GetMapping({ "/", "/index" })
     public String index(@RequestParam(name = "name", required = false, defaultValue = "World") String name,
             Model model) {
-        logger.info("Message" + name);
+        logger.info("Message: " + name);
         model.addAttribute("name", name);
         return "index";
     }
@@ -26,7 +26,7 @@ public class GreetingController {
     @ResponseBody
     public String post(@RequestParam(name = "name", required = false, defaultValue = "World") String name,
             Model model) {
-        logger.info("Message" + name);
+        logger.info("Message: " + name);
         model.addAttribute("name", name);
         return model.getAttribute("name").toString();
     }
