@@ -15,7 +15,7 @@ public class GreetingController {
 
     Logger logger = LoggerFactory.getLogger(GreetingController.class);
 
-    @GetMapping({ "/", "/index" })
+    @GetMapping("/index.html")
     public String index(@RequestParam(name = "name", required = false, defaultValue = "World") String name,
             Model model) {
         logger.info("Message" + name);
@@ -34,7 +34,7 @@ public class GreetingController {
     
 
     // Login form
-    @RequestMapping("/login.html")
+    @RequestMapping({ "/", "/login.html" })
     public String login() {
       return "login.html";
     }
