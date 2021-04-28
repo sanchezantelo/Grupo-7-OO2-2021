@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -14,7 +15,7 @@ public class GreetingController {
 
     Logger logger = LoggerFactory.getLogger(GreetingController.class);
 
-    @GetMapping({ "/", "/index" })
+    @GetMapping("/index.html")
     public String index(@RequestParam(name = "name", required = false, defaultValue = "World") String name,
             Model model) {
         logger.info("Message: " + name);
@@ -29,5 +30,19 @@ public class GreetingController {
         logger.info("Message: " + name);
         model.addAttribute("name", name);
         return model.getAttribute("name").toString();
+    }
+    
+
+    // Login form
+    @RequestMapping({ "/", "/login.html" })
+    public String login() {
+      return "login.html";
+    }
+
+    // Login form with error
+    @RequestMapping("/login-error.html")
+    public String loginError(Model model) {
+      model.addAttribute("loginError", true);
+      return "login.html";
     }
 }
