@@ -7,7 +7,7 @@
   <body>
   <div class=center>
     <h1>Login</h1>
-    <p th:if="${loginError}" class="error">Wrong user or password</p>
+    <p th:if="${loginError}" class="error"> Wrong user or password</p>
     <form th:action="@{/login.html}" method="post">
    
       <label for="username">Username</label>
@@ -15,9 +15,9 @@
    
       
       <label for="password">Password</label>
-      <input class="controls" type="password" required id="password" name="password" /> <br /><br><br>
+      <input class="controls" type="password" required id="password" name="password" /> <br /><br><br> 
      
-      <input type="submit" value="Login" />
+      <input type="submit" value="Enviar" />
       <div class="signup_link">
       Not a member? <a href="#">Signup</a>
       </div>
