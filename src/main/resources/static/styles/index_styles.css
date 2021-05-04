@@ -1,0 +1,18 @@
+@charset "ISO-8859-1";
+
+/* CSS Document */
+
+/******************************
+Footer
+******************************/
+
+
+.social-media-icon{
+    color: #000000;
+}
+
+
+.social-media-icon i{
+    font-size: 30px;
+    line-height: 60px;
+}
