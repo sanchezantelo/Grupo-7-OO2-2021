@@ -5,7 +5,6 @@ body{
 	padding: 0;
 	font-family: 'montserrat';
 	background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
-	overflow: hidden;	
 	box-sizing: border-box;
 }
 
@@ -16,7 +15,7 @@ body{
 	border-radius: 10px; 
     padding: 30px;
     margin: auto;
-    margin-top: 100px;/*margen superior del cuadro*/
+    margin-top: 50px;/*margen superior del cuadro*/
     margin-block-end: 100px;/*margen inferior del cuadro*/   
     font-family: 'montserrat';
     color: white;
