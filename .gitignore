@@ -12,6 +12,7 @@ target/
 .settings
 .springBeans
 .sts4-cache
+.metadata
 
 ### IntelliJ IDEA ###
 .idea
@@ -32,3 +33,4 @@ build/
 ### VS Code ###
 .vscode/
 .tern-project
+
