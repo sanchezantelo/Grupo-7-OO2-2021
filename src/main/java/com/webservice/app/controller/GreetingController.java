@@ -45,4 +45,13 @@ public class GreetingController {
       model.addAttribute("loginError", true);
       return "login.html";
     }
+    
+    // Rol
+    @RequestMapping("/rol.html")
+    public String rol(Model model) {
+      model.addAttribute("rol", true);
+      return "rol.html";
+    }
+    
+    
 }
