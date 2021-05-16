@@ -4,14 +4,13 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
+
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -20,53 +19,51 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
-@Table(name="usuario")
+@Table(name = "usuario")
 public class Usuario {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
-	@Column(name="usuario", unique=true, nullable=false, length=45)
+
+	@Column(name = "usuario", unique = true, nullable = false, length = 45)
 	private String usuario;
-	
-	@Column(name="clave", nullable=false, length=60)
+
+	@Column(name = "clave", nullable = false, length = 60)
 	private String clave;
-	
-	
-	
+
 	@OneToOne(mappedBy = "usuario")
 	private Persona persona;
 
-	
-	@Column(name="enabled")
+	@Column(name = "enabled")
 	private boolean enabled;
-	
-	@Column(name="createdat")
+
+	@Column(name = "createdat")
 	@CreationTimestamp
 	private LocalDateTime createdAt;
-	
-	@Column(name="updatedat")
+
+	@Column(name = "updatedat")
 	@UpdateTimestamp
 	private LocalDateTime updatedAt;
-	
-	@OneToMany(fetch=FetchType.LAZY, mappedBy="usuario")
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario")
 	private Set<UsuarioRol> usuarioRoles = new HashSet<UsuarioRol>();
 
-	public Usuario() {}
-	
+	public Usuario() {
+	}
+
 	public Usuario(String usuario, String clave, boolean enabled) {
 		this.usuario = usuario;
 		this.clave = clave;
 		this.enabled = enabled;
 	}
-	
+
 	public Usuario(String usuario, String clave, boolean enabled, Set<UsuarioRol> usuarioRoles, Persona persona) {
 		this.usuario = usuario;
 		this.clave = clave;
 		this.enabled = enabled;
 		this.usuarioRoles = usuarioRoles;
-		this.persona=persona;
+		this.persona = persona;
 	}
 
 	public int getId() {
@@ -132,5 +129,5 @@ public class Usuario {
 	public void setPersona(Persona persona) {
 		this.persona = persona;
 	}
-	
+
 }

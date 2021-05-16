@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.sun.tools.sjavac.Log;
 import com.webservice.app.entities.Usuario;
 import com.webservice.app.helpers.ViewRouteHelper;
 import com.webservice.app.services.IUsuarioService;
@@ -56,14 +55,14 @@ public class UserController {
 
 	@GetMapping("/bajaUsuario")
 	public ResponseEntity<String> bajaUsuario(@RequestParam("id") int id) {
-		logger.debug("/bajaUsuario"+id);
+		logger.debug("/bajaUsuario" + id);
 		usuarioService.bajaUsuario(usuarioService.findById(id));
 		return new ResponseEntity<>("Usuario dado de baja exitosamente!", HttpStatus.OK);
 	}
 
 	@GetMapping("/modificacionUsuario")
-	public ResponseEntity<String> modificacionUsuario(Model model,@RequestParam("id") int id) {
-		logger.debug("/modificacionUsuario"+id);
+	public ResponseEntity<String> modificacionUsuario(Model model, @RequestParam("id") int id) {
+		logger.debug("/modificacionUsuario" + id);
 		usuarioService.modificacionUsuario(usuarioService.findById(id));
 		return new ResponseEntity<>("Usuario modificado exitosamente!", HttpStatus.OK);
 	}
