@@ -41,7 +41,8 @@ public class Usuario implements Serializable {
 	@JoinColumn(name = "rol_id", nullable = false)
 	private UsuarioRol rol;
 	
-	@OneToOne(fetch = FetchType.LAZY,cascade =  CascadeType.ALL,mappedBy = "usuario")
+	@OneToOne(fetch = FetchType.LAZY,cascade =  CascadeType.ALL)
+	@JoinColumn(name = "persona_id", nullable = false)
 	private Persona persona;
 
 	@Column(name = "enabled")

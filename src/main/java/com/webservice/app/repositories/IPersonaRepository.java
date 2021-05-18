@@ -11,8 +11,6 @@ import com.webservice.app.entities.Persona;
 @Repository("personaRepository")
 public interface IPersonaRepository extends JpaRepository<Persona, Serializable> {
 
-	public abstract Persona findByUsuario(@Param("persona") String persona);
-
 	public abstract Persona findById(@Param("id") int id);
 
 }

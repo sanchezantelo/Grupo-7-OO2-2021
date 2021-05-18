@@ -39,9 +39,6 @@ public class Persona implements Serializable {
 	@Column(name = "email", unique = true, nullable = false, length = 45)
 	private String email;
 
-	@OneToOne
-	@JoinColumn(name = "usuario_persona")
-	private Usuario usuario;
 
 	@Column(name = "createdat")
 	@CreationTimestamp
@@ -128,12 +125,6 @@ public class Persona implements Serializable {
 		this.updatedAt = updatedAt;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
-	}
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
 
 }

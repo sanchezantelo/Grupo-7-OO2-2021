@@ -1,6 +1,5 @@
 package com.webservice.app.models;
 
-import com.webservice.app.entities.Persona;
 import com.webservice.app.entities.UsuarioRol;
 
 public class UsuarioModel {
