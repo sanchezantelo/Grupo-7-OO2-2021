@@ -13,10 +13,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.webservice.app.entities.Usuario;
 import com.webservice.app.helpers.ViewRouteHelper;
-import com.webservice.app.models.PersonaModel;
 import com.webservice.app.models.UsuarioModel;
 import com.webservice.app.services.IUsuarioService;
 
@@ -58,10 +57,13 @@ public class UserController {
 //ABM
 
 	@PostMapping("/altaUsuario")
-	public ResponseEntity<String> altaUsuario(@ModelAttribute("usuarioModel") UsuarioModel usuarioModel) {
+	public String altaUsuario(@ModelAttribute("usuarioModel") UsuarioModel usuarioModel,   RedirectAttributes redirectAttrs) {
 
 		usuarioService.altaUsuario(usuarioModel);
-		return new ResponseEntity<>("Usuario agregado exitosamente!", HttpStatus.OK);
+	    redirectAttrs
+        .addFlashAttribute("mensaje", "Agregado correctamente")
+        .addFlashAttribute("clase", "success");
+		return "redirect:/abm-usuario";
 	}
 
 	@GetMapping("/bajaUsuario")

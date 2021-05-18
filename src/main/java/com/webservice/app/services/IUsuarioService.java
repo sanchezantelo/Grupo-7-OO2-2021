@@ -1,7 +1,6 @@
 package com.webservice.app.services;
 
 import com.webservice.app.entities.Usuario;
-import com.webservice.app.models.PersonaModel;
 import com.webservice.app.models.UsuarioModel;
 
 public interface IUsuarioService {

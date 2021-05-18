@@ -53,6 +53,8 @@
 			</ul>
 		</div>
 	</nav>
+<div class="alert alert-success" th:text="${mensaje}" />
+
 
 	<div class="container fluid">
 		<form th:action="@{/altaUsuario}" th:object="${usuarioModel}"

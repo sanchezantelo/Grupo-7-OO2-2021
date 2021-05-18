@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import com.webservice.app.converters.PersonaConverter;
 import com.webservice.app.converters.UsuarioConverter;
 import com.webservice.app.entities.Usuario;
-import com.webservice.app.models.PersonaModel;
 import com.webservice.app.models.UsuarioModel;
 import com.webservice.app.repositories.IUsuarioRepository;
 import com.webservice.app.services.IUsuarioService;
