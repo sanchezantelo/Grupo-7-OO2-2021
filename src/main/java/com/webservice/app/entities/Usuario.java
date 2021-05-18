@@ -2,8 +2,6 @@ package com.webservice.app.entities;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,8 +9,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -52,8 +50,9 @@ public class Usuario implements Serializable {
 	@UpdateTimestamp
 	private LocalDateTime updatedAt;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario")
-	private Set<UsuarioRol> usuarioRoles = new HashSet<UsuarioRol>();
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "rol_id", nullable = false)
+	private UsuarioRol rol;
 
 	public Usuario() {
 	}
@@ -64,12 +63,13 @@ public class Usuario implements Serializable {
 		this.enabled = enabled;
 	}
 
-	public Usuario(String usuario, String clave, boolean enabled, Set<UsuarioRol> usuarioRoles, Persona persona) {
+	public Usuario(String usuario, String clave, Persona persona, boolean enabled, UsuarioRol rol) {
+		super();
 		this.usuario = usuario;
 		this.clave = clave;
-		this.enabled = enabled;
-		this.usuarioRoles = usuarioRoles;
 		this.persona = persona;
+		this.enabled = enabled;
+		this.rol = rol;
 	}
 
 	public int getId() {
@@ -80,19 +80,19 @@ public class Usuario implements Serializable {
 		this.id = id;
 	}
 
-	public String getusuario() {
+	public String getUsuario() {
 		return usuario;
 	}
 
-	public void setusuario(String usuario) {
+	public void setUsuario(String usuario) {
 		this.usuario = usuario;
 	}
 
-	public String getclave() {
+	public String getClave() {
 		return clave;
 	}
 
-	public void setclave(String clave) {
+	public void setClave(String clave) {
 		this.clave = clave;
 	}
 
@@ -120,12 +120,12 @@ public class Usuario implements Serializable {
 		this.updatedAt = updatedAt;
 	}
 
-	public Set<UsuarioRol> getusuarioRoles() {
-		return usuarioRoles;
+	public UsuarioRol getRol() {
+		return rol;
 	}
 
-	public void setusuarioRoles(Set<UsuarioRol> usuarioRoles) {
-		this.usuarioRoles = usuarioRoles;
+	public void setRol(UsuarioRol rol) {
+		this.rol = rol;
 	}
 
 	public Persona getPersona() {

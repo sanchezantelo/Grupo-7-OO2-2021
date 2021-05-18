@@ -59,6 +59,15 @@ public class Persona implements Serializable {
 		this.email = email;
 	}
 
+	public Persona(int id, String nombre, String apellido, Long dni, String email) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.dni = dni;
+		this.email = email;
+	}
+
 	public Persona() {
 		super();
 	}
