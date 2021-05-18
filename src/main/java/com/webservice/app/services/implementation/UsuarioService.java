@@ -9,31 +9,30 @@ import com.webservice.app.repositories.IUsuarioRepository;
 import com.webservice.app.services.IUsuarioService;
 
 @Service("usuarioService")
-public class UsuarioService  implements IUsuarioService {
-	
+public class UsuarioService implements IUsuarioService {
+
 	@Autowired
 	@Qualifier("usuarioRepository")
 	private IUsuarioRepository usuarioRepository;
-	
+
 	public Usuario findByUsuario(String usuario) {
 		return usuarioRepository.findByUsuario(usuario);
 	}
-	
-	public Usuario findById(int id){
+
+	public Usuario findById(int id) {
 		return usuarioRepository.findById(id);
 	}
-	
+
 	public void altaUsuario(Usuario usuario) {
 		usuarioRepository.save(usuario);
 	}
-	
+
 	public void bajaUsuario(Usuario usuario) {
 		usuarioRepository.delete(usuario);
 	}
-	
+
 	public void modificacionUsuario(Usuario usuario) {
 		usuarioRepository.saveAndFlush(usuario);
 	}
-	
 
 }

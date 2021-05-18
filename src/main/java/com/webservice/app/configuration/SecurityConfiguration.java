@@ -18,6 +18,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	        .defaultSuccessUrl("/index.html")
 	      .and()
 	        .logout()
-	        .logoutSuccessUrl("/index.html");
-	}
+	        .logoutSuccessUrl("/index.html")
+	        .and().authorizeRequests().antMatchers("/abm-usuario.html").permitAll();
+
+}
 }

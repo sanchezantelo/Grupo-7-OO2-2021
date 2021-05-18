@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -44,10 +46,17 @@ public class UserController {
 		return "redirect:/index";
 	}
 
+	
+	@GetMapping("abm-usuario")
+	public String abmUsuario(Model model) {
+		model.addAttribute("usuario", new Usuario());
+		return "abm-usuario";
+	}
+
 //ABM
 
-	@GetMapping("/altaUsuario")
-	public ResponseEntity<String> altaUsuario(Model model, Usuario usuario) {
+	@PostMapping("/altaUsuario")
+	public ResponseEntity<String> altaUsuario(@ModelAttribute Usuario usuario) {
 
 		usuarioService.altaUsuario(usuario);
 		return new ResponseEntity<>("Usuario agregado exitosamente!", HttpStatus.OK);
