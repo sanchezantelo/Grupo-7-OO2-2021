@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.webservice.app.entities.Usuario;
 import com.webservice.app.helpers.ViewRouteHelper;
+import com.webservice.app.models.PersonaModel;
+import com.webservice.app.models.UsuarioModel;
 import com.webservice.app.services.IUsuarioService;
 
 @Controller
@@ -49,30 +51,30 @@ public class UserController {
 	
 	@GetMapping("abm-usuario")
 	public String abmUsuario(Model model) {
-		model.addAttribute("usuario", new Usuario());
+		model.addAttribute("usuarioModel", new UsuarioModel());
 		return "abm-usuario";
 	}
 
 //ABM
 
 	@PostMapping("/altaUsuario")
-	public ResponseEntity<String> altaUsuario(@ModelAttribute Usuario usuario) {
+	public ResponseEntity<String> altaUsuario(@ModelAttribute("usuarioModel") UsuarioModel usuarioModel) {
 
-		usuarioService.altaUsuario(usuario);
+		usuarioService.altaUsuario(usuarioModel);
 		return new ResponseEntity<>("Usuario agregado exitosamente!", HttpStatus.OK);
 	}
 
 	@GetMapping("/bajaUsuario")
 	public ResponseEntity<String> bajaUsuario(@RequestParam("id") int id) {
 		logger.debug("/bajaUsuario" + id);
-		usuarioService.bajaUsuario(usuarioService.findById(id));
+		//usuarioService.bajaUsuario(usuarioService.findById(id));
 		return new ResponseEntity<>("Usuario dado de baja exitosamente!", HttpStatus.OK);
 	}
 
 	@GetMapping("/modificacionUsuario")
 	public ResponseEntity<String> modificacionUsuario(Model model, @RequestParam("id") int id) {
 		logger.debug("/modificacionUsuario" + id);
-		usuarioService.modificacionUsuario(usuarioService.findById(id));
+		//usuarioService.modificacionUsuario(usuarioService.findById(id));
 		return new ResponseEntity<>("Usuario modificado exitosamente!", HttpStatus.OK);
 	}
 

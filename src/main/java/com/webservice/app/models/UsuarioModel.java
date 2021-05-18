@@ -1,24 +1,35 @@
 package com.webservice.app.models;
 
 import com.webservice.app.entities.Persona;
+import com.webservice.app.entities.UsuarioRol;
 
 public class UsuarioModel {
 	private int id;
 	private String usuario;
 	private String clave;
-	private Persona persona;
+	private boolean enabled;
+	private UsuarioRol rol;
+	private PersonaModel persona;
 
 	public UsuarioModel() {
 		super();
 	}
 
-	public UsuarioModel(int id, String usuario, String clave, Persona persona) {
+
+
+
+	public UsuarioModel(int id, String usuario, String clave, boolean enabled, UsuarioRol rol, PersonaModel persona) {
 		super();
 		this.id = id;
 		this.usuario = usuario;
 		this.clave = clave;
+		this.enabled = enabled;
+		this.rol = rol;
 		this.persona = persona;
 	}
+
+
+
 
 	public int getId() {
 		return id;
@@ -44,17 +55,42 @@ public class UsuarioModel {
 		this.clave = clave;
 	}
 
-	public Persona getPersona() {
+	public UsuarioRol getRol() {
+		return rol;
+	}
+
+	public void setRol(UsuarioRol rol) {
+		this.rol = rol;
+	}
+
+
+	public PersonaModel getPersona() {
 		return persona;
 	}
 
-	public void setPersona(Persona persona) {
+
+	public void setPersona(PersonaModel persona) {
 		this.persona = persona;
 	}
 
-	@Override
-	public String toString() {
-		return "UsuarioModel [id=" + id + ", usuario=" + usuario + ", clave=" + clave + ", persona=" + persona + "]";
+	
+
+	public boolean isEnabled() {
+		return enabled;
 	}
 
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+
+	@Override
+	public String toString() {
+		return "UsuarioModel [id=" + id + ", usuario=" + usuario + ", clave=" + clave + ", rol=" + rol + ", persona="
+				+ persona + "]";
+	}
+
+
+	
 }

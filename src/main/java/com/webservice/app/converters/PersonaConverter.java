@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import com.webservice.app.entities.Persona;
 import com.webservice.app.models.PersonaModel;
 
-@Component("personaConverter")
+@Component("personaModel")
 
 public class PersonaConverter {
 
@@ -16,7 +16,7 @@ public class PersonaConverter {
     }
 
     public Persona modelToEntity(PersonaModel personaModel){
-        return new Persona(personaModel.getId(),personaModel.getNombre(), personaModel.getApellido(), personaModel.getDni(),personaModel.getEmail());
+        return new Persona(personaModel.getNombre(), personaModel.getApellido(), personaModel.getDni(),personaModel.getEmail());
     }
 }
 

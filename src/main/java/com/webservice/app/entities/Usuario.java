@@ -3,6 +3,7 @@ package com.webservice.app.entities;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -36,7 +37,11 @@ public class Usuario implements Serializable {
 	@Column(name = "clave", nullable = false, length = 60)
 	private String clave;
 
-	@OneToOne(mappedBy = "usuario")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "rol_id", nullable = false)
+	private UsuarioRol rol;
+	
+	@OneToOne(fetch = FetchType.LAZY,cascade =  CascadeType.ALL,mappedBy = "usuario")
 	private Persona persona;
 
 	@Column(name = "enabled")
@@ -50,9 +55,7 @@ public class Usuario implements Serializable {
 	@UpdateTimestamp
 	private LocalDateTime updatedAt;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "rol_id", nullable = false)
-	private UsuarioRol rol;
+	
 
 	public Usuario() {
 	}
@@ -70,6 +73,15 @@ public class Usuario implements Serializable {
 		this.persona = persona;
 		this.enabled = enabled;
 		this.rol = rol;
+	}
+
+	public Usuario(int id, String usuario, String clave, UsuarioRol rol, Persona persona) {
+		super();
+		this.id = id;
+		this.usuario = usuario;
+		this.clave = clave;
+		this.rol = rol;
+		this.persona = persona;
 	}
 
 	public int getId() {
@@ -136,4 +148,6 @@ public class Usuario implements Serializable {
 		this.persona = persona;
 	}
 
+	
+	
 }
