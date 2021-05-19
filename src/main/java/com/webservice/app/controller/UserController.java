@@ -51,6 +51,7 @@ public class UserController {
 	@GetMapping("abm-usuario")
 	public String abmUsuario(Model model) {
 		model.addAttribute("usuarioModel", new UsuarioModel());
+		model.addAttribute("lstUsuarios",usuarioService.findAll());
 		return "abm-usuario";
 	}
 
@@ -58,7 +59,7 @@ public class UserController {
 
 	@PostMapping("/altaUsuario")
 	public String altaUsuario(@ModelAttribute("usuarioModel") UsuarioModel usuarioModel,   RedirectAttributes redirectAttrs) {
-
+        logger.info("/altaUsuario"+usuarioModel);
 		usuarioService.altaUsuario(usuarioModel);
 	    redirectAttrs
         .addFlashAttribute("mensaje", "Agregado correctamente")

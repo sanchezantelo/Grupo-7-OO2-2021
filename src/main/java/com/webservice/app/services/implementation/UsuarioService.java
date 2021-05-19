@@ -1,5 +1,7 @@
 package com.webservice.app.services.implementation;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -17,7 +19,7 @@ public class UsuarioService implements IUsuarioService {
 	@Autowired
 	@Qualifier("usuarioRepository")
 	private IUsuarioRepository usuarioRepository;
-	
+
 	@Autowired
 	@Qualifier("usuarioModel")
 	private UsuarioConverter usuarioModel;
@@ -35,8 +37,8 @@ public class UsuarioService implements IUsuarioService {
 	}
 
 	public void altaUsuario(UsuarioModel usuario) {
-		Usuario user=usuarioModel.modelToEntity(usuario);
-		//user.setPersona(personaModel.modelToEntity(persona));
+		Usuario user = usuarioModel.modelToEntity(usuario);
+		// user.setPersona(personaModel.modelToEntity(persona));
 		usuarioRepository.save(user);
 	}
 
@@ -48,4 +50,8 @@ public class UsuarioService implements IUsuarioService {
 		usuarioRepository.saveAndFlush(usuarioModel.modelToEntity(usuario));
 	}
 
+	public List<Usuario> findAll() {
+
+		return usuarioRepository.findAll();
+	}
 }

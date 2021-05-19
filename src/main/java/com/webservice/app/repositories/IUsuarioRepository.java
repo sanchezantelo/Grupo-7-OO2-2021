@@ -1,6 +1,7 @@
 package com.webservice.app.repositories;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
@@ -13,5 +14,7 @@ public interface IUsuarioRepository extends JpaRepository<Usuario, Serializable>
 	public abstract Usuario findByUsuario(@Param("usuario") String usuario);
 
 	public abstract Usuario findById(@Param("id") int id);
+	
+	public abstract List<Usuario> findAll();
 
 }
