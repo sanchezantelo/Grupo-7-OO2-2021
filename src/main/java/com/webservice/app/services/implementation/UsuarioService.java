@@ -35,6 +35,10 @@ public class UsuarioService implements IUsuarioService {
 	public Usuario findById(int id) {
 		return usuarioRepository.findById(id);
 	}
+	public UsuarioModel traerUsuario(int id) {
+		
+		return usuarioModel.entityToModel(usuarioRepository.findById(id));
+	}
 
 	public void altaUsuario(UsuarioModel usuario) {
 		Usuario user = usuarioModel.modelToEntity(usuario);

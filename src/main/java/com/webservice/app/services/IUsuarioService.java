@@ -11,6 +11,8 @@ public interface IUsuarioService {
 
 	Usuario findById(int id);
 	
+	UsuarioModel traerUsuario(int id);
+	
 	List<Usuario>findAll();
 
 	void altaUsuario(UsuarioModel usuarioModel);

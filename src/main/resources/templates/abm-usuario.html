@@ -58,7 +58,7 @@
 				<h3>Datos del Usuario</h3>
 				<div class="form-group">
 
-					<form th:action="@{/altaUsuario}" th:object="${usuarioModel}"
+					<form th:action="@{/altaUsuario}" th:if="${usuarioModel}" th:unless="${usuarioModelUpdate}" th:object="${usuarioModel}"
 						method="post">
 						<div class="form-group">
 							<label>Usuario </label> <input type="text"
@@ -71,6 +71,68 @@
 						</div>
 
 
+						<div class="form-group">
+							<label>nombre</label> <input type="text"
+								class="form-control form-control-sm"
+								th:field="*{persona.nombre}">
+						</div>
+
+						<div class="form-group">
+							<label>apellido</label> <input type="text"
+								class="form-control form-control-sm"
+								th:field="*{persona.apellido}">
+						</div>
+
+						<div class="form-group">
+							<label>dni</label> <input type="number"
+								class="form-control form-control-sm" th:field="*{persona.dni}">
+						</div>
+
+						<div class="form-group">
+							<label>email</label> <input type="text"
+								class="form-control form-control-sm" th:field="*{persona.email}">
+						</div>
+
+						<div class="form-group">
+							<select class="form-control form-control-sm" th:field="*{rol.id}">
+								<option th:value="1">ROL_ADMIN</option>
+								<option th:value="2">ROL_AUDITOR</option>
+							</select>
+						</div>
+
+						<div class="form-group">
+							<label>Activo</label> <input type="checkbox"
+								class="form-control form-control-sm" th:field="*{enabled}">
+						</div>
+
+						<div class="form-group">
+							<input type="submit" class="btn-success form-control form-control-sm"/>
+						</div>
+
+					</form>
+					
+					
+					
+					<form th:action="@{/modificacionUsuario}"  th:if="${usuarioModelUpdate}" th:object="${usuarioModelUpdate}"
+						method="post">
+						<div class="form-group">
+							 <input type="hidden"
+								class="form-control form-control-sm" th:field="*{id}">
+						</div>
+						<div class="form-group">
+							<label>Usuario </label> <input type="text"
+								class="form-control form-control-sm" th:field="*{usuario}">
+						</div>
+
+						<div class="form-group">
+							<label>Clave</label> <input type="text"
+								class="form-control form-control-sm" th:field="*{clave}">
+						</div>
+
+                       <div class="form-group">
+							 <input type="hidden"
+								class="form-control form-control-sm" th:field="*{persona.id}">
+						</div>
 						<div class="form-group">
 							<label>nombre</label> <input type="text"
 								class="form-control form-control-sm"
@@ -126,6 +188,7 @@
 							<th scope="col">Email</th>
 							<th scope="col">Rol</th>
 							<th scope="col"></th>
+							<th scope="col"></th>
 							
 						</tr>
 					</thead>
@@ -140,7 +203,8 @@
 							<td><span th:text="${usuario.persona.dni}"></td>
 							<td><span th:text="${usuario.persona.email}"></td>
 							<td><span th:text="${usuario.rol.id}"></td>
-							<td><a th:href="@{'/bajaUsuario?id=' + ${usuario.id}}" class="btn-danger">eliminar</a></td>
+							<td><a th:href="@{'/bajaUsuario?id=' + ${usuario.id}}" class="btn btn-danger btn-sm">eliminar</a></td>
+							<td><a th:href="@{'/traerUsuario?id=' + ${usuario.id}}" class="btn btn-warning btn-sm">editar</a></td>
 						</tr>
 					</tbody>
 				</table>

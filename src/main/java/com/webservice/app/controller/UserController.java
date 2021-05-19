@@ -5,8 +5,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -51,7 +49,7 @@ public class UserController {
 	
 	@GetMapping("abm-usuario")
 	public String abmUsuario(Model model) {
-		model.addAttribute("usuarioModel", new UsuarioModel());
+        model.addAttribute("usuarioModel", new UsuarioModel());
 		model.addAttribute("lstUsuarios",usuarioService.findAll());
 		return "abm-usuario";
 	}
@@ -78,11 +76,23 @@ public class UserController {
 		return "redirect:/abm-usuario";
 	}
 
-	@GetMapping("/modificacionUsuario")
-	public ResponseEntity<String> modificacionUsuario(Model model, @RequestParam("id") int id) {
-		logger.debug("/modificacionUsuario" + id);
-		//usuarioService.modificacionUsuario(usuarioService.findById(id));
-		return new ResponseEntity<>("Usuario modificado exitosamente!", HttpStatus.OK);
+	@PostMapping("/modificacionUsuario")
+	public String modificacionUsuario(@ModelAttribute("usuarioModelUpdate") UsuarioModel usuarioModelUpdate, RedirectAttributes redirectAttrs) {
+		logger.info("/modificacionUsuario" + usuarioModelUpdate);
+		usuarioService.modificacionUsuario(usuarioModelUpdate);
+		 redirectAttrs
+	        .addFlashAttribute("mensaje","Usuario modificado exitosamente")
+	        .addFlashAttribute("clase", "alert alert-success");
+		return "redirect:/abm-usuario";
 	}
 
+	@GetMapping("/traerUsuario")
+	public String traerUsuario(@RequestParam("id") int id,Model model, RedirectAttributes redirectAttrs) {
+		logger.info("/traerUsuario" + id);
+		 model.addAttribute("editar", true);
+		 redirectAttrs
+	        .addFlashAttribute("usuarioModelUpdate",usuarioService.traerUsuario(id))
+	        .addFlashAttribute("clase", "alert alert-success");
+		return "redirect:/abm-usuario";
+	}
 }
