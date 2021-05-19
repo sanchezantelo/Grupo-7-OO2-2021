@@ -15,7 +15,7 @@ public interface IUsuarioService {
 
 	void altaUsuario(UsuarioModel usuarioModel);
 
-	void bajaUsuario(UsuarioModel usuarioModel);
+	void bajaUsuario(int id);
 
 	void modificacionUsuario(UsuarioModel usuarioModel);
 

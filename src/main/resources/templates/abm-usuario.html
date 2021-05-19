@@ -39,17 +39,12 @@
 		</button>
 		<div class="collapse navbar-collapse" id="collapsibleNavbar">
 			<ul class="navbar-nav">
-				<li class="nav-item"><a class="nav-link" href="#personas">Personas</a>
+				<li class="nav-item"><a class="nav-link" href="#personas"></a>
 				</li>
-				<li class="nav-item"><a class="nav-link" href="#permisos">Permisos</a>
+				<li class="nav-item"><a class="nav-link" href="#permisos"></a>
 				</li>
-				<li class="nav-item"><a class="nav-link" href="#rodados">Rodados</a>
+				<li class="nav-item"><a class="nav-link" href="#rodados"></a>
 				</li>
-				<li class="nav-item"><a class="nav-link" href="#nosotros">Sobre
-						Nosotros</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">Cerrar
-						Sesión <i class='bx bxs-log-out-circle'></i>
-				</a></li>
 			</ul>
 		</div>
 	</nav>
@@ -111,7 +106,7 @@
 						</div>
 
 						<div class="form-group">
-							<input type="submit" class="form-control form-control-sm"/>
+							<input type="submit" class="btn-success form-control form-control-sm"/>
 						</div>
 
 					</form>
@@ -130,6 +125,8 @@
 							<th scope="col">dni</th>
 							<th scope="col">Email</th>
 							<th scope="col">Rol</th>
+							<th scope="col"></th>
+							
 						</tr>
 					</thead>
 					<tbody >
@@ -143,6 +140,7 @@
 							<td><span th:text="${usuario.persona.dni}"></td>
 							<td><span th:text="${usuario.persona.email}"></td>
 							<td><span th:text="${usuario.rol.id}"></td>
+							<td><a th:href="@{'/bajaUsuario?id=' + ${usuario.id}}" class="btn-danger">eliminar</a></td>
 						</tr>
 					</tbody>
 				</table>

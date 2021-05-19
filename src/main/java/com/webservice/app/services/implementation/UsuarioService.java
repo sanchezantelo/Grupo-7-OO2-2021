@@ -42,8 +42,8 @@ public class UsuarioService implements IUsuarioService {
 		usuarioRepository.save(user);
 	}
 
-	public void bajaUsuario(UsuarioModel usuario) {
-		usuarioRepository.delete(usuarioModel.modelToEntity(usuario));
+	public void bajaUsuario(int id) {
+		usuarioRepository.deleteById(id);
 	}
 
 	public void modificacionUsuario(UsuarioModel usuario) {

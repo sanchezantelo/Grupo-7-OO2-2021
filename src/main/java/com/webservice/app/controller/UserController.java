@@ -1,3 +1,4 @@
+
 package com.webservice.app.controller;
 
 import org.slf4j.Logger;
@@ -62,16 +63,19 @@ public class UserController {
         logger.info("/altaUsuario"+usuarioModel);
 		usuarioService.altaUsuario(usuarioModel);
 	    redirectAttrs
-        .addFlashAttribute("mensaje","Agregado correctamente")
+        .addFlashAttribute("mensaje","Usuario agregado exitosamente")
         .addFlashAttribute("clase", "alert alert-success");
 		return "redirect:/abm-usuario";
 	}
 
 	@GetMapping("/bajaUsuario")
-	public ResponseEntity<String> bajaUsuario(@RequestParam("id") int id) {
-		logger.debug("/bajaUsuario" + id);
-		//usuarioService.bajaUsuario(usuarioService.findById(id));
-		return new ResponseEntity<>("Usuario dado de baja exitosamente!", HttpStatus.OK);
+	public String bajaUsuario(@RequestParam("id") int id, RedirectAttributes redirectAttrs) {
+		logger.info("/bajaUsuario" + id);
+		usuarioService.bajaUsuario(id);
+		 redirectAttrs
+	        .addFlashAttribute("mensaje","Usuario dado de baja exitosamente")
+	        .addFlashAttribute("clase", "alert alert-success");
+		return "redirect:/abm-usuario";
 	}
 
 	@GetMapping("/modificacionUsuario")
