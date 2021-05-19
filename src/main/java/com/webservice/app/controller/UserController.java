@@ -62,8 +62,8 @@ public class UserController {
         logger.info("/altaUsuario"+usuarioModel);
 		usuarioService.altaUsuario(usuarioModel);
 	    redirectAttrs
-        .addFlashAttribute("mensaje", "Agregado correctamente")
-        .addFlashAttribute("clase", "success");
+        .addFlashAttribute("mensaje","Agregado correctamente")
+        .addFlashAttribute("clase", "alert alert-success");
 		return "redirect:/abm-usuario";
 	}
 
