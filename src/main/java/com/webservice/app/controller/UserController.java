@@ -49,7 +49,7 @@ public class UserController {
 		try {
 			usuarioService.altaUsuario(usuarioModel);
 			redirectAttrs
-		    .addFlashAttribute("mensaje","Usuario agregado exitosamente")
+		    .addFlashAttribute("mensaje","Usuario agregado exitosamente!")
 		    .addFlashAttribute("clase", "alert alert-success");
 		} catch (Exception e) {
 			redirectAttrs
@@ -63,10 +63,17 @@ public class UserController {
 	@GetMapping("/bajaUsuario")
 	public String bajaUsuario(@RequestParam("id") int id, RedirectAttributes redirectAttrs) {
 		logger.info("/bajaUsuario" + id);
-		usuarioService.bajaUsuario(id);
-		 redirectAttrs
-	        .addFlashAttribute("mensaje","Usuario dado de baja exitosamente")
+		try {
+			usuarioService.bajaUsuario(id);
+			redirectAttrs
+	        .addFlashAttribute("mensaje","Usuario dado de baja exitosamente!")
 	        .addFlashAttribute("clase", "alert alert-success");
+		} catch (Exception e) {
+			redirectAttrs
+	        .addFlashAttribute("error",e.getMessage())
+	        .addFlashAttribute("clase", "alert alert-danger");
+		}
+		 
 		return "redirect:/admin/usuario/abm-usuario";
 	}
 
@@ -76,7 +83,7 @@ public class UserController {
 		try {
 			usuarioService.modificacionUsuario(usuarioModelUpdate);
 			 redirectAttrs
-		        .addFlashAttribute("mensaje","Usuario modificado exitosamente")
+		        .addFlashAttribute("mensaje","Usuario modificado exitosamente!")
 		        .addFlashAttribute("clase", "alert alert-success");
 		} catch (Exception e) {
 			redirectAttrs

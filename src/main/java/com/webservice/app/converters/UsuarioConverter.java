@@ -16,11 +16,11 @@ public class UsuarioConverter {
 	private PersonaConverter personaModel;
 
 	public UsuarioModel entityToModel(Usuario usuario){
-        return new UsuarioModel(usuario.getId(),usuario.getUsuario(),usuario.getClave(),usuario.isEnabled(),usuario.getRol(),personaModel.entityToModel(usuario.getPersona()));
+        return new UsuarioModel(usuario.getId(),usuario.getUsuario(),usuario.getClave(),true,usuario.getRol(),personaModel.entityToModel(usuario.getPersona()));
     }
 
     public Usuario modelToEntity(UsuarioModel usuarioModel){
-        return new Usuario(usuarioModel.getId(),usuarioModel.getUsuario(),usuarioModel.getClave(),usuarioModel.getRol(),personaModel.modelToEntity(usuarioModel.getPersona()));
+        return new Usuario(usuarioModel.getId(),usuarioModel.getUsuario(),usuarioModel.getClave(),true,usuarioModel.getRol(),personaModel.modelToEntity(usuarioModel.getPersona()));
     }
 }
 

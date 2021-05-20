@@ -17,7 +17,7 @@ public interface IUsuarioService {
 
 	void altaUsuario(UsuarioModel usuarioModel) throws Exception;
 
-	void bajaUsuario(int id);
+	void bajaUsuario(int id) throws Exception;
 
 	void modificacionUsuario(UsuarioModel usuarioModel) throws Exception;
 

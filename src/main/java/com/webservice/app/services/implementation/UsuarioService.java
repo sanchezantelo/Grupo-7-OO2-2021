@@ -45,13 +45,19 @@ public class UsuarioService implements IUsuarioService {
 		Usuario user = usuarioModel.modelToEntity(usuario);
 		usuarioRepository.save(user);
 		} catch (Exception e) {
-		throw new Exception("No se pudo completar la operación, el usuario ya existe");
+		throw new Exception("No se pudo completar la operación,error al ingresar los datos o el usuario ya existe");
 	}	
 	}
 
 
-	public void bajaUsuario(int id) {
-		usuarioRepository.deleteById(id);
+	public void bajaUsuario(int id) throws Exception {
+		Usuario usuario=usuarioRepository.findById(id);
+		usuario.setEnabled(false);
+		try {
+			usuarioRepository.saveAndFlush(usuario);
+			} catch (Exception e) {
+			throw new Exception("No se pudo completar la operación");
+			}
 	}
 
 	

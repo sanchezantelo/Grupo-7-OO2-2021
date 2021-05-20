@@ -45,7 +45,7 @@ public class Usuario implements Serializable {
 	@JoinColumn(name = "persona_id", nullable = false)
 	private Persona persona;
 
-	@Column(name = "enabled")
+	@Column(name = "enabled",columnDefinition = "boolean default true")
 	private boolean enabled;
 
 	@Column(name = "createdat")
@@ -76,11 +76,12 @@ public class Usuario implements Serializable {
 		this.rol = rol;
 	}
 
-	public Usuario(int id, String usuario, String clave, UsuarioRol rol, Persona persona) {
+	public Usuario(int id, String usuario, String clave,boolean enabled, UsuarioRol rol, Persona persona) {
 		super();
 		this.id = id;
 		this.usuario = usuario;
 		this.clave = clave;
+		this.enabled = enabled;
 		this.rol = rol;
 		this.persona = persona;
 	}

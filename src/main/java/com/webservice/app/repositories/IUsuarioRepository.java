@@ -18,7 +18,7 @@ public interface IUsuarioRepository extends JpaRepository<Usuario, Serializable>
 	
 	public abstract List<Usuario> findAll();
 	
-	@Query("SELECT u FROM Usuario u JOIN FETCH u.rol WHERE u.enabled=false")
+	@Query("SELECT u FROM Usuario u JOIN FETCH u.rol WHERE u.enabled=true")
 	public abstract List<Usuario> findByEnabled();
 
 }
