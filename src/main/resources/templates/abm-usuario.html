@@ -58,7 +58,7 @@
 				<h3>Datos del Usuario</h3>
 				<div class="form-group">
 
-					<form th:action="@{/altaUsuario}" th:if="${usuarioModel}" th:unless="${usuarioModelUpdate}" th:object="${usuarioModel}"
+					<form th:action="@{/admin/usuario/altaUsuario}" th:if="${usuarioModel}" th:unless="${usuarioModelUpdate}" th:object="${usuarioModel}"
 						method="post">
 						<div class="form-group">
 							<label>Usuario </label> <input type="text"
@@ -113,7 +113,7 @@
 					
 					
 					
-					<form th:action="@{/modificacionUsuario}"  th:if="${usuarioModelUpdate}" th:object="${usuarioModelUpdate}"
+					<form th:action="@{/admin/usuario/modificacionUsuario}"  th:if="${usuarioModelUpdate}" th:object="${usuarioModelUpdate}"
 						method="post">
 						<div class="form-group">
 							 <input type="hidden"
@@ -181,7 +181,6 @@
 				<table class="table">
 					<thead>
 						<tr>
-							<th scope="col">#</th>
 							<th scope="col">Nombre</th>
 							<th scope="col">Apellido</th>
 							<th scope="col">dni</th>
@@ -197,14 +196,14 @@
 							<td colspan="2">Sin usuarios en el sistema</td>
 						</tr>
 						<tr th:each="usuario: ${lstUsuarios}">
-							<td><span th:text="${usuario.id}"></td>
 							<td><span th:text="${usuario.persona.nombre}"></td>
 							<td><span th:text="${usuario.persona.apellido}"></td>
 							<td><span th:text="${usuario.persona.dni}"></td>
 							<td><span th:text="${usuario.persona.email}"></td>
 							<td><span th:text="${usuario.rol.id}"></td>
-							<td><a th:href="@{'/bajaUsuario?id=' + ${usuario.id}}" class="btn btn-danger btn-sm">eliminar</a></td>
-							<td><a th:href="@{'/traerUsuario?id=' + ${usuario.id}}" class="btn btn-warning btn-sm">editar</a></td>
+							<td><a th:href="@{'/admin/usuario/bajaUsuario?id=' + ${usuario.id}}" class="btn btn-danger btn-sm">eliminar</a></td>
+							<td><a th:href="@{'/admin/usuario/traerUsuario?id=' + ${usuario.id}}" class="btn btn-warning btn-sm">editar</a></td>
+						    <td><input type="hidden" th:value="${usuario.id}"/></td>
 						</tr>
 					</tbody>
 				</table>

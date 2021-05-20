@@ -14,12 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.webservice.app.helpers.ViewRouteHelper;
 import com.webservice.app.models.UsuarioModel;
 import com.webservice.app.services.IUsuarioService;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/admin/usuario")
 public class UserController {
 
 	@Autowired
@@ -28,26 +27,7 @@ public class UserController {
 
 	Logger logger = LoggerFactory.getLogger(UserController.class);
 
-	@GetMapping("/login")
-	public String login(Model model, @RequestParam(name = "error", required = false) String error,
-			@RequestParam(name = "logout", required = false) String logout) {
-		model.addAttribute("error", error);
-		model.addAttribute("logout", logout);
-		return ViewRouteHelper.USER_LOGIN;
-	}
-
-	@GetMapping("/logout")
-	public String logout(Model model) {
-		return ViewRouteHelper.USER_LOGOUT;
-	}
-
-	@GetMapping("/loginsuccess")
-	public String loginCheck() {
-		return "redirect:/index";
-	}
-
-	
-	@GetMapping("abm-usuario")
+	@GetMapping("/abm-usuario")
 	public String abmUsuario(Model model) {
         model.addAttribute("usuarioModel", new UsuarioModel());
 		model.addAttribute("lstUsuarios",usuarioService.findAll());
@@ -63,7 +43,7 @@ public class UserController {
 	    redirectAttrs
         .addFlashAttribute("mensaje","Usuario agregado exitosamente")
         .addFlashAttribute("clase", "alert alert-success");
-		return "redirect:/abm-usuario";
+		return "redirect:/admin/usuario/abm-usuario";
 	}
 
 	@GetMapping("/bajaUsuario")
@@ -73,7 +53,7 @@ public class UserController {
 		 redirectAttrs
 	        .addFlashAttribute("mensaje","Usuario dado de baja exitosamente")
 	        .addFlashAttribute("clase", "alert alert-success");
-		return "redirect:/abm-usuario";
+		return "redirect:/admin/usuario/abm-usuario";
 	}
 
 	@PostMapping("/modificacionUsuario")
@@ -83,7 +63,7 @@ public class UserController {
 		 redirectAttrs
 	        .addFlashAttribute("mensaje","Usuario modificado exitosamente")
 	        .addFlashAttribute("clase", "alert alert-success");
-		return "redirect:/abm-usuario";
+		return "redirect:/admin/usuario/abm-usuario";
 	}
 
 	@GetMapping("/traerUsuario")
@@ -93,6 +73,6 @@ public class UserController {
 		 redirectAttrs
 	        .addFlashAttribute("usuarioModelUpdate",usuarioService.traerUsuario(id))
 	        .addFlashAttribute("clase", "alert alert-success");
-		return "redirect:/abm-usuario";
+		return "redirect:/admin/usuario/abm-usuario";
 	}
 }
