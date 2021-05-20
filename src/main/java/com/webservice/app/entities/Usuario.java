@@ -17,6 +17,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.util.DigestUtils;
 
 @Entity
 @Table(name = "usuario")
@@ -61,7 +62,7 @@ public class Usuario implements Serializable {
 
 	public Usuario(String usuario, String clave, boolean enabled) {
 		this.usuario = usuario;
-		this.clave = clave;
+		this.clave = DigestUtils.md5DigestAsHex(clave.getBytes());;
 		this.enabled = enabled;
 	}
 
@@ -78,7 +79,7 @@ public class Usuario implements Serializable {
 		super();
 		this.id = id;
 		this.usuario = usuario;
-		this.clave = clave;
+		this.clave = DigestUtils.md5DigestAsHex(clave.getBytes());;
 		this.rol = rol;
 		this.persona = persona;
 		this.enabled = enabled;
@@ -105,7 +106,7 @@ public class Usuario implements Serializable {
 	}
 
 	public void setClave(String clave) {
-		this.clave = clave;
+		this.clave = DigestUtils.md5DigestAsHex(clave.getBytes());
 	}
 
 	public boolean isEnabled() {
