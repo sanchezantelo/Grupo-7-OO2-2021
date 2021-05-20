@@ -95,8 +95,8 @@
 
 						<div class="form-group">
 							<select class="form-control form-control-sm" th:field="*{rol.id}">
-								<option th:value="1">ROL_ADMIN</option>
-								<option th:value="2">ROL_AUDITOR</option>
+							 <option th:each="i : ${lstRoles}" th:value="${i.id}" th:text="${i.rol}">
+                              </option>
 							</select>
 						</div>
 
@@ -157,8 +157,8 @@
 
 						<div class="form-group">
 							<select class="form-control form-control-sm" th:field="*{rol.id}">
-								<option th:value="1">ROL_ADMIN</option>
-								<option th:value="2">ROL_AUDITOR</option>
+							 <option th:each="i : ${lstRoles}" th:value="${i.id}" th:text="${i.rol}">
+                              </option>
 							</select>
 						</div>
 

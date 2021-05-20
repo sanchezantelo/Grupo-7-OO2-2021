@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.webservice.app.models.UsuarioModel;
+import com.webservice.app.services.IUsuarioRolService;
 import com.webservice.app.services.IUsuarioService;
 
 @Controller
@@ -24,6 +25,11 @@ public class UserController {
 	@Autowired
 	@Qualifier("usuarioService")
 	private IUsuarioService usuarioService;
+	
+	@Autowired
+	@Qualifier("usuarioRolService")
+	private IUsuarioRolService usuarioRolService;
+
 
 	Logger logger = LoggerFactory.getLogger(UserController.class);
 
@@ -31,6 +37,7 @@ public class UserController {
 	public String abmUsuario(Model model) {
         model.addAttribute("usuarioModel", new UsuarioModel());
 		model.addAttribute("lstUsuarios",usuarioService.findAll());
+		model.addAttribute("lstRoles",usuarioRolService.findAll());
 		return "abm-usuario";
 	}
 
