@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -31,12 +33,15 @@ public class Persona implements Serializable {
 	@Column(name = "apellido", unique = true, nullable = false, length = 45)
 	private String apellido;
 
+	@Column(name = "tipoDocumento", nullable = false, length = 8)
+	@Enumerated(value = EnumType.STRING)
+	private TipoDocumento tipoDocumento;
+
 	@Column(name = "dni", unique = true, nullable = false)
 	private Long dni;
 
 	@Column(name = "email", unique = true, nullable = false, length = 45)
 	private String email;
-
 
 	@Column(name = "createdat")
 	@CreationTimestamp
@@ -46,19 +51,21 @@ public class Persona implements Serializable {
 	@UpdateTimestamp
 	private LocalDateTime updatedAt;
 
-	public Persona(String nombre, String apellido, Long dni, String email) {
+	public Persona(String nombre, String apellido, TipoDocumento tipoDocumento, Long dni, String email) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
+		this.tipoDocumento = tipoDocumento;
 		this.dni = dni;
 		this.email = email;
 	}
 
-	public Persona(int id, String nombre, String apellido, Long dni, String email) {
+	public Persona(int id, String nombre, String apellido, TipoDocumento tipoDocumento, Long dni, String email) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.apellido = apellido;
+		this.tipoDocumento = tipoDocumento;
 		this.dni = dni;
 		this.email = email;
 	}
@@ -89,6 +96,14 @@ public class Persona implements Serializable {
 
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
+	}
+
+	public TipoDocumento getTipoDocumento() {
+		return tipoDocumento;
+	}
+
+	public void setTipoDocumento(TipoDocumento tipoDocumento) {
+		this.tipoDocumento = tipoDocumento;
 	}
 
 	public Long getDni() {
@@ -122,7 +137,5 @@ public class Persona implements Serializable {
 	public void setUpdatedAt(LocalDateTime updatedAt) {
 		this.updatedAt = updatedAt;
 	}
-
-
 
 }

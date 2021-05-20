@@ -14,9 +14,6 @@ public class UsuarioModel {
 		super();
 	}
 
-
-
-
 	public UsuarioModel(int id, String usuario, String clave, boolean enabled, UsuarioRol rol, PersonaModel persona) {
 		super();
 		this.id = id;
@@ -26,9 +23,6 @@ public class UsuarioModel {
 		this.rol = rol;
 		this.persona = persona;
 	}
-
-
-
 
 	public int getId() {
 		return id;
@@ -62,34 +56,26 @@ public class UsuarioModel {
 		this.rol = rol;
 	}
 
-
 	public PersonaModel getPersona() {
 		return persona;
 	}
-
 
 	public void setPersona(PersonaModel persona) {
 		this.persona = persona;
 	}
 
-	
-
 	public boolean isEnabled() {
 		return enabled;
 	}
-
 
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
 
-
 	@Override
 	public String toString() {
-		return "UsuarioModel [id=" + id + ", usuario=" + usuario + ", clave=" + clave + ", rol=" + rol + ", persona="
-				+ persona + "]";
+		return "UsuarioModel [id=" + id + ", usuario=" + usuario + ", clave=" + clave + ", enabled=" + enabled
+				+ ", rol=" + rol + ", persona=" + persona + "]";
 	}
 
-
-	
 }

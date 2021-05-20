@@ -1,29 +1,32 @@
 package com.webservice.app.models;
 
+import com.webservice.app.entities.TipoDocumento;
+
 public class PersonaModel {
 	private int id;
 	private String nombre;
 	private String apellido;
+	private TipoDocumento tipoDocumento;
 	private Long dni;
 	private String email;
 
-	public PersonaModel() {
-		super();
-	}
-
-	public PersonaModel(int id, String nombre, String apellido, Long dni, String email) {
+	public PersonaModel() {}
+	
+	public PersonaModel(int id, String nombre, String apellido, TipoDocumento tipoDocumento, Long dni, String email) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.apellido = apellido;
+		this.tipoDocumento = tipoDocumento;
 		this.dni = dni;
 		this.email = email;
 	}
 
-	public PersonaModel(String nombre, String apellido, Long dni, String email) {
+	public PersonaModel(String nombre, String apellido, TipoDocumento tipoDocumento, Long dni, String email) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
+		this.tipoDocumento = tipoDocumento;
 		this.dni = dni;
 		this.email = email;
 	}
@@ -52,6 +55,14 @@ public class PersonaModel {
 		this.apellido = apellido;
 	}
 
+	public TipoDocumento getTipoDocumento() {
+		return tipoDocumento;
+	}
+
+	public void setTipoDocumento(TipoDocumento tipoDocumento) {
+		this.tipoDocumento = tipoDocumento;
+	}
+
 	public Long getDni() {
 		return dni;
 	}
@@ -70,8 +81,8 @@ public class PersonaModel {
 
 	@Override
 	public String toString() {
-		return "PersonaModel [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni + ", email="
-				+ email + "]";
+		return "PersonaModel [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", tipoDocumento="
+				+ tipoDocumento + ", dni=" + dni + ", email=" + email + "]";
 	}
 
 }

@@ -40,12 +40,12 @@ public class Usuario implements Serializable {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "rol_id", nullable = false)
 	private UsuarioRol rol;
-	
-	@OneToOne(fetch = FetchType.LAZY,cascade =  CascadeType.ALL)
+
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "persona_id", nullable = false)
 	private Persona persona;
 
-	@Column(name = "enabled",columnDefinition = "boolean default true")
+	@Column(name = "enabled", columnDefinition = "boolean default true")
 	private boolean enabled;
 
 	@Column(name = "createdat")
@@ -56,8 +56,6 @@ public class Usuario implements Serializable {
 	@UpdateTimestamp
 	private LocalDateTime updatedAt;
 
-	
-
 	public Usuario() {
 	}
 
@@ -67,23 +65,23 @@ public class Usuario implements Serializable {
 		this.enabled = enabled;
 	}
 
-	public Usuario(String usuario, String clave, Persona persona, boolean enabled, UsuarioRol rol) {
+	public Usuario(String usuario, String clave, UsuarioRol rol, Persona persona, boolean enabled) {
 		super();
 		this.usuario = usuario;
 		this.clave = clave;
+		this.rol = rol;
 		this.persona = persona;
 		this.enabled = enabled;
-		this.rol = rol;
 	}
 
-	public Usuario(int id, String usuario, String clave,boolean enabled, UsuarioRol rol, Persona persona) {
+	public Usuario(int id, String usuario, String clave, UsuarioRol rol, Persona persona, boolean enabled) {
 		super();
 		this.id = id;
 		this.usuario = usuario;
 		this.clave = clave;
-		this.enabled = enabled;
 		this.rol = rol;
 		this.persona = persona;
+		this.enabled = enabled;
 	}
 
 	public int getId() {
@@ -150,6 +148,4 @@ public class Usuario implements Serializable {
 		this.persona = persona;
 	}
 
-	
-	
 }
