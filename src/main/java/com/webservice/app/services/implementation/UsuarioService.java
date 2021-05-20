@@ -56,6 +56,6 @@ public class UsuarioService implements IUsuarioService {
 
 	public List<Usuario> findAll() {
 
-		return usuarioRepository.findAll();
+		return usuarioRepository.findByEnabled();
 	}
 }

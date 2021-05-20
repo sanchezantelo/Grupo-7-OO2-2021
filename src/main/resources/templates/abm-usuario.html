@@ -200,10 +200,11 @@
 							<td><span th:text="${usuario.persona.apellido}"></td>
 							<td><span th:text="${usuario.persona.dni}"></td>
 							<td><span th:text="${usuario.persona.email}"></td>
-							<td><span th:text="${usuario.rol.id}"></td>
+							<td><span th:text="${usuario.rol.rol}"></td>
 							<td><a th:href="@{'/admin/usuario/bajaUsuario?id=' + ${usuario.id}}" class="btn btn-danger btn-sm">eliminar</a></td>
 							<td><a th:href="@{'/admin/usuario/traerUsuario?id=' + ${usuario.id}}" class="btn btn-warning btn-sm">editar</a></td>
 						    <td><input type="hidden" th:value="${usuario.id}"/></td>
+						    <td><input type="hidden" th:value="${usuario.rol.id}"/></td>
 						</tr>
 					</tbody>
 				</table>

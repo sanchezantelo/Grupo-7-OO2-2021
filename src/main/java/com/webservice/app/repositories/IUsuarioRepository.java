@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import com.webservice.app.entities.Usuario;
@@ -16,5 +17,8 @@ public interface IUsuarioRepository extends JpaRepository<Usuario, Serializable>
 	public abstract Usuario findById(@Param("id") int id);
 	
 	public abstract List<Usuario> findAll();
+	
+	@Query("SELECT u FROM Usuario u JOIN FETCH u.rol WHERE u.enabled=false")
+	public abstract List<Usuario> findByEnabled();
 
 }
