@@ -26,7 +26,7 @@ public class UsuarioRol implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@Column(name = "rol", nullable = false, length = 100)
+	@Column(name = "rol",unique = true, nullable = false, length = 100)
 	private String rol;
 
 	@Column(name = "createdat")

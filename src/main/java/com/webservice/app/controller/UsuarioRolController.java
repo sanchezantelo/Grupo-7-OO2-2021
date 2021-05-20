@@ -19,21 +19,19 @@ import com.webservice.app.services.IUsuarioRolService;
 @Controller
 @RequestMapping("/admin/rol")
 public class UsuarioRolController {
-	
+
 	@Autowired
 	@Qualifier("usuarioRolService")
 	private IUsuarioRolService usuarioRolService;
 
 	Logger logger = LoggerFactory.getLogger(UsuarioRolController.class);
-	
 
 	@GetMapping("/abm-rol")
 	public String abmRol(Model model) {
-        model.addAttribute("usuarioRolModel", new UsuarioRolModel());
-		model.addAttribute("lstRoles",usuarioRolService.findAll());
+		model.addAttribute("usuarioRolModel", new UsuarioRolModel());
+		model.addAttribute("lstRoles", usuarioRolService.findAll());
 		return "abm-rol";
 	}
-
 
 	// ABM
 
@@ -41,18 +39,26 @@ public class UsuarioRolController {
 	public String altaUsuarioRol(@ModelAttribute("usuarioRolModel") UsuarioRolModel usuarioRolModel,
 			RedirectAttributes redirectAttrs) {
 		logger.info("/altaUsuarioRol" + usuarioRolModel);
-		usuarioRolService.altaUsuarioRol(usuarioRolModel);
-		redirectAttrs.addFlashAttribute("mensaje", "Rol agregado exitosamente").addFlashAttribute("clase",
-				"alert alert-success");
+		try {
+			usuarioRolService.altaUsuarioRol(usuarioRolModel);
+			redirectAttrs.addFlashAttribute("mensaje", "Rol agregado exitosamente!").addFlashAttribute("clase",
+					"alert alert-success");
+		} catch (Exception e) {
+			redirectAttrs.addFlashAttribute("error", e.getMessage()).addFlashAttribute("clase", "alert alert-danger");
+		}
 		return "redirect:/admin/rol/abm-rol";
 	}
 
 	@GetMapping("/bajaUsuarioRol")
 	public String bajaUsuarioRol(@RequestParam("id") int id, RedirectAttributes redirectAttrs) {
 		logger.info("/bajaUsuarioRol" + id);
-		usuarioRolService.bajaUsuarioRol(id);
-		redirectAttrs.addFlashAttribute("mensaje", "Rol dado de baja exitosamente").addFlashAttribute("clase",
-				"alert alert-success");
+		try {
+			usuarioRolService.bajaUsuarioRol(id);
+			redirectAttrs.addFlashAttribute("mensaje", "Rol dado de baja exitosamente!").addFlashAttribute("clase",
+					"alert alert-success");
+		} catch (Exception e) {
+			redirectAttrs.addFlashAttribute("error", e.getMessage()).addFlashAttribute("clase", "alert alert-danger");
+		}
 		return "redirect:/admin/rol/abm-rol";
 	}
 
@@ -60,9 +66,13 @@ public class UsuarioRolController {
 	public String modificacionUsuarioRol(@ModelAttribute("usuarioModelUpdate") UsuarioRolModel usuarioRolModelUpdate,
 			RedirectAttributes redirectAttrs) {
 		logger.info("/modificacionUsuario" + usuarioRolModelUpdate);
-		usuarioRolService.modificacionUsuarioRol(usuarioRolModelUpdate);
-		redirectAttrs.addFlashAttribute("mensaje", "Rol modificado exitosamente").addFlashAttribute("clase",
-				"alert alert-success");
+		try {
+			usuarioRolService.modificacionUsuarioRol(usuarioRolModelUpdate);
+			redirectAttrs.addFlashAttribute("mensaje", "Rol modificado exitosamente!").addFlashAttribute("clase",
+					"alert alert-success");
+		} catch (Exception e) {
+			redirectAttrs.addFlashAttribute("error", e.getMessage()).addFlashAttribute("clase", "alert alert-danger");
+		}
 		return "redirect:/admin/rol/abm-rol";
 	}
 

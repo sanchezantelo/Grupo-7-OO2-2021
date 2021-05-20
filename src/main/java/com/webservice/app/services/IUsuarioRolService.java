@@ -15,10 +15,10 @@ public interface IUsuarioRolService {
 	
 	UsuarioRolModel traerUsuarioRol(int id);
 
-	void altaUsuarioRol(UsuarioRolModel usuarioRol);
+	void altaUsuarioRol(UsuarioRolModel usuarioRol) throws Exception;
 
-	void bajaUsuarioRol(int id);
+	void bajaUsuarioRol(int id) throws Exception;
 
-	void modificacionUsuarioRol(UsuarioRolModel usuarioRol);
+	void modificacionUsuarioRol(UsuarioRolModel usuarioRol) throws Exception;
 
 }

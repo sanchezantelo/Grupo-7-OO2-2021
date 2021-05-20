@@ -35,38 +35,37 @@ public class UsuarioService implements IUsuarioService {
 	public Usuario findById(int id) {
 		return usuarioRepository.findById(id);
 	}
+
 	public UsuarioModel traerUsuario(int id) {
-		
+
 		return usuarioModel.entityToModel(usuarioRepository.findById(id));
 	}
 
 	public void altaUsuario(UsuarioModel usuario) throws Exception {
 		try {
-		Usuario user = usuarioModel.modelToEntity(usuario);
-		usuarioRepository.save(user);
+			Usuario user = usuarioModel.modelToEntity(usuario);
+			usuarioRepository.save(user);
 		} catch (Exception e) {
-		throw new Exception("No se pudo completar la operación,error al ingresar los datos o el usuario ya existe");
-	}	
+			throw new Exception("No se pudo completar la operación,error al ingresar los datos o el usuario ya existe");
+		}
 	}
 
-
 	public void bajaUsuario(int id) throws Exception {
-		Usuario usuario=usuarioRepository.findById(id);
+		Usuario usuario = usuarioRepository.findById(id);
 		usuario.setEnabled(false);
 		try {
 			usuarioRepository.saveAndFlush(usuario);
-			} catch (Exception e) {
+		} catch (Exception e) {
 			throw new Exception("No se pudo completar la operación");
-			}
+		}
 	}
 
-	
 	public void modificacionUsuario(UsuarioModel usuario) throws Exception {
 		try {
 			usuarioRepository.saveAndFlush(usuarioModel.modelToEntity(usuario));
-			} catch (Exception e) {
+		} catch (Exception e) {
 			throw new Exception("No se pudo completar la operación");
-			}				
+		}
 	}
 
 	public List<Usuario> findAll() {

@@ -51,8 +51,8 @@
 
 	<div class="container">		
 	
-		<div class="alert alert-primary" role="alert" th:if="${mensaje}" th:text="${mensaje}"></div>
-		<!-- <div class="alert alert-danger" role="alert" th:if="${mensajeError}" th:text="${mensajeError}"></div> -->
+		<div class="alert alert-primary" role="alert" th:if="${mensaje}" th:unless="${error}" th:text="${mensaje}"></div>
+		<div class="alert alert-danger" role="alert" th:if="${error}" th:text="${error}"></div>
 		<div class="row mb-3">
 			<div class="col-4">
 				<h3>Datos de Rol</h3>

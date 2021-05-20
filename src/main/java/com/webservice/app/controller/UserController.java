@@ -25,38 +25,35 @@ public class UserController {
 	@Autowired
 	@Qualifier("usuarioService")
 	private IUsuarioService usuarioService;
-	
+
 	@Autowired
 	@Qualifier("usuarioRolService")
 	private IUsuarioRolService usuarioRolService;
-
 
 	Logger logger = LoggerFactory.getLogger(UserController.class);
 
 	@GetMapping("/abm-usuario")
 	public String abmUsuario(Model model) {
-        model.addAttribute("usuarioModel", new UsuarioModel());
-		model.addAttribute("lstUsuarios",usuarioService.findAll());
-		model.addAttribute("lstRoles",usuarioRolService.findAll());
+		model.addAttribute("usuarioModel", new UsuarioModel());
+		model.addAttribute("lstUsuarios", usuarioService.findAll());
+		model.addAttribute("lstRoles", usuarioRolService.findAll());
 		return "abm-usuario";
 	}
 
 //ABM
 
 	@PostMapping("/altaUsuario")
-	public String altaUsuario(@ModelAttribute("usuarioModel") UsuarioModel usuarioModel,   RedirectAttributes redirectAttrs) {
-        logger.info("/altaUsuario"+usuarioModel);
+	public String altaUsuario(@ModelAttribute("usuarioModel") UsuarioModel usuarioModel,
+			RedirectAttributes redirectAttrs) {
+		logger.info("/altaUsuario" + usuarioModel);
 		try {
 			usuarioService.altaUsuario(usuarioModel);
-			redirectAttrs
-		    .addFlashAttribute("mensaje","Usuario agregado exitosamente!")
-		    .addFlashAttribute("clase", "alert alert-success");
+			redirectAttrs.addFlashAttribute("mensaje", "Usuario agregado exitosamente!").addFlashAttribute("clase",
+					"alert alert-success");
 		} catch (Exception e) {
-			redirectAttrs
-	        .addFlashAttribute("error",e.getMessage())
-	        .addFlashAttribute("clase", "alert alert-danger");
+			redirectAttrs.addFlashAttribute("error", e.getMessage()).addFlashAttribute("clase", "alert alert-danger");
 		}
-	 
+
 		return "redirect:/admin/usuario/abm-usuario";
 	}
 
@@ -65,42 +62,36 @@ public class UserController {
 		logger.info("/bajaUsuario" + id);
 		try {
 			usuarioService.bajaUsuario(id);
-			redirectAttrs
-	        .addFlashAttribute("mensaje","Usuario dado de baja exitosamente!")
-	        .addFlashAttribute("clase", "alert alert-success");
+			redirectAttrs.addFlashAttribute("mensaje", "Usuario dado de baja exitosamente!").addFlashAttribute("clase",
+					"alert alert-success");
 		} catch (Exception e) {
-			redirectAttrs
-	        .addFlashAttribute("error",e.getMessage())
-	        .addFlashAttribute("clase", "alert alert-danger");
+			redirectAttrs.addFlashAttribute("error", e.getMessage()).addFlashAttribute("clase", "alert alert-danger");
 		}
-		 
+
 		return "redirect:/admin/usuario/abm-usuario";
 	}
 
 	@PostMapping("/modificacionUsuario")
-	public String modificacionUsuario(@ModelAttribute("usuarioModelUpdate") UsuarioModel usuarioModelUpdate, RedirectAttributes redirectAttrs) {
+	public String modificacionUsuario(@ModelAttribute("usuarioModelUpdate") UsuarioModel usuarioModelUpdate,
+			RedirectAttributes redirectAttrs) {
 		logger.info("/modificacionUsuario" + usuarioModelUpdate);
 		try {
 			usuarioService.modificacionUsuario(usuarioModelUpdate);
-			 redirectAttrs
-		        .addFlashAttribute("mensaje","Usuario modificado exitosamente!")
-		        .addFlashAttribute("clase", "alert alert-success");
+			redirectAttrs.addFlashAttribute("mensaje", "Usuario modificado exitosamente!").addFlashAttribute("clase",
+					"alert alert-success");
 		} catch (Exception e) {
-			redirectAttrs
-	        .addFlashAttribute("error",e.getMessage())
-	        .addFlashAttribute("clase", "alert alert-danger");
+			redirectAttrs.addFlashAttribute("error", e.getMessage()).addFlashAttribute("clase", "alert alert-danger");
 		}
 
 		return "redirect:/admin/usuario/abm-usuario";
 	}
 
 	@GetMapping("/traerUsuario")
-	public String traerUsuario(@RequestParam("id") int id,Model model, RedirectAttributes redirectAttrs) {
+	public String traerUsuario(@RequestParam("id") int id, Model model, RedirectAttributes redirectAttrs) {
 		logger.info("/traerUsuario" + id);
-		 model.addAttribute("editar", true);
-		 redirectAttrs
-	        .addFlashAttribute("usuarioModelUpdate",usuarioService.traerUsuario(id))
-	        .addFlashAttribute("clase", "alert alert-success");
+		model.addAttribute("editar", true);
+		redirectAttrs.addFlashAttribute("usuarioModelUpdate", usuarioService.traerUsuario(id))
+				.addFlashAttribute("clase", "alert alert-success");
 		return "redirect:/admin/usuario/abm-usuario";
 	}
 }
