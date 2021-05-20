@@ -1,5 +1,6 @@
 package com.webservice.app.entities;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -14,7 +15,12 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 @Table(name = "usuario_rol")
-public class UsuarioRol {
+public class UsuarioRol implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,6 +45,12 @@ public class UsuarioRol {
 		this.rol = rol;
 	}
 
+	public UsuarioRol(int id, String rol) {
+		super();
+		this.id = id;
+		this.rol = rol;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -47,11 +59,11 @@ public class UsuarioRol {
 		this.id = id;
 	}
 
-	public String getrol() {
+	public String getRol() {
 		return rol;
 	}
 
-	public void setrol(String rol) {
+	public void setRol(String rol) {
 		this.rol = rol;
 	}
 
