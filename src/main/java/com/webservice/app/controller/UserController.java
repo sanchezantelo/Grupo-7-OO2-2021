@@ -46,10 +46,17 @@ public class UserController {
 	@PostMapping("/altaUsuario")
 	public String altaUsuario(@ModelAttribute("usuarioModel") UsuarioModel usuarioModel,   RedirectAttributes redirectAttrs) {
         logger.info("/altaUsuario"+usuarioModel);
-		usuarioService.altaUsuario(usuarioModel);
-	    redirectAttrs
-        .addFlashAttribute("mensaje","Usuario agregado exitosamente")
-        .addFlashAttribute("clase", "alert alert-success");
+		try {
+			usuarioService.altaUsuario(usuarioModel);
+			redirectAttrs
+		    .addFlashAttribute("mensaje","Usuario agregado exitosamente")
+		    .addFlashAttribute("clase", "alert alert-success");
+		} catch (Exception e) {
+			redirectAttrs
+	        .addFlashAttribute("error",e.getMessage())
+	        .addFlashAttribute("clase", "alert alert-danger");
+		}
+	 
 		return "redirect:/admin/usuario/abm-usuario";
 	}
 
@@ -66,10 +73,17 @@ public class UserController {
 	@PostMapping("/modificacionUsuario")
 	public String modificacionUsuario(@ModelAttribute("usuarioModelUpdate") UsuarioModel usuarioModelUpdate, RedirectAttributes redirectAttrs) {
 		logger.info("/modificacionUsuario" + usuarioModelUpdate);
-		usuarioService.modificacionUsuario(usuarioModelUpdate);
-		 redirectAttrs
-	        .addFlashAttribute("mensaje","Usuario modificado exitosamente")
-	        .addFlashAttribute("clase", "alert alert-success");
+		try {
+			usuarioService.modificacionUsuario(usuarioModelUpdate);
+			 redirectAttrs
+		        .addFlashAttribute("mensaje","Usuario modificado exitosamente")
+		        .addFlashAttribute("clase", "alert alert-success");
+		} catch (Exception e) {
+			redirectAttrs
+	        .addFlashAttribute("error",e.getMessage())
+	        .addFlashAttribute("clase", "alert alert-danger");
+		}
+
 		return "redirect:/admin/usuario/abm-usuario";
 	}
 

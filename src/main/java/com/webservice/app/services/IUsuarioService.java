@@ -15,10 +15,10 @@ public interface IUsuarioService {
 	
 	List<Usuario>findAll();
 
-	void altaUsuario(UsuarioModel usuarioModel);
+	void altaUsuario(UsuarioModel usuarioModel) throws Exception;
 
 	void bajaUsuario(int id);
 
-	void modificacionUsuario(UsuarioModel usuarioModel);
+	void modificacionUsuario(UsuarioModel usuarioModel) throws Exception;
 
 }
