@@ -1,10 +1,17 @@
 
 package com.webservice.app.controller;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.webservice.app.entities.Usuario;
 import com.webservice.app.models.UsuarioModel;
 import com.webservice.app.services.IUsuarioRolService;
 import com.webservice.app.services.IUsuarioService;
@@ -37,6 +45,7 @@ public class UserController {
 		model.addAttribute("usuarioModel", new UsuarioModel());
 		model.addAttribute("lstUsuarios", usuarioService.findAll());
 		model.addAttribute("lstRoles", usuarioRolService.findAll());
+		model.addAttribute("pageNumbers", IntStream.rangeClosed(1, 5).boxed().collect(Collectors.toList()));
 		return "abm-usuario";
 	}
 
@@ -92,6 +101,26 @@ public class UserController {
 		model.addAttribute("editar", true);
 		redirectAttrs.addFlashAttribute("usuarioModelUpdate", usuarioService.traerUsuario(id))
 				.addFlashAttribute("clase", "alert alert-success");
+		return "redirect:/admin/usuario/abm-usuario";
+	}
+
+	@GetMapping("/listUsuarios")
+	public String listUsuarios(RedirectAttributes redirectAttrs, @RequestParam("page") Optional<Integer> page,
+			@RequestParam("size") Optional<Integer> size) {
+		int currentPage = page.orElse(1);
+		int pageSize = size.orElse(5);
+		logger.info("page "+page+"size "+size);
+
+		Page<Usuario> lstUsuarios = usuarioService.findPaginated(PageRequest.of(currentPage - 1, pageSize));
+
+		redirectAttrs.addFlashAttribute("lstUsuarios", lstUsuarios);
+
+		int totalPages = lstUsuarios.getTotalPages();
+		if (totalPages > 0) {
+			List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
+			redirectAttrs.addFlashAttribute("pageNumbers", pageNumbers);
+		}
+
 		return "redirect:/admin/usuario/abm-usuario";
 	}
 }

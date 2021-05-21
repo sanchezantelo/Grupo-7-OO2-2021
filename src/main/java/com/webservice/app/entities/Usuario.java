@@ -49,11 +49,11 @@ public class Usuario implements Serializable {
 	@Column(name = "enabled", columnDefinition = "boolean default true")
 	private boolean enabled;
 
-	@Column(name = "createdat")
+	@Column(name = "createdat", nullable = false)
 	@CreationTimestamp
 	private LocalDateTime createdAt;
 
-	@Column(name = "updatedat")
+	@Column(name = "updatedat", nullable = false)
 	@UpdateTimestamp
 	private LocalDateTime updatedAt;
 

@@ -112,8 +112,8 @@
 						<tr th:each="rol: ${lstRoles}">
 							<td><span th:text="${rol.rol}"></td>
 							<td><input type="hidden" th:value="${rol.id}"/></td>
-							<td><a th:href="@{'/admin/rol/bajaUsuarioRol?id=' + ${rol.id}}" class="btn btn-danger btn-sm">eliminar</a></td>
-							<td><a th:href="@{'/admin/rol/traerUsuarioRol?id=' + ${rol.id}}" class="btn btn-warning btn-sm">editar</a></td>
+							<td><a th:href="@{'/admin/rol/bajaUsuarioRol?id=' + ${rol.id}}" class="btn btn-danger btn-sm">Eliminar</a></td>
+							<td><a th:href="@{'/admin/rol/traerUsuarioRol?id=' + ${rol.id}}" class="btn btn-warning btn-sm">Editar</a></td>
 						</tr>
 					</tbody>
 				</table>

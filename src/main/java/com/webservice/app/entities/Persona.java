@@ -14,6 +14,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+
 @Entity
 @Table(name = "persona")
 public class Persona implements Serializable {
@@ -36,18 +37,18 @@ public class Persona implements Serializable {
 	@Column(name = "tipoDocumento", nullable = false, length = 8)
 	@Enumerated(value = EnumType.STRING)
 	private TipoDocumento tipoDocumento;
-
+	
 	@Column(name = "dni", unique = true, nullable = false)
 	private Long dni;
-
+	
 	@Column(name = "email", unique = true, nullable = false, length = 45)
 	private String email;
 
-	@Column(name = "createdat")
+	@Column(name = "createdat", nullable = false)
 	@CreationTimestamp
 	private LocalDateTime createdAt;
 
-	@Column(name = "updatedat")
+	@Column(name = "updatedat", nullable = false)
 	@UpdateTimestamp
 	private LocalDateTime updatedAt;
 

@@ -29,11 +29,11 @@ public class UsuarioRol implements Serializable {
 	@Column(name = "rol",unique = true, nullable = false, length = 100)
 	private String rol;
 
-	@Column(name = "createdat")
+	@Column(name = "createdat", nullable = false)
 	@CreationTimestamp
 	private LocalDateTime createdAt;
 
-	@Column(name = "updatedat")
+	@Column(name = "updatedat", nullable = false)
 	@UpdateTimestamp
 	private LocalDateTime updatedAt;
 
