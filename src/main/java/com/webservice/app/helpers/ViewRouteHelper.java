@@ -9,6 +9,7 @@ public class ViewRouteHelper {
 	public final static String USER_LOGOUT = "logout";
 	
 	
+	public final static String INDEX = "inicio/index";
 
 	
 
