@@ -49,7 +49,7 @@ public class Usuario implements Serializable {
 	@Column(name = "enabled", columnDefinition = "boolean default true")
 	private boolean enabled;
 
-	@Column(name = "createdat", nullable = false)
+	@Column(name = "createdat", updatable = false)
 	@CreationTimestamp
 	private LocalDateTime createdAt;
 
@@ -58,21 +58,6 @@ public class Usuario implements Serializable {
 	private LocalDateTime updatedAt;
 
 	public Usuario() {
-	}
-
-	public Usuario(String usuario, String clave, boolean enabled) {
-		this.usuario = usuario;
-		this.clave = DigestUtils.md5DigestAsHex(clave.getBytes());;
-		this.enabled = enabled;
-	}
-
-	public Usuario(String usuario, String clave, UsuarioRol rol, Persona persona, boolean enabled) {
-		super();
-		this.usuario = usuario;
-		this.clave = clave;
-		this.rol = rol;
-		this.persona = persona;
-		this.enabled = enabled;
 	}
 
 	public Usuario(int id, String usuario, String clave, UsuarioRol rol, Persona persona, boolean enabled) {

@@ -1,14 +1,11 @@
 package com.webservice.app.services.implementation;
 
-import java.util.ArrayList;
-import java.util.Collections;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -44,7 +41,7 @@ public class UsuarioService implements IUsuarioService {
 
 	public UsuarioModel traerUsuario(int id) {
 
-		return usuarioModel.entityToModel(usuarioRepository.findById(id));
+		return usuarioModel.entityToModel(usuarioRepository.findByIdRol(id));
 	}
 
 	public void altaUsuario(UsuarioModel usuario) throws Exception {
@@ -83,22 +80,7 @@ public class UsuarioService implements IUsuarioService {
 	
     //METODO PARA MOSTRAR UNA LISTA DE ELEMENTOS CON PAGINACION 
 			
-	 public Page<Usuario> findPaginated(Pageable pageable) {
-	        int pageSize = pageable.getPageSize();
-	        int currentPage = pageable.getPageNumber();
-	        int startItem = currentPage * pageSize;
-	        List<Usuario> lstUsuarios= new ArrayList<Usuario>();
-
-	        if (lstUsuarios.size() < startItem) {
-	        	lstUsuarios = Collections.emptyList();
-	        } else {
-	            int toIndex = Math.min(startItem + pageSize, lstUsuarios.size());
-	            lstUsuarios = lstUsuarios.subList(startItem, toIndex);
-	        }
-
-	        Page<Usuario> userPage
-	          = new PageImpl<Usuario>(lstUsuarios, PageRequest.of(currentPage, pageSize), lstUsuarios.size());
-
-	        return userPage;
+	 public Page<Usuario> findPaginated(Pageable pageable) {   
+	        return usuarioRepository.findAll(pageable);
 	    }
 }

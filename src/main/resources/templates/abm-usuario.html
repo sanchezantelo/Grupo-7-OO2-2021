@@ -1,5 +1,5 @@
-<!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
 <head>
 <title>Website Grupo 07</title>
 <meta charset="utf-8">
@@ -15,7 +15,8 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <link href='https://unpkg.com/boxicons@2.0.5/css/boxicons.min.css'
 	rel='stylesheet'>
-<link rel="stylesheet" type="text/css" href="/css/index_styles.css">
+	 
+<link rel="stylesheet" type="text/css" th:src="@{'/css/formularios.css}">
 <style>
 .fakeimg {
 	height: 200px;
@@ -50,11 +51,11 @@
 		</div>
 	</nav>
 
-	<div class="container">		
+	<main role="main" class="container">		
 	
 		<div class="alert alert-primary" role="alert" th:if="${mensaje}" th:unless="${error}" th:text="${mensaje}"></div>
 		<div class="alert alert-danger" role="alert" th:if="${error}" th:text="${error}"></div>
-		<div class="row mb-3">
+		<div class="row mb-3 w3-example">
 			<div class="col-4">
 				<h3>Datos del Usuario</h3>
 				<div class="form-group">
@@ -177,6 +178,8 @@
 							 <option th:each="i : ${lstRoles}" th:value="${i.id}" th:text="${i.rol}">
                               </option>
 							</select>
+							<input type="hidden"
+								class="form-control form-control-sm" th:field="*{rol.rol}">
 						</div>
 
 						<div class="form-group">
@@ -204,6 +207,7 @@
 							<th scope="col">Num Documento</th>
 							<th scope="col">Email</th>
 							<th scope="col">Rol</th>
+							<th scope="col">Activo</th>
 							<th scope="col"></th>
 							<th scope="col"></th>
 							
@@ -220,38 +224,37 @@
 							<td><span th:text="${usuario.persona.dni}"></td>
 							<td><span th:text="${usuario.persona.email}"></td>
 							<td><span th:text="${usuario.rol.rol}"></td>
-							<td><a th:href="@{'/admin/usuario/bajaUsuario?id=' + ${usuario.id}}" class="btn btn-danger btn-sm">
-							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-							  <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-							  <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-							</svg>Eliminar</a></td>
-							<td><a th:href="@{'/admin/usuario/traerUsuario?id=' + ${usuario.id}}" class="btn btn-warning btn-sm">
-							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-		 					<path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                         	<path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-		                     </svg>Editar</a></td>
+							<td><span th:text="${usuario.enabled}"></td>							
+							<td><a th:href="@{'/admin/usuario/bajaUsuario?id=' + ${usuario.id}}" class="btn-danger btn-sm">
+							<img th:src="@{'/images/trash.svg'}" th:text="Eliminar"/></td>
+							<td><a th:href="@{'/admin/usuario/traerUsuario?id=' + ${usuario.id}}" class="btn-warning btn-sm">
+							<img th:src="@{'/images/pencil-square.svg'}" th:text="Editar"/></a></td>
 						    <td><input type="hidden" th:value="${usuario.id}"/></td>
 						    <td><input type="hidden" th:value="${usuario.rol.id}"/></td>
 						</tr>
 					</tbody>
 				</table>
-		<!-- 	<div class="row" th:fragment="pagination">
+		 	   <div class="row" th:fragment="pagination">
         <div class="col-md-2"></div>
         <div class="col-md-8">
             <nav aria-label="Pagination">
-                <ul class="pagination justify-content-center">
+                <ul class="pagination justify-content-end">
                     <li class="page-item" th:each="pageNumber : ${pageNumbers}" >
-                        <a class="page-link" th:href="@{|/admin/usuario/listUsuarios?page=${pageNumber}|}" th:text=${pageNumber}>1</a>
+                        <a class="page-link" th:href="@{|/admin/usuario/abm-usuario?page=${pageNumber}|}" th:text=${pageNumber}>1</a>
                     </li>
                 </ul>
             </nav>
         </div>
         <div class="col-md-2"></div>
-         -->
+         
 		</div>
 		
+	</div>	
 	</div>
 	</div>
+	</main>
+	
+	
 	<div class="jumbotron text-center" style="margin-bottom: 0">
 		<footer id="footer">
 			<div class="contenedor footer-content">

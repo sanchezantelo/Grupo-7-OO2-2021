@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 
 @Configuration
 @EnableWebSecurity
@@ -21,8 +22,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	        .logoutSuccessUrl("/index.html")
 	        .and().authorizeRequests().antMatchers("/admin/usuario/abm-usuario.html").permitAll()
 	        .and().authorizeRequests().antMatchers("/admin/usuario/listUsuarios").permitAll()
-	        .and().authorizeRequests().antMatchers("/admin/rol/abm-rol.html").permitAll();
-	        
+	        .and().authorizeRequests().antMatchers("/admin/rol/abm-rol.html").permitAll();	        
 
 }
+	
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/static/**").addResourceLocations("/static/");
+    }
 }

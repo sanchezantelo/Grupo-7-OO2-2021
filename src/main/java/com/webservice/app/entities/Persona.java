@@ -44,7 +44,7 @@ public class Persona implements Serializable {
 	@Column(name = "email", unique = true, nullable = false, length = 45)
 	private String email;
 
-	@Column(name = "createdat", nullable = false)
+	@Column(name = "createdat", updatable = false)
 	@CreationTimestamp
 	private LocalDateTime createdAt;
 

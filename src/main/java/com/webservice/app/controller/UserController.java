@@ -41,11 +41,26 @@ public class UserController {
 	Logger logger = LoggerFactory.getLogger(UserController.class);
 
 	@GetMapping("/abm-usuario")
-	public String abmUsuario(Model model) {
+	public String abmUsuario(Model model,@RequestParam("page") Optional<Integer> page,
+			@RequestParam("size") Optional<Integer> size) {
 		model.addAttribute("usuarioModel", new UsuarioModel());
-		model.addAttribute("lstUsuarios", usuarioService.findAll());
+		//model.addAttribute("lstUsuarios", usuarioService.findAll());
 		model.addAttribute("lstRoles", usuarioRolService.findAll());
 		model.addAttribute("pageNumbers", IntStream.rangeClosed(1, 5).boxed().collect(Collectors.toList()));
+
+		int currentPage = page.orElse(1);
+		int pageSize = size.orElse(5);
+		logger.info("page "+page+"size "+size);
+
+		Page<Usuario> lstUsuarios = usuarioService.findPaginated(PageRequest.of(currentPage - 1, pageSize));
+
+		model.addAttribute("lstUsuarios", lstUsuarios);
+
+		int totalPages = lstUsuarios.getTotalPages();
+		if (totalPages > 0) {
+			List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
+			model.addAttribute("pageNumbers", pageNumbers);
+		}
 		return "abm-usuario";
 	}
 

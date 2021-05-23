@@ -29,7 +29,7 @@ public class UsuarioRol implements Serializable {
 	@Column(name = "rol",unique = true, nullable = false, length = 100)
 	private String rol;
 
-	@Column(name = "createdat", nullable = false)
+	@Column(name = "createdat", updatable = false)
 	@CreationTimestamp
 	private LocalDateTime createdAt;
 
