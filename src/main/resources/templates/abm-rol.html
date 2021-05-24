@@ -114,14 +114,18 @@
 							<td><input type="hidden" th:value="${rol.id}"/></td>
 							<td><a th:href="@{'/admin/rol/bajaUsuarioRol?id=' + ${rol.id}}" class="btn-danger btn-sm"><img  th:src="@{'/images/trash.svg'}" th:text="Eliminar"/></a></td>
 							<td><a th:href="@{'/admin/rol/traerUsuarioRol?id=' + ${rol.id}}" class="btn-warning btn-sm"><img th:src="@{'/images/pencil-square.svg'}" th:text="Editar"/></a></td>
+							
 						</tr>
 					</tbody>
+					
 				</table>
+				<a th:href="@{usuarioRol/export/pdf}">Generar PDF</a>
 			</div>
 
 		</div>
 	</div>
 	</div>
+	
 	<div class="jumbotron text-center" style="margin-bottom: 0">
 		<footer id="footer">
 			<div class="contenedor footer-content">
