@@ -1,5 +1,10 @@
 package com.webservice.app.controller;
 
+import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +18,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.lowagie.text.DocumentException;
+import com.webservice.app.entities.UsuarioRol;
 import com.webservice.app.models.UsuarioRolModel;
 import com.webservice.app.services.IUsuarioRolService;
+import com.webservice.app.util.RolPDF;
 
 @Controller
 @RequestMapping("/admin/rol")
@@ -84,5 +92,22 @@ public class UsuarioRolController {
 				.addFlashAttribute("clase", "alert alert-success");
 		return "redirect:/admin/rol/abm-rol";
 	}
+	
+	
+	         
+	    @GetMapping("/usuarioRol/export/pdf")
+	    public void exportToPDF(HttpServletResponse response) throws DocumentException, IOException {
+	        response.setContentType("application/pdf");
+	            
+	        String headerKey = "Content-Disposition";
+	        String headerValue = "attachment; filename=usuarioRol.pdf";
+	        response.setHeader(headerKey, headerValue);
+	         
+	        List<UsuarioRol> lstRoles = usuarioRolService.findAll();
+	         
+	        RolPDF exporter = new RolPDF(lstRoles);
+	        exporter.export(response);
+	         
+	    }
 
 }
