@@ -28,10 +28,10 @@ public class Persona implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@Column(name = "nombre", unique = true, nullable = false, length = 45)
+	@Column(name = "nombre", nullable = false, length = 45)
 	private String nombre;
 
-	@Column(name = "apellido", unique = true, nullable = false, length = 45)
+	@Column(name = "apellido", nullable = false, length = 45)
 	private String apellido;
 
 	@Column(name = "tipoDocumento", nullable = false, length = 8)

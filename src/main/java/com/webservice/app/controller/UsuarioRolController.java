@@ -92,22 +92,20 @@ public class UsuarioRolController {
 				.addFlashAttribute("clase", "alert alert-success");
 		return "redirect:/admin/rol/abm-rol";
 	}
-	
-	
-	         
-	    @GetMapping("/usuarioRol/export/pdf")
-	    public void exportToPDF(HttpServletResponse response) throws DocumentException, IOException {
-	        response.setContentType("application/pdf");
-	            
-	        String headerKey = "Content-Disposition";
-	        String headerValue = "attachment; filename=usuarioRol.pdf";
-	        response.setHeader(headerKey, headerValue);
-	         
-	        List<UsuarioRol> lstRoles = usuarioRolService.findAll();
-	         
-	        RolPDF exporter = new RolPDF(lstRoles);
-	        exporter.export(response);
-	         
-	    }
+
+	@GetMapping("/usuarioRol/export/pdf")
+	public void exportToPDF(HttpServletResponse response) throws DocumentException, IOException {
+		response.setContentType("application/pdf");
+
+		String headerKey = "Content-Disposition";
+		String headerValue = "attachment; filename=usuarioRol.pdf";
+		response.setHeader(headerKey, headerValue);
+
+		List<UsuarioRol> lstRoles = usuarioRolService.findAll();
+
+		RolPDF exporter = new RolPDF(lstRoles);
+		exporter.export(response);
+
+	}
 
 }
