@@ -1,10 +1,13 @@
 
 package com.webservice.app.controller;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,10 +24,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.lowagie.text.DocumentException;
 import com.webservice.app.entities.Usuario;
 import com.webservice.app.models.UsuarioModel;
 import com.webservice.app.services.IUsuarioRolService;
 import com.webservice.app.services.IUsuarioService;
+import com.webservice.app.util.UsuarioPDF;
 
 @Controller
 @RequestMapping("/admin/usuario")
@@ -138,4 +143,18 @@ public class UserController {
 
 		return "redirect:/admin/usuario/abm-usuario";
 	}
+	 @GetMapping("/usuario/export/pdf")
+	    public void exportToPDF(HttpServletResponse response) throws DocumentException, IOException {
+	        response.setContentType("application/pdf");
+	       
+	        String headerKey = "Content-Disposition";
+	        String headerValue = "attachment; filename=usuarios.pdf";
+	        response.setHeader(headerKey, headerValue);
+	         
+	        List<Usuario> lstusuarios = usuarioService.findAll();
+	         
+	        UsuarioPDF exporter = new UsuarioPDF(lstusuarios);
+	        exporter.export(response);
+	         
+	    }
 }
