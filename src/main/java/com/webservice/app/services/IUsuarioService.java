@@ -25,5 +25,7 @@ public interface IUsuarioService {
 	void modificacionUsuario(UsuarioModel usuarioModel) throws Exception;
 	
 	Page<Usuario> findPaginated(Pageable pageable);
+	
+	UsuarioModel validarCredenciales(UsuarioModel usuarioModel)throws Exception;
 
 }

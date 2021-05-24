@@ -64,7 +64,7 @@ public class Usuario implements Serializable {
 		super();
 		this.id = id;
 		this.usuario = usuario;
-		this.clave = DigestUtils.md5DigestAsHex(clave.getBytes());;
+		this.clave = DigestUtils.md5DigestAsHex(clave.getBytes());
 		this.rol = rol;
 		this.persona = persona;
 		this.enabled = enabled;

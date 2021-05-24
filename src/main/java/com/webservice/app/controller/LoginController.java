@@ -8,10 +8,14 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.webservice.app.helpers.ViewRouteHelper;
+import com.webservice.app.models.UsuarioModel;
 import com.webservice.app.services.IUsuarioService;
 
 @Controller
@@ -27,18 +31,32 @@ public class LoginController {
 	@GetMapping("/login")
 	public String login(Model model, @RequestParam(name = "error", required = false) String error,
 			@RequestParam(name = "logout", required = false) String logout) {
-		model.addAttribute("error", error);
 		model.addAttribute("logout", logout);
+		model.addAttribute("usuarioModel", new UsuarioModel());
 		return ViewRouteHelper.USER_LOGIN;
 	}
 
 	@GetMapping("/logout")
 	public String logout(Model model) {
+		model.addAttribute("usuarioModel", new UsuarioModel());
 		return ViewRouteHelper.USER_LOGOUT;
 	}
 
-	@GetMapping("/loginsuccess")
-	public String loginCheck() {
+	@PostMapping("/autenticar")
+	public String loginCheck(@ModelAttribute("usuarioModel") UsuarioModel usuarioModel,RedirectAttributes redirectAttrs) {
+		logger.info("/autenticar" + usuarioModel);
+		try {
+			redirectAttrs.addFlashAttribute("user", usuarioService.validarCredenciales(usuarioModel));
+		} catch (Exception e) {
+			redirectAttrs.addFlashAttribute("error", e.getMessage()).addFlashAttribute("clase", "alert alert-danger");
+			return "redirect:/login";
+		}
+
 		return "redirect:/index";
+	}
+	
+	@GetMapping("/index")
+	public String index(Model model) {
+		return "index";
 	}
 }

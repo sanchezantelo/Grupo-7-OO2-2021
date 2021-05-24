@@ -23,6 +23,9 @@ public interface IUsuarioRepository extends JpaRepository<Usuario, Serializable>
 	
 	@Query("SELECT u FROM Usuario u JOIN FETCH u.rol WHERE u.enabled=true")
 	public abstract List<Usuario> findByEnabled();
+	
+	@Query("SELECT u FROM Usuario u  JOIN FETCH u.rol JOIN FETCH u.persona WHERE u.usuario LIKE :usuario and u.clave LIKE :clave")
+	public abstract Usuario validarCredenciales(@Param("usuario") String usuario, @Param("clave") String clave);
 
 	
 }

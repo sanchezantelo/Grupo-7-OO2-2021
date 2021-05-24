@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.util.DigestUtils;
 
 import com.webservice.app.converters.PersonaConverter;
 import com.webservice.app.converters.UsuarioConverter;
@@ -83,4 +84,19 @@ public class UsuarioService implements IUsuarioService {
 	 public Page<Usuario> findPaginated(Pageable pageable) {   
 	        return usuarioRepository.findAll(pageable);
 	    }
+	 
+	 
+	 public UsuarioModel validarCredenciales(UsuarioModel usuario) throws Exception {
+		 try {
+		 UsuarioModel user= usuarioModel.entityToModel(usuarioRepository.validarCredenciales(usuario.getUsuario(),DigestUtils.md5DigestAsHex(usuario.getClave().getBytes())));
+		 if(user.equals(null)) {
+			 throw new Exception("Usuario y Clave incorrectos");
+		 }else {
+		 return user;
+		 }
+	} catch (Exception e){
+		
+		throw new Exception("Usuario y Clave incorrectos");
+	}
+		 }
 }

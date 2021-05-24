@@ -45,10 +45,10 @@
         <a class="nav-link" href="#rodados">Rodados</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#nosotros">Sobre Nosotros</a>
+        <a class="nav-link" href="#nosotros" th:if="${user}" th:text="${user.persona.nombre}"></a>
       </li>    
         <li class="nav-item">
-        <a class="nav-link" href="#">Cerrar Sesión <i class='bx bxs-log-out-circle' ></i></a>     
+        <a class="nav-link" th:href="@{/logout}">Cerrar Sesión <i class='bx bxs-log-out-circle' ></i></a>     
       </li> 
     </ul>
   </div>  
