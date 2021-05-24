@@ -88,7 +88,8 @@ public class UsuarioService implements IUsuarioService {
 	 
 	 public UsuarioModel validarCredenciales(UsuarioModel usuario) throws Exception {
 		 try {
-		 UsuarioModel user= usuarioModel.entityToModel(usuarioRepository.validarCredenciales(usuario.getUsuario(),DigestUtils.md5DigestAsHex(usuario.getClave().getBytes())));
+		 UsuarioModel user= usuarioModel.entityToModel(usuarioRepository.validarCredenciales(usuario.getUsuario(),usuario.getUsuario(),DigestUtils.md5DigestAsHex(usuario.getClave().getBytes())));
+		
 		 if(user.equals(null)) {
 			 throw new Exception("Usuario y Clave incorrectos");
 		 }else {

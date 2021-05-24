@@ -10,9 +10,9 @@
     <p th:if="${error}" class="error"> Usuario y Clave incorrectos</p>
     <form th:action="@{/autenticar}" method="post" th:object="${usuarioModel}">
    
-      <label for="username">Username</label>
-      <input class="controls" type="text" required id="username" name="username" autofocus="autofocus" th:field="*{usuario}"/> <br/>  <br>
-   
+      <label for="username">Username or email address</label>
+      <input class="controls" type="text"  name="username"  required  autofocus="autofocus" th:field="*{usuario}"/> <br/>  <br>
+
       
       <label for="password">Password</label>
       <input class="controls" type="password" required id="password" name="password" th:field="*{clave}"/> <br /><br><br> 
