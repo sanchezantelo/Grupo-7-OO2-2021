@@ -40,6 +40,7 @@ For further reference, please consider the following sections:
 * [Spring Web](https://docs.spring.io/spring-boot/docs/2.4.5/reference/htmlsingle/#boot-features-developing-web-applications)
 * [Thymeleaf](https://docs.spring.io/spring-boot/docs/2.4.5/reference/htmlsingle/#boot-features-spring-mvc-template-engines)
 * [Spring Security](https://docs.spring.io/spring-boot/docs/2.4.5/reference/htmlsingle/#boot-features-security)
+* [Bootstrap 4](https://getbootstrap.com/docs/4.6/getting-started/introduction/)
 
 ### Guides
 The following guides illustrate how to use some features concretely:

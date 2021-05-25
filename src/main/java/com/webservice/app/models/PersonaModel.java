@@ -85,4 +85,8 @@ public class PersonaModel {
 				+ tipoDocumento + ", dni=" + dni + ", email=" + email + "]";
 	}
 
+	public String nombreApellido() {
+		return nombre + " "+ apellido ;
+	}
+	
 }
