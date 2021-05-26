@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,7 +48,9 @@ public class UserController {
 
 	@GetMapping("/abm-usuario")
 	public String abmUsuario(Model model,@RequestParam("page") Optional<Integer> page,
-			@RequestParam("size") Optional<Integer> size) {
+			@RequestParam("size") Optional<Integer> size,HttpSession sesion ) {
+		   model.addAttribute("user",sesion.getAttribute("user"));
+		  
 		model.addAttribute("usuarioModel", new UsuarioModel());
 		//model.addAttribute("lstUsuarios", usuarioService.findAll());
 		model.addAttribute("lstRoles", usuarioRolService.findAll());

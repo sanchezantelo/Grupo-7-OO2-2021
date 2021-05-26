@@ -78,4 +78,11 @@ public class UsuarioModel {
 				+ ", rol=" + rol + ", persona=" + persona + "]";
 	}
 
+	public boolean hasRole(String rol) {
+		boolean hasRole=false;
+		if(this.rol.getRol().compareTo(rol)==0) {
+		hasRole=true;
+	}
+		return hasRole;
+	}
 }

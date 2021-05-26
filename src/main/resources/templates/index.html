@@ -78,14 +78,17 @@
            
       <h3>Links</h3>
       <p>Seleccione opción:</p>
-      <ul class="nav nav-pills flex-column">
+      
+
+      <ul th:if="${user}" class="nav nav-pills flex-column">
         <li class="nav-item">
-          <a class="nav-link active" href="/admin/usuario/abm-usuario">Usuario</a>
+          <a class="nav-link active" th:if="${user}" th:href="@{'/admin/usuario/abm-usuario'}">Usuario</a>
         </li>
+      <div th:if="${user.hasRole('ROL_ADMIN')}">
         <li class="nav-item">
-          <a class="nav-link" href="/admin/rol/abm-rol">Rol</a>
+          <a class="nav-link" th:if="${user}" th:href="@{'/admin/rol/abm-rol'}">Rol</a>
         </li>
-        
+      </div>
       </ul>
       <hr class="d-sm-none">
     </div>

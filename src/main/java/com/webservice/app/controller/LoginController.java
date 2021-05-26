@@ -1,6 +1,8 @@
 
 package com.webservice.app.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,9 +45,10 @@ public class LoginController {
 	}
 
 	@PostMapping("/autenticar")
-	public String loginCheck(@ModelAttribute("usuarioModel") UsuarioModel usuarioModel,RedirectAttributes redirectAttrs) {
+	public String loginCheck(@ModelAttribute("usuarioModel") UsuarioModel usuarioModel,RedirectAttributes redirectAttrs, HttpSession sesion) {
 		logger.info("/autenticar" + usuarioModel);
 		try {
+			sesion.setAttribute("user", usuarioService.validarCredenciales(usuarioModel));
 			redirectAttrs.addFlashAttribute("user", usuarioService.validarCredenciales(usuarioModel));
 		} catch (Exception e) {
 			redirectAttrs.addFlashAttribute("error", e.getMessage()).addFlashAttribute("clase", "alert alert-danger");
@@ -55,8 +58,9 @@ public class LoginController {
 		return "redirect:/index";
 	}
 	
-	@GetMapping("/index")
-	public String index(Model model) {
+	@GetMapping({"/index",""})
+	public String index(Model model, HttpSession sesion) {
+		model.addAttribute("user",sesion.getAttribute("user"));
 		return "index";
 	}
 }

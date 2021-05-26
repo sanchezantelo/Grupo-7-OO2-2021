@@ -1,7 +1,9 @@
 package com.webservice.app.services.implementation;
 
 
+
 import java.util.List;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -16,6 +18,8 @@ import com.webservice.app.entities.Usuario;
 import com.webservice.app.models.UsuarioModel;
 import com.webservice.app.repositories.IUsuarioRepository;
 import com.webservice.app.services.IUsuarioService;
+
+
 
 @Service("usuarioService")
 public class UsuarioService implements IUsuarioService {

@@ -20,9 +20,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	      .and()
 	        .logout()
 	        .logoutSuccessUrl("/index.html")
-	        .and().authorizeRequests().antMatchers("/admin/usuario/abm-usuario.html").permitAll()
-	        .and().authorizeRequests().antMatchers("/admin/usuario/listUsuarios").permitAll()
-	        .and().authorizeRequests().antMatchers("/admin/rol/abm-rol.html").permitAll();	        
+	        .and().authorizeRequests().antMatchers("/admin/usuario/abm-usuario.html").hasAuthority("ROL_ADMIN")
+	        .and().authorizeRequests().antMatchers("/admin/usuario/listUsuarios").hasAuthority("ROL_ADMIN")
+	        .and().authorizeRequests().antMatchers("/admin/rol/abm-rol.html").hasAuthority("ROL_ADMIN");	        
 
 }
 	

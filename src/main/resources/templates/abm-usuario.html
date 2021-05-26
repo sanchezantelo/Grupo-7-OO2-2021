@@ -34,7 +34,7 @@
 	</div>
 
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-		<a class="navbar-brand" href="/">Inicio</a>
+		<a class="navbar-brand" th:href="@{'/index'}">Inicio</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#collapsibleNavbar">
 			<span class="navbar-toggler-icon"></span>
@@ -53,10 +53,12 @@
 
 	<main role="main" class="container">		
 	
+        	
 		<div class="alert alert-primary" role="alert" th:if="${mensaje}" th:unless="${error}" th:text="${mensaje}"></div>
 		<div class="alert alert-danger" role="alert" th:if="${error}" th:text="${error}"></div>
+        <div th:object=${user}></div>
 		<div class="row mb-3 w3-example">
-			<div class="col-4">
+			<div class="col-4" th:if="${user.hasRole('ROL_ADMIN')}">
 				<h3>Datos del Usuario</h3>
 				<div class="form-group">
 
@@ -192,7 +194,8 @@
 						</div>
 
 					</form>
-				</div>
+			
+		</div>
 		</div>
 		<div class="col-8">
 			<h3>Usuarios</h3>
@@ -225,10 +228,12 @@
 							<td><span th:text="${usuario.persona.email}"></td>
 							<td><span th:text="${usuario.rol.rol}"></td>
 							<td><span th:text="${usuario.enabled}"></td>							
-							<td><a th:href="@{'/admin/usuario/bajaUsuario?id=' + ${usuario.id}}" class="btn-danger btn-sm">
+							<td>
+							<a th:if="${user.hasRole('ROL_ADMIN')}" th:href="@{'/admin/usuario/bajaUsuario?id=' + ${usuario.id}}" class="btn-danger btn-sm">
 							<img th:src="@{'/images/trash.svg'}" th:text="Eliminar"/></td>
-							<td><a th:href="@{'/admin/usuario/traerUsuario?id=' + ${usuario.id}}" class="btn-warning btn-sm">
-							<img th:src="@{'/images/pencil-square.svg'}" th:text="Editar"/></a></td>
+							<td>
+							<a th:if="${user.hasRole('ROL_ADMIN')}" th:href="@{'/admin/usuario/traerUsuario?id=' + ${usuario.id}}" class="btn-warning btn-sm">
+							<img th:src="@{'/images/pencil-square.svg'}" th:text="Editar"/></td>
 						    <td><input type="hidden" th:value="${usuario.id}"/></td>
 						    <td><input type="hidden" th:value="${usuario.rol.id}"/></td>
 						</tr>
