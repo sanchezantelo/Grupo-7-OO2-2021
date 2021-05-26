@@ -29,6 +29,14 @@
     java -jar .\target\app-v0.1.war
 
 
+## Importar datos  
+
+    grupo-7-bdd-oo2-2021.sql
+
+## Ingresar al login desde el navegador con el usuario admin/admin o auditor/auditor  
+
+    http://localhost:8080/login
+
 
 ### Reference Documentation
 For further reference, please consider the following sections:
