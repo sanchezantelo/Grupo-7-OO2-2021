@@ -1,8 +1,10 @@
 package com.webservice.app.entities;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -18,33 +20,32 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "permiso")
-@Inheritance(strategy = InheritanceType.JOINED) 
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Permiso {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected int idPermiso;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "persona_id", nullable = false)
+	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	@JoinColumn(name = "persona_id", nullable = true)
 	protected Persona persona;
-    
+
 	@Column(name = "fecha", nullable = false)
 	protected LocalDate fecha;
 
-	@ManyToMany
-	protected Set<Lugar>desdeHasta;
+	@ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	protected Set<Lugar> desdeHasta = new HashSet<Lugar>();
 
 	public Permiso() {
 		super();
 	}
 
-	public Permiso(int idPermiso, Persona persona, LocalDate fecha, Set<Lugar> desdeHasta) {
+	public Permiso(int idPermiso, Persona persona, LocalDate fecha) {
 		super();
 		this.idPermiso = idPermiso;
 		this.persona = persona;
 		this.fecha = fecha;
-		this.desdeHasta = desdeHasta;
 	}
 
 	public int getIdPermiso() {

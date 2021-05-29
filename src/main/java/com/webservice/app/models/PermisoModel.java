@@ -1,35 +1,28 @@
 package com.webservice.app.models;
 
-import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
-
-import com.webservice.app.entities.Lugar;
-import com.webservice.app.entities.Persona;
 
 public abstract class PermisoModel {
 	protected int idPermiso;
-	protected Persona persona;
-	protected LocalDate fecha;
-	protected Set<Lugar> desdeHasta;
+	protected PersonaModel persona;
+	protected String fecha;
+	protected Set<LugarModel> desdeHasta = new HashSet<LugarModel>();
 
 	public PermisoModel() {
 	}
 
-	public PermisoModel(Persona persona, LocalDate fecha, Set<Lugar> desdeHasta) {
-		super();
-		this.persona = persona;
-		this.fecha = fecha;
-		this.desdeHasta = desdeHasta;
-	}
-	
-	
-
-	public PermisoModel(int idPermiso, Persona persona, LocalDate fecha, Set<Lugar> desdeHasta) {
+	public PermisoModel(int idPermiso, PersonaModel persona, String fecha) {
 		super();
 		this.idPermiso = idPermiso;
 		this.persona = persona;
 		this.fecha = fecha;
-		this.desdeHasta = desdeHasta;
+	}
+
+	public PermisoModel(PersonaModel persona, String fecha) {
+		super();
+		this.persona = persona;
+		this.fecha = fecha;
 	}
 
 	public int getIdPermiso() {
@@ -40,28 +33,30 @@ public abstract class PermisoModel {
 		this.idPermiso = idPermiso;
 	}
 
-	public Persona getPersona() {
+	public PersonaModel getPersona() {
 		return persona;
 	}
 
-	public void setPersona(Persona persona) {
+	public void setPersona(PersonaModel persona) {
 		this.persona = persona;
 	}
 
-	public LocalDate getFecha() {
-		return fecha;
-	}
-
-	public void setFecha(LocalDate fecha) {
-		this.fecha = fecha;
-	}
-
-	public Set<Lugar> getDesdeHasta() {
+	public Set<LugarModel> getDesdeHasta() {
 		return desdeHasta;
 	}
 
-	public void setDesdeHasta(Set<Lugar> desdeHasta) {
+	public void setDesdeHasta(Set<LugarModel> desdeHasta) {
 		this.desdeHasta = desdeHasta;
+	}
+
+	
+
+	public String getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(String fecha) {
+		this.fecha = fecha;
 	}
 
 	@Override

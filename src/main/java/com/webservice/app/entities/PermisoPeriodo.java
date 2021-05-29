@@ -1,14 +1,12 @@
 package com.webservice.app.entities;
 
 import java.time.LocalDate;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
 
 @Entity
 
@@ -35,10 +33,9 @@ public class PermisoPeriodo extends Permiso {
 		this.rodado = rodado;
 	}
 
-	public PermisoPeriodo(int idPermiso, Persona persona, LocalDate fecha, Set<Lugar> desdeHasta,
-			int cantDias, boolean vacaciones, Rodado rodado) {
-		super(idPermiso, persona, fecha, desdeHasta);
-		
+	public PermisoPeriodo(int idPermiso, Persona persona, LocalDate fecha, int cantDias, boolean vacaciones,
+			Rodado rodado) {
+		super(idPermiso, persona, fecha);
 		this.cantDias = cantDias;
 		this.vacaciones = vacaciones;
 		this.rodado = rodado;

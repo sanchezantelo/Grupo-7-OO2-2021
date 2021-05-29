@@ -1,7 +1,6 @@
 package com.webservice.app.entities;
 
 import java.time.LocalDate;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,13 +15,8 @@ public class PermisoDiario extends Permiso {
 		super();
 	}
 
-	public PermisoDiario(String motivo) {
-		super();
-		this.motivo = motivo;
-	}
-
-	public PermisoDiario(int idPermiso, Persona persona, LocalDate fecha, Set<Lugar> desdeHasta, String motivo) {
-		super(idPermiso, persona, fecha, desdeHasta);
+	public PermisoDiario(int idPermiso, Persona persona, LocalDate fecha, String motivo) {
+		super(idPermiso, persona, fecha);
 		this.motivo = motivo;
 	}
 
