@@ -45,12 +45,14 @@ public class PermisoService implements IPermisoService {
 		try {
 			if (permisoModel instanceof PermisoDiarioModel) {
 				Permiso permiso = permisoDiarioModel.modelToEntity((PermisoDiarioModel) permisoModel);
-				//permiso.getDesdeHasta().add(lugarModel.modelToEntity(lugarOrigenModel));
+				permiso.getDesdeHasta().add(lugarModel.modelToEntity(lugarOrigenModel));
 				permiso.getDesdeHasta().add(lugarModel.modelToEntity(lugarDestinoModel));
 				permisoRepository.save(permiso);
 			}
 			if (permisoModel instanceof PermisoPeriodoModel) {
 				Permiso permiso = permisoPeriodoModel.modelToEntity((PermisoPeriodoModel) permisoModel);
+				permiso.getDesdeHasta().add(lugarModel.modelToEntity(lugarOrigenModel));
+				permiso.getDesdeHasta().add(lugarModel.modelToEntity(lugarDestinoModel));
 				permisoRepository.save(permiso);
 			}
 		} catch (Exception e) {

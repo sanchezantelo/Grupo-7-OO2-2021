@@ -2,6 +2,7 @@ package com.webservice.app.entities;
 
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -18,7 +19,7 @@ public class PermisoPeriodo extends Permiso {
 	@Column(name = "vacaciones", nullable = false)
 	private boolean vacaciones;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY , cascade = CascadeType.ALL)
 	@JoinColumn(name = "rodado_id", nullable = false)
 	private Rodado rodado;
 

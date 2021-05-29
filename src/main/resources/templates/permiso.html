@@ -61,7 +61,12 @@
 				<h3>Datos del Permiso</h3>
 				<div class="form-group">
 
-					<form th:action="@{/index/altaPermiso}" th:if="${permisoDiarioModel}" th:object="${permisoDiarioModel}"
+                	<div class="form-group">
+							<input type="hidden"
+								class="form-control form-control-sm" th:number="${page}">
+						</div>
+                
+					<form th:action="@{/index/altaPermisoDiario}" th:if="${permisoDiarioModel}" th:object="${permisoDiarioModel}"
 						method="post">
 	
 						<div class="form-group">
@@ -126,9 +131,91 @@
 
 					</form>
 					
+					
+						<form th:action="@{/index/altaPermisoPeriodo}" th:if="${permisoPeriodoModel}" th:unless="${permisoDiarioModel}"  th:object="${permisoPeriodoModel}"
+						method="post">
+	
+						<div class="form-group">
+							<label>Nombre</label> <input type="text"
+								class="form-control form-control-sm"
+								th:field="*{persona.nombre}"required>
+						</div>
+
+						<div class="form-group">
+							<label>Apellido</label> <input type="text"
+								class="form-control form-control-sm"
+								th:field="*{persona.apellido}"required>
+						</div>
+
+                      <div class="form-group">
+                      <label>Tipo de Documento</label>	
+							<select name="tipoDocumento" class="form-control form-control-sm" th:field="*{persona.tipoDocumento}">
+    						<option th:each="tipoDocumento : ${T(com.webservice.app.entities.TipoDocumento).values()}" 
+        					th:value="${tipoDocumento}" th:text="${tipoDocumento}"></option>
+							</select>
+						</div>
+
+						<div class="form-group">
+							<label>Numero de Documento</label> <input type="number"
+								class="form-control form-control-sm" th:field="*{persona.dni}"required>
+						</div>
+
+						<div class="form-group">
+							<label>Email</label> <input type="email"
+								class="form-control form-control-sm" th:field="*{persona.email}"required>
+						</div>
+						
+						<div class="form-group">
+  						  <label>Fecha</label> <input class="form-control form-control-sm" type="date" id="start" min="1970-01-01" max="5555-12-31" placeholder="start time" th:field="*{fecha}" > 
+  						  </div>
+  						  
+  						  <div class="form-group">
+							<label>Lugar Origen</label> <input type="text"
+								class="form-control form-control-sm" th:field="${lugarOrigenModel.lugar}" required>
+									<br>
+								<label>Codigo Postal</label>
+								<input type="text"
+								class="form-control form-control-sm" th:field="${lugarOrigenModel.codigoPostal}" required>
+						</div>
+						
+						<div class="form-group">
+							<label>Lugar Destino</label> <input type="text"
+								class="form-control form-control-sm" th:field="${lugarDestinoModel.lugar}" required>
+								<br>
+								<label>Codigo Postal</label>
+								<input type="text"
+								class="form-control form-control-sm" th:field="${lugarDestinoModel.codigoPostal}" required>
+						</div>
+					
+					<div class="form-group">
+							<label>Cantidad de Dias</label> <input type="number"
+								class="form-control form-control-sm" th:field="*{cantDias}"required>
+						</div>
+							<div class="form-group">
+							<label>Vacaciones</label> <input type="checkbox"
+								class="form-control form-control" th:field="*{vacaciones}">
+						</div>
+						
+							<div class="form-group">
+							<label>Dominio</label> <input type="text"
+								class="form-control form-control-sm" th:field="*{rodado.dominio}"required>
+						</div>
+						
+							<div class="form-group">
+							<label>Vehiculo</label> <input type="text"
+								class="form-control form-control-sm" th:field="*{rodado.vehiculo}"required>
+						</div>
+						
+						
+						<div class="form-group">
+							<input type="submit" class="btn-success form-control form-control-sm"/>
+						</div>
+
+					</form>				
 				</div>
 				</div>
-				</div>	
+				</div>
+					
    	</main>
 	
 	<div class="jumbotron text-center" style="margin-bottom: 0">
