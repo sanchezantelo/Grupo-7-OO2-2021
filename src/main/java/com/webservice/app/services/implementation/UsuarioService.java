@@ -14,8 +14,10 @@ import org.springframework.util.DigestUtils;
 
 import com.webservice.app.converters.PersonaConverter;
 import com.webservice.app.converters.UsuarioConverter;
+import com.webservice.app.entities.Persona;
 import com.webservice.app.entities.Usuario;
 import com.webservice.app.models.UsuarioModel;
+import com.webservice.app.repositories.IPersonaRepository;
 import com.webservice.app.repositories.IUsuarioRepository;
 import com.webservice.app.services.IUsuarioService;
 
@@ -27,6 +29,11 @@ public class UsuarioService implements IUsuarioService {
 	@Autowired
 	@Qualifier("usuarioRepository")
 	private IUsuarioRepository usuarioRepository;
+	
+
+	@Autowired
+	@Qualifier("personaRepository")
+	private IPersonaRepository personaRepository;
 
 	@Autowired
 	@Qualifier("usuarioModel")
@@ -44,6 +51,10 @@ public class UsuarioService implements IUsuarioService {
 		return usuarioRepository.findById(id);
 	}
 
+	public Persona findByDni(long dni) {
+		return personaRepository.findByDni(dni);
+	}
+	
 	public UsuarioModel traerUsuario(int id) {
 
 		return usuarioModel.entityToModel(usuarioRepository.findByIdRol(id));

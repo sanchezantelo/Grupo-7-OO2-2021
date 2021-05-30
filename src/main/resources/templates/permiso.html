@@ -214,6 +214,51 @@
 					</form>				
 				</div>
 				</div>
+						<div class="col-8">
+			<h3>Buscar Permiso</h3>
+			<form th:action="@{/index/traerPermiso}" th:object="${personaModel}"
+						method="post">
+						
+						<div class="form-group">
+							<label>DNI</label> <input type="text"
+								class="form-control form-control-sm" th:field="*{dni}"required>
+						</div>
+							<div class="form-group">
+							<input type="submit" class="btn-success form-control form-control-sm"/>
+						</div>
+						
+			</form>			
+			<!--tabla-->
+			<div style="overflow-x: auto;">
+				<table class="table table-xl-12" th:if="${lstPermisos}">
+					<thead>
+						<tr>
+							<th scope="col">Nombre</th>
+							<th scope="col">Apellido</th>
+							<th scope="col">Tipo Documento</th>
+							<th scope="col">Num Documento</th>
+							<th scope="col">Email</th>
+							<th scope="col">Fecha</th>
+							<th scope="col">Origen/Destino</th>
+						</tr>
+					</thead>
+					<tbody >
+						<tr th:if="${lstPermisos.empty}">
+							<td colspan="2"></td>
+						</tr>
+						<tr th:each="permiso: ${lstPermisos}">
+							<td><span th:text="${permiso.persona.nombre}"></td>
+							<td><span th:text="${permiso.persona.apellido}"></td>
+							<td><span th:text="${permiso.persona.tipoDocumento}"></td>
+							<td><span th:text="${permiso.persona.dni}"></td>
+							<td><span th:text="${permiso.persona.email}"></td>				
+							<td><span th:text="${permiso.fecha}"></td>				
+						</tr>
+					</tbody>
+				</table>
+		 	 
+	</div>	
+	</div>
 				</div>
 					
    	</main>

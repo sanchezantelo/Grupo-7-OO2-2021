@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.webservice.app.models.LugarModel;
 import com.webservice.app.models.PermisoDiarioModel;
 import com.webservice.app.models.PermisoPeriodoModel;
+import com.webservice.app.models.PersonaModel;
 import com.webservice.app.services.ILugarService;
 import com.webservice.app.services.IPermisoService;
 
@@ -35,6 +36,7 @@ public class PermisoController {
 	@GetMapping("/permiso")
 	public String abmPermiso(Model model, @RequestParam("page") int page) {
 		model.addAttribute("lugares", lugarService.findAll());
+		model.addAttribute("personaModel",new PersonaModel());
 		if (page == 0) {
 			model.addAttribute("permisoDiarioModel", new PermisoDiarioModel());
 		} else {
@@ -77,5 +79,15 @@ public class PermisoController {
 		}
 		return "redirect:/index/permiso";
 	}
+	
+	//TRAER PERMISO
+	@PostMapping("/traerPermiso")
+	public String traerPermiso(@ModelAttribute("personaModel") PersonaModel personaModel, Model model, RedirectAttributes redirectAttrs) {
+		logger.info("/traerPermiso" + personaModel);
+		redirectAttrs.addFlashAttribute("lstPermisos", permisoService.findByPersona(personaModel.getDni()))
+				.addFlashAttribute("clase", "alert alert-success").addAttribute("page", 0);
+		return "redirect:/index/permiso";
+	}
+
 
 }
