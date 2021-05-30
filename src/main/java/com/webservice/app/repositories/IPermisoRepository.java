@@ -1,7 +1,6 @@
 package com.webservice.app.repositories;
 
 import java.io.Serializable;
-import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
@@ -14,8 +13,7 @@ import com.webservice.app.entities.Persona;
 public interface IPermisoRepository extends JpaRepository<Permiso, Serializable> {
 
 	public abstract Permiso findByIdPermiso(@Param("idPermiso") int idPermiso);
-	
+
 	public abstract Permiso findByPersona(@Param("persona") Persona persona);
-	
 
 }

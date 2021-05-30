@@ -3,8 +3,6 @@ package com.webservice.app.models;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.webservice.app.entities.Lugar;
-
 public abstract class PermisoModel {
 	protected int idPermiso;
 	protected PersonaModel persona;
@@ -25,8 +23,6 @@ public abstract class PermisoModel {
 		this.lugarOrigenModel = lugarOrigenModel;
 		this.lugarDestinoModel = lugarDestinoModel;
 	}
-	
-	
 
 	public PermisoModel(int idPermiso, PersonaModel persona, String fecha) {
 		super();
@@ -80,8 +76,7 @@ public abstract class PermisoModel {
 	public void setLugarDestinoModel(LugarModel lugarDestinoModel) {
 		this.lugarDestinoModel = lugarDestinoModel;
 	}
-	
-	
+
 	public Set<LugarModel> getDesdeHasta() {
 		return desdeHasta;
 	}

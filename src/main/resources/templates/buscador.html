@@ -1,0 +1,149 @@
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<head>
+<title>Website Grupo 07</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<link href='https://unpkg.com/boxicons@2.0.5/css/boxicons.min.css'
+	rel='stylesheet'>
+	 
+<link rel="stylesheet" type="text/css" th:src="@{'/css/formularios.css}">
+<style>
+.fakeimg {
+	height: 200px;
+	background: grey;
+}
+</style>
+</head>
+
+
+<body>
+	<div class="jumbotron text-center" style="margin-bottom: 0">
+		<h1>Website Grupo 07-OO2</h1>
+		<h2>Nuestro sitio está en proceso</h2>
+		<h4>Bienvenidos!</h4>
+	</div>
+
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+		<a class="navbar-brand" th:href="@{'/index'}">Inicio</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#collapsibleNavbar">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="collapsibleNavbar">
+			<ul class="navbar-nav">
+				<li class="nav-item"><a class="nav-link" href="#personas"></a>
+				</li>
+				<li class="nav-item"><a class="nav-link" href="#permisos"></a>
+				</li>
+				<li class="nav-item"><a class="nav-link" href="#rodados"></a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+
+	<main role="main" class="container">		
+	   	
+		<div class="alert alert-primary" role="alert" th:if="${mensaje}" th:unless="${error}" th:text="${mensaje}"></div>
+		<div class="alert alert-danger" role="alert" th:if="${error}" th:text="${error}"></div>
+        <div th:object=${permisoDiarioModel}></div>
+		<div class="row mb-3 w3-example">
+
+			<div class="col-8">
+			<h3>Buscar Permiso Rodado</h3>
+			<form th:action="@{/buscador/traerPermisoRodado}" th:object="${rodadoModel}"
+						method="post">
+						
+						<div class="form-group">
+							<label>Dominio</label> <input type="text"
+								class="form-control form-control-sm" th:field="*{dominio}">
+						</div>
+						<div class="form-group">
+							<label>Vehiculo</label> <input type="text"
+								class="form-control form-control-sm" th:field="*{vehiculo}">
+						</div>
+							<div class="form-group">
+							<input type="submit" class="btn-success form-control form-control-sm"/>
+						</div>
+						
+			</form>			
+			<!--tabla-->
+			<div style="overflow-x: auto;">
+				<table class="table table-xl-12" th:if="${pperiodo}">
+					<thead>
+						<tr>
+							<th scope="col">Nombre</th>
+							<th scope="col">Apellido</th>
+							<th scope="col">Tipo Documento</th>
+							<th scope="col">Num Documento</th>
+							<th scope="col">Email</th>
+							<th scope="col">Fecha</th>
+							<th scope="col">Desde</th>
+							<th scope="col">Hasta</th>
+							<th scope="col">Dias</th>
+							<th scope="col">Vacaciones</th>
+							<th scope="col">Dominio</th>
+							<th scope="col">Vehiculo</th>
+							
+						</tr>
+					</thead>
+					<tbody >
+						<tr th:if="${pperiodo}">
+							<td colspan="2"></td>
+						</tr>
+						<tr>
+							<td><span th:text="${pperiodo.persona.nombre}"></td>
+							<td><span th:text="${pperiodo.persona.apellido}"></td>
+							<td><span th:text="${pperiodo.persona.tipoDocumento}"></td>
+							<td><span th:text="${pperiodo.persona.dni}"></td>
+							<td><span th:text="${pperiodo.persona.email}"></td>				
+							<td><span th:text="${pperiodo.fecha}"></td>	
+							<td><span th:text="${pperiodo.desdeHasta[1].lugar()}"></td>	
+							<td><span th:text="${pperiodo.desdeHasta[0].lugar()}"></td>	
+							<td><span th:text="${pperiodo.cantDias}"></td>
+							<td><span th:text="${pperiodo.vacaciones}"></td>
+							<td><span th:text="${pperiodo.rodado.dominio}"></td>	
+							<td><span th:text="${pperiodo.rodado.vehiculo}"></td>		
+							
+								
+						</tr>
+					</tbody>
+				</table>
+		 	 
+	</div>	
+	</div>
+	
+	</div>
+					
+   	</main>
+	
+	<div class="jumbotron text-center" style="margin-bottom: 0">
+		<footer id="footer">
+			<div class="contenedor footer-content">
+				<div class="contact-us">
+					<h2 class="brand">Grupo 07-OO2</h2>
+					<p>Sofia Sánchez Antelo </p>
+				</div>
+				<div class="social-media">
+					<a href="https://github.com/sanchezantelo/Grupo-7-OO2-2021"
+						class="social-media-icon" target="_blank"> <i
+						class='bx bxl-github'></i>
+					</a>
+				</div>
+			</div>
+		</footer>
+	</div>
+	
+</body> 
+
+</html>  
+
