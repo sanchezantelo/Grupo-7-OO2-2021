@@ -3,17 +3,18 @@ package com.webservice.app.models;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.webservice.app.entities.Lugar;
+
 public abstract class PermisoModel {
 	protected int idPermiso;
 	protected PersonaModel persona;
 	protected String fecha;
+	protected Set<LugarModel> desdeHasta = new HashSet<LugarModel>();
 	protected LugarModel lugarOrigenModel;
 	protected LugarModel lugarDestinoModel;
-	
+
 	public PermisoModel() {
 	}
-
-	
 
 	public PermisoModel(int idPermiso, PersonaModel persona, String fecha, LugarModel lugarOrigenModel,
 			LugarModel lugarDestinoModel) {
@@ -24,8 +25,8 @@ public abstract class PermisoModel {
 		this.lugarOrigenModel = lugarOrigenModel;
 		this.lugarDestinoModel = lugarDestinoModel;
 	}
-
-
+	
+	
 
 	public PermisoModel(int idPermiso, PersonaModel persona, String fecha) {
 		super();
@@ -33,8 +34,6 @@ public abstract class PermisoModel {
 		this.persona = persona;
 		this.fecha = fecha;
 	}
-
-
 
 	public PermisoModel(PersonaModel persona, String fecha) {
 		super();
@@ -58,7 +57,6 @@ public abstract class PermisoModel {
 		this.persona = persona;
 	}
 
-
 	public String getFecha() {
 		return fecha;
 	}
@@ -67,38 +65,35 @@ public abstract class PermisoModel {
 		this.fecha = fecha;
 	}
 
-
-
 	public LugarModel getLugarOrigenModel() {
 		return lugarOrigenModel;
 	}
-
-
 
 	public void setLugarOrigenModel(LugarModel lugarOrigenModel) {
 		this.lugarOrigenModel = lugarOrigenModel;
 	}
 
-
-
 	public LugarModel getLugarDestinoModel() {
 		return lugarDestinoModel;
 	}
 
-
-
 	public void setLugarDestinoModel(LugarModel lugarDestinoModel) {
 		this.lugarDestinoModel = lugarDestinoModel;
 	}
+	
+	
+	public Set<LugarModel> getDesdeHasta() {
+		return desdeHasta;
+	}
 
-
+	public void setDesdeHasta(Set<LugarModel> desdeHasta) {
+		this.desdeHasta = desdeHasta;
+	}
 
 	@Override
 	public String toString() {
 		return "PermisoModel [idPermiso=" + idPermiso + ", persona=" + persona + ", fecha=" + fecha
 				+ ", lugarOrigenModel=" + lugarOrigenModel + ", lugarDestinoModel=" + lugarDestinoModel + "]";
 	}
-
-
 
 }

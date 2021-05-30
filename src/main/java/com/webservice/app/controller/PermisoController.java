@@ -1,4 +1,5 @@
 package com.webservice.app.controller;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.webservice.app.models.LugarModel;
 import com.webservice.app.models.PermisoDiarioModel;
 import com.webservice.app.models.PermisoPeriodoModel;
 import com.webservice.app.models.PersonaModel;
@@ -26,7 +26,7 @@ public class PermisoController {
 	@Autowired
 	@Qualifier("permisoService")
 	private IPermisoService permisoService;
-	
+
 	@Autowired
 	@Qualifier("lugarService")
 	private ILugarService lugarService;
@@ -36,7 +36,7 @@ public class PermisoController {
 	@GetMapping("/permiso")
 	public String abmPermiso(Model model, @RequestParam("page") int page) {
 		model.addAttribute("lugares", lugarService.findAll());
-		model.addAttribute("personaModel",new PersonaModel());
+		model.addAttribute("personaModel", new PersonaModel());
 		if (page == 0) {
 			model.addAttribute("permisoDiarioModel", new PermisoDiarioModel());
 		} else {
@@ -79,15 +79,24 @@ public class PermisoController {
 		}
 		return "redirect:/index/permiso";
 	}
-	
-	//TRAER PERMISO
-	@PostMapping("/traerPermiso")
-	public String traerPermiso(@ModelAttribute("personaModel") PersonaModel personaModel, Model model, RedirectAttributes redirectAttrs) {
-		logger.info("/traerPermiso" + personaModel);
-		redirectAttrs.addFlashAttribute("lstPermisos", permisoService.findByPersona(personaModel.getDni()))
-				.addFlashAttribute("clase", "alert alert-success").addAttribute("page", 0);
+
+	// TRAER PERMISO
+	@PostMapping("/traerPermisoPeriodo")
+	public String traerPermisoPeriodo(@ModelAttribute("personaModel") PersonaModel personaModel, Model model,
+			RedirectAttributes redirectAttrs) {
+		logger.info("/traerPermisoPeriodo" + personaModel);
+		redirectAttrs.addFlashAttribute("pperiodo", permisoService.findByPersonaPeriodo(personaModel.getDni()))
+				.addFlashAttribute("clase", "alert alert-success").addAttribute("page", 1);
 		return "redirect:/index/permiso";
 	}
-
+	
+	@PostMapping("/traerPermisoDiario")
+	public String traerPermisoDiario(@ModelAttribute("personaModel") PersonaModel personaModel, Model model,
+			RedirectAttributes redirectAttrs) {
+		logger.info("/traerPermisoDiario" + personaModel);
+		redirectAttrs.addFlashAttribute("pdiario", permisoService.findByPersonaDiario(personaModel.getDni()))
+				.addFlashAttribute("clase", "alert alert-success").addAttribute("page",0);
+		return "redirect:/index/permiso";
+	}
 
 }

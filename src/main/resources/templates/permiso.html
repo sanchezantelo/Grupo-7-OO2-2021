@@ -214,9 +214,9 @@
 					</form>				
 				</div>
 				</div>
-						<div class="col-8">
-			<h3>Buscar Permiso</h3>
-			<form th:action="@{/index/traerPermiso}" th:object="${personaModel}"
+			<div class="col-8" th:if="${permisoPeriodoModel}">
+			<h3>Buscar Permiso Periodo</h3>
+			<form th:action="@{/index/traerPermisoPeriodo}" th:object="${personaModel}"
 						method="post">
 						
 						<div class="form-group">
@@ -230,7 +230,7 @@
 			</form>			
 			<!--tabla-->
 			<div style="overflow-x: auto;">
-				<table class="table table-xl-12" th:if="${lstPermisos}">
+				<table class="table table-xl-12" th:if="${pperiodo}">
 					<thead>
 						<tr>
 							<th scope="col">Nombre</th>
@@ -239,20 +239,86 @@
 							<th scope="col">Num Documento</th>
 							<th scope="col">Email</th>
 							<th scope="col">Fecha</th>
-							<th scope="col">Origen/Destino</th>
+							<th scope="col">Desde</th>
+							<th scope="col">Hasta</th>
+							<th scope="col">Dias</th>
+							<th scope="col">Vacaciones</th>
+							<th scope="col">Dominio</th>
+							<th scope="col">Vehiculo</th>
+							
 						</tr>
 					</thead>
 					<tbody >
-						<tr th:if="${lstPermisos.empty}">
+						<tr th:if="${pperiodo}">
 							<td colspan="2"></td>
 						</tr>
-						<tr th:each="permiso: ${lstPermisos}">
-							<td><span th:text="${permiso.persona.nombre}"></td>
-							<td><span th:text="${permiso.persona.apellido}"></td>
-							<td><span th:text="${permiso.persona.tipoDocumento}"></td>
-							<td><span th:text="${permiso.persona.dni}"></td>
-							<td><span th:text="${permiso.persona.email}"></td>				
-							<td><span th:text="${permiso.fecha}"></td>				
+						<tr>
+							<td><span th:text="${pperiodo.persona.nombre}"></td>
+							<td><span th:text="${pperiodo.persona.apellido}"></td>
+							<td><span th:text="${pperiodo.persona.tipoDocumento}"></td>
+							<td><span th:text="${pperiodo.persona.dni}"></td>
+							<td><span th:text="${pperiodo.persona.email}"></td>				
+							<td><span th:text="${pperiodo.fecha}"></td>	
+							<td><span th:text="${pperiodo.desdeHasta[1].lugar()}"></td>	
+							<td><span th:text="${pperiodo.desdeHasta[0].lugar()}"></td>	
+							<td><span th:text="${pperiodo.cantDias}"></td>
+							<td><span th:text="${pperiodo.vacaciones}"></td>
+							<td><span th:text="${pperiodo.rodado.dominio}"></td>	
+							<td><span th:text="${pperiodo.rodado.vehiculo}"></td>		
+							
+								
+						</tr>
+					</tbody>
+				</table>
+		 	 
+	</div>	
+	</div>
+	
+				<div class="col-8" th:if="${permisoDiarioModel}">
+			<h3>Buscar Permiso Diario</h3>
+			<form th:action="@{/index/traerPermisoDiario}" th:object="${personaModel}"
+						method="post">
+						
+						<div class="form-group">
+							<label>DNI</label> <input type="text"
+								class="form-control form-control-sm" th:field="*{dni}"required>
+						</div>
+							<div class="form-group">
+							<input type="submit" class="btn-success form-control form-control-sm"/>
+						</div>
+						
+			</form>			
+			<!--tabla-->
+			<div style="overflow-x: auto;">
+				<table class="table table-xl-12" th:if="${pdiario}">
+					<thead>
+						<tr>
+							<th scope="col">Nombre</th>
+							<th scope="col">Apellido</th>
+							<th scope="col">Tipo Documento</th>
+							<th scope="col">Num Documento</th>
+							<th scope="col">Email</th>
+							<th scope="col">Fecha</th>
+							<th scope="col">Desde</th>
+							<th scope="col">Hasta</th>
+							<th scope="col">Motivo</th>							
+						</tr>
+					</thead>
+					<tbody >
+						<tr th:if="${pdiario}">
+							<td colspan="2"></td>
+						</tr>
+						<tr>
+							<td><span th:text="${pdiario.persona.nombre}"></td>
+							<td><span th:text="${pdiario.persona.apellido}"></td>
+							<td><span th:text="${pdiario.persona.tipoDocumento}"></td>
+							<td><span th:text="${pdiario.persona.dni}"></td>
+							<td><span th:text="${pdiario.persona.email}"></td>				
+							<td><span th:text="${pdiario.fecha}"></td>	
+							<td><span th:text="${pdiario.desdeHasta[1].lugar()}"></td>	
+							<td><span th:text="${pdiario.desdeHasta[0].lugar()}"></td>	
+							<td><span th:text="${pdiario.motivo}"></td>
+															
 						</tr>
 					</tbody>
 				</table>

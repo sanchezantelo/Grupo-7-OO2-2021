@@ -15,6 +15,7 @@ public interface IPermisoRepository extends JpaRepository<Permiso, Serializable>
 
 	public abstract Permiso findByIdPermiso(@Param("idPermiso") int idPermiso);
 	
-	public abstract List<Permiso> findByPersona(@Param("persona") Persona persona);
+	public abstract Permiso findByPersona(@Param("persona") Persona persona);
+	
 
 }

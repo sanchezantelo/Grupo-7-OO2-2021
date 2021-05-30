@@ -1,7 +1,5 @@
 package com.webservice.app.models;
 
-import java.time.LocalDate;
-
 public class PermisoPeriodoModel extends PermisoModel {
 	private int cantDias;
 	private boolean vacaciones;

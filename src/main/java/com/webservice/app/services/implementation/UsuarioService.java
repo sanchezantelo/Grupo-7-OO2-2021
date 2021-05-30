@@ -1,9 +1,6 @@
 package com.webservice.app.services.implementation;
 
-
-
 import java.util.List;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -21,15 +18,12 @@ import com.webservice.app.repositories.IPersonaRepository;
 import com.webservice.app.repositories.IUsuarioRepository;
 import com.webservice.app.services.IUsuarioService;
 
-
-
 @Service("usuarioService")
 public class UsuarioService implements IUsuarioService {
 
 	@Autowired
 	@Qualifier("usuarioRepository")
 	private IUsuarioRepository usuarioRepository;
-	
 
 	@Autowired
 	@Qualifier("personaRepository")
@@ -54,7 +48,7 @@ public class UsuarioService implements IUsuarioService {
 	public Persona findByDni(long dni) {
 		return personaRepository.findByDni(dni);
 	}
-	
+
 	public UsuarioModel traerUsuario(int id) {
 
 		return usuarioModel.entityToModel(usuarioRepository.findByIdRol(id));
@@ -91,28 +85,26 @@ public class UsuarioService implements IUsuarioService {
 
 		return usuarioRepository.findByEnabled();
 	}
-	
-	
-	
-    //METODO PARA MOSTRAR UNA LISTA DE ELEMENTOS CON PAGINACION 
-			
-	 public Page<Usuario> findPaginated(Pageable pageable) {   
-	        return usuarioRepository.findAll(pageable);
-	    }
-	 
-	 
-	 public UsuarioModel validarCredenciales(UsuarioModel usuario) throws Exception {
-		 try {
-		 UsuarioModel user= usuarioModel.entityToModel(usuarioRepository.validarCredenciales(usuario.getUsuario(),usuario.getUsuario(),DigestUtils.md5DigestAsHex(usuario.getClave().getBytes())));
-		
-		 if(user.equals(null)) {
-			 throw new Exception("Usuario y Clave incorrectos");
-		 }else {
-		 return user;
-		 }
-	} catch (Exception e){
-		
-		throw new Exception("Usuario y Clave incorrectos");
+
+	// METODO PARA MOSTRAR UNA LISTA DE ELEMENTOS CON PAGINACION
+
+	public Page<Usuario> findPaginated(Pageable pageable) {
+		return usuarioRepository.findAll(pageable);
 	}
-		 }
+
+	public UsuarioModel validarCredenciales(UsuarioModel usuario) throws Exception {
+		try {
+			UsuarioModel user = usuarioModel.entityToModel(usuarioRepository.validarCredenciales(usuario.getUsuario(),
+					usuario.getUsuario(), DigestUtils.md5DigestAsHex(usuario.getClave().getBytes())));
+
+			if (user.equals(null)) {
+				throw new Exception("Usuario y Clave incorrectos");
+			} else {
+				return user;
+			}
+		} catch (Exception e) {
+
+			throw new Exception("Usuario y Clave incorrectos");
+		}
+	}
 }

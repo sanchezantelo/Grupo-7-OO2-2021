@@ -1,7 +1,5 @@
 package com.webservice.app.models;
 
-import java.time.LocalDate;
-
 public class PermisoDiarioModel extends PermisoModel {
 	private String motivo;
 

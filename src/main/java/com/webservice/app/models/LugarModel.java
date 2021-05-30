@@ -50,4 +50,8 @@ public class LugarModel {
 		return "LugarModel [idLugar=" + idLugar + ", lugar=" + lugar + ", codigoPostal=" + codigoPostal + "]";
 	}
 
+	public String lugar() {
+		return lugar + "," + codigoPostal;
+	}
+	
 }

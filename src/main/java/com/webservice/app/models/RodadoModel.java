@@ -16,6 +16,12 @@ public class RodadoModel {
 		this.vehiculo = vehiculo;
 	}
 
+	public RodadoModel(String dominio, String vehiculo) {
+		super();
+		this.dominio = dominio;
+		this.vehiculo = vehiculo;
+	}
+
 	public int getIdRodado() {
 		return idRodado;
 	}

@@ -32,6 +32,12 @@ public class Rodado {
 		this.vehiculo = vehiculo;
 	}
 
+	public Rodado(String dominio, String vehiculo) {
+		super();
+		this.dominio = dominio;
+		this.vehiculo = vehiculo;
+	}
+
 	public int getIdRodado() {
 		return idRodado;
 	}
