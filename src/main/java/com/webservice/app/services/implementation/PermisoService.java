@@ -1,5 +1,10 @@
 package com.webservice.app.services.implementation;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -7,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.webservice.app.converters.LugarConverter;
 import com.webservice.app.converters.PermisoDiarioConverter;
 import com.webservice.app.converters.PermisoPeriodoConverter;
+import com.webservice.app.entities.Lugar;
 import com.webservice.app.entities.Permiso;
 import com.webservice.app.models.LugarModel;
 import com.webservice.app.models.PermisoDiarioModel;
@@ -29,7 +35,10 @@ public class PermisoService implements IPermisoService {
 	@Autowired
 	@Qualifier("lugarModel")
 	private LugarConverter lugarModel;
-	
+
+	@Autowired
+	@Qualifier("lugarService")
+	private LugarService lugarService;
 
 	@Autowired
 	@Qualifier("permisoPeriodoModel")
@@ -41,18 +50,19 @@ public class PermisoService implements IPermisoService {
 
 	// ALTA
 
-	public void altaPermiso(PermisoModel permisoModel,LugarModel lugarOrigenModel, LugarModel lugarDestinoModel) throws Exception {
+	public void altaPermiso(PermisoModel permisoModel) throws Exception {
 		try {
+		
 			if (permisoModel instanceof PermisoDiarioModel) {
 				Permiso permiso = permisoDiarioModel.modelToEntity((PermisoDiarioModel) permisoModel);
-				permiso.getDesdeHasta().add(lugarModel.modelToEntity(lugarOrigenModel));
-				permiso.getDesdeHasta().add(lugarModel.modelToEntity(lugarDestinoModel));
+				permiso.getDesdeHasta().add(lugarService.findById(permisoModel.getLugarOrigenModel().getIdLugar()));
+				permiso.getDesdeHasta().add(lugarService.findById(permisoModel.getLugarDestinoModel().getIdLugar()));
 				permisoRepository.save(permiso);
 			}
 			if (permisoModel instanceof PermisoPeriodoModel) {
 				Permiso permiso = permisoPeriodoModel.modelToEntity((PermisoPeriodoModel) permisoModel);
-				permiso.getDesdeHasta().add(lugarModel.modelToEntity(lugarOrigenModel));
-				permiso.getDesdeHasta().add(lugarModel.modelToEntity(lugarDestinoModel));
+				permiso.getDesdeHasta().add(lugarService.findById(permisoModel.getLugarOrigenModel().getIdLugar()));
+				permiso.getDesdeHasta().add(lugarService.findById(permisoModel.getLugarDestinoModel().getIdLugar()));
 				permisoRepository.save(permiso);
 			}
 		} catch (Exception e) {

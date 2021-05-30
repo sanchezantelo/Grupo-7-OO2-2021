@@ -8,6 +8,6 @@ public interface IPermisoService {
 
 	Permiso findByIdPermiso(int idPermiso);
 
-	void altaPermiso(PermisoModel permisoModel, LugarModel lugarOrigenModel, LugarModel lugarDestinoModel) throws Exception;
+	void altaPermiso(PermisoModel permisoModel) throws Exception;
 
 }

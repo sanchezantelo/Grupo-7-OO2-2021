@@ -103,23 +103,23 @@
   						  <label>Fecha</label> <input class="form-control form-control-sm" type="date" id="start" min="1970-01-01" max="5555-12-31" placeholder="start time" th:field="*{fecha}" > 
   						  </div>
   						  
-  						  <div class="form-group">
-							<label>Lugar Origen</label> <input type="text"
-								class="form-control form-control-sm" th:field="${lugarOrigenModel.lugar}" required>
-									<br>
-								<label>Codigo Postal</label>
-								<input type="text"
-								class="form-control form-control-sm" th:field="${lugarOrigenModel.codigoPostal}" required>
+  						  <div class="form-group">				
+						<label>Lugar Origen</label>	
+							<select class="form-control form-control-sm" th:field="*{lugarOrigenModel.idLugar}">
+							 <option th:each="l : ${lugares}" th:value="${l.idLugar}" th:text="${l.lugar+','+ l.codigoPostal}">
+                              </option>
+							</select>
+					        
 						</div>
 						
 						<div class="form-group">
-							<label>Lugar Destino</label> <input type="text"
-								class="form-control form-control-sm" th:field="${lugarDestinoModel.lugar}" required>
-								<br>
-								<label>Codigo Postal</label>
-								<input type="text"
-								class="form-control form-control-sm" th:field="${lugarDestinoModel.codigoPostal}" required>
-						</div>
+							<label>Lugar Destino</label> 
+							<select class="form-control form-control-sm" th:field="*{lugarDestinoModel.idLugar}">
+							 <option th:each="lugar : ${lugares}" th:value="${lugar.idLugar}" th:text="${lugar.lugar+','+ lugar.codigoPostal} ">
+                              </option>
+							</select>
+			
+							</div>
 					
 					<div class="form-group">
 							<label>Motivo</label> <input type="text"
@@ -169,23 +169,23 @@
   						  <label>Fecha</label> <input class="form-control form-control-sm" type="date" id="start" min="1970-01-01" max="5555-12-31" placeholder="start time" th:field="*{fecha}" > 
   						  </div>
   						  
-  						  <div class="form-group">
-							<label>Lugar Origen</label> <input type="text"
-								class="form-control form-control-sm" th:field="${lugarOrigenModel.lugar}" required>
-									<br>
-								<label>Codigo Postal</label>
-								<input type="text"
-								class="form-control form-control-sm" th:field="${lugarOrigenModel.codigoPostal}" required>
+  						   <div class="form-group">				
+						<label>Lugar Origen</label>	
+							<select class="form-control form-control-sm" th:field="*{lugarOrigenModel.idLugar}">
+							 <option th:each="l : ${lugares}" th:value="${l.idLugar}" th:text="${l.lugar+','+ l.codigoPostal}">
+                              </option>
+							</select>
+					        
 						</div>
 						
 						<div class="form-group">
-							<label>Lugar Destino</label> <input type="text"
-								class="form-control form-control-sm" th:field="${lugarDestinoModel.lugar}" required>
-								<br>
-								<label>Codigo Postal</label>
-								<input type="text"
-								class="form-control form-control-sm" th:field="${lugarDestinoModel.codigoPostal}" required>
-						</div>
+							<label>Lugar Destino</label> 
+							<select class="form-control form-control-sm" th:field="*{lugarDestinoModel.idLugar}">
+							 <option th:each="lugar : ${lugares}" th:value="${lugar.idLugar}" th:text="${lugar.lugar+','+ lugar.codigoPostal} ">
+                              </option>
+							</select>
+			
+							</div>
 					
 					<div class="form-group">
 							<label>Cantidad de Dias</label> <input type="number"

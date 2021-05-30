@@ -7,5 +7,6 @@ import com.webservice.app.entities.Lugar;
 public interface ILugarService {
 	 
 	List<Lugar>  findAll();
+	Lugar findById(int idLugar);
 
 }

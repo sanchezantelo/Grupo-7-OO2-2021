@@ -22,5 +22,9 @@ public class LugarService implements ILugarService {
 	public List<Lugar> findAll() {
 		return lugarRepository.findAll();
 	}
+	
+	public Lugar findById(int idLugar){
+		return lugarRepository.findByIdLugar(idLugar);
+	}
 
 }
