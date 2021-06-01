@@ -122,6 +122,69 @@
 	</div>	
 	</div>
 	
+	
+	<div class="col-8">
+			<h3>Buscar Permiso Activo</h3>
+			<form th:action="@{/buscador/traerPermisoPeriodoActivo}" th:object="${fechaBusquedaModel}"
+						method="post">
+						
+						<div class="form-group">
+							<label>Fecha Desde:</label> <input class="form-control form-control-sm" type="date" id="start" min="1970-01-01" max="5555-12-31" placeholder="start time" th:field="*{fechaDesde}" >
+						</div>
+						<div class="form-group">
+							<label>Fecha Hasta:</label> <input class="form-control form-control-sm" type="date" id="start" min="1970-01-01" max="5555-12-31" placeholder="start time" th:field="*{fechaHasta}" >
+						</div>
+							<div class="form-group">
+							<input type="submit" class="btn-success form-control form-control-sm"/>
+						</div>
+						
+			</form>			
+			<!--tabla-->
+			<div style="overflow-x: auto;">
+				<table class="table table-xl-12" th:if="${lstpermisos}">
+					<thead>
+						<tr>
+							<th scope="col">Nombre</th>
+							<th scope="col">Apellido</th>
+							<th scope="col">Tipo Documento</th>
+							<th scope="col">Num Documento</th>
+							<th scope="col">Email</th>
+							<th scope="col">Fecha</th>
+							<th scope="col">Desde</th>
+							<th scope="col">Hasta</th>
+							<th scope="col">Dias</th>
+							<th scope="col">Vacaciones</th>
+							<th scope="col">Dominio</th>
+							<th scope="col">Vehiculo</th>
+							
+						</tr>
+					</thead>
+					<tbody >
+						<tr th:if="${lstpermisos}">
+							<td colspan="2"></td>
+						</tr>
+						<tr th:each="pperiodo: ${lstpermisos}">
+							<td><span th:text="${pperiodo.persona.nombre}"></td>
+							<td><span th:text="${pperiodo.persona.apellido}"></td>
+							<td><span th:text="${pperiodo.persona.tipoDocumento}"></td>
+							<td><span th:text="${pperiodo.persona.dni}"></td>
+							<td><span th:text="${pperiodo.persona.email}"></td>				
+							<td><span th:text="${pperiodo.fecha}"></td>	
+							<td><span th:text="${pperiodo.desdeHasta[1].lugar()}"></td>	
+							<td><span th:text="${pperiodo.desdeHasta[0].lugar()}"></td>	
+							<td><span th:text="${pperiodo.cantDias}"></td>
+							<td><span th:text="${pperiodo.vacaciones}"></td>
+							<td><span th:text="${pperiodo.rodado.dominio}"></td>	
+							<td><span th:text="${pperiodo.rodado.vehiculo}"></td>		
+							
+								
+						</tr>
+					</tbody>
+				</table>
+		 	 
+	</div>	
+	</div>
+	
 	</div>
 					
    	</main>

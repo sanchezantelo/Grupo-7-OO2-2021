@@ -48,6 +48,8 @@ public class PermisoController {
 
 	// ABM
 
+	// ALTA PERMISO DIARIO
+
 	@PostMapping("/altaPermisoDiario")
 	public String altaPermisoDiario(@ModelAttribute("permisoDiarioModel") PermisoDiarioModel permisoDiarioModel,
 			RedirectAttributes redirectAttrs) {
@@ -63,6 +65,8 @@ public class PermisoController {
 		}
 		return "redirect:/index/permiso";
 	}
+
+	// ALTA PERMISO PERIODO
 
 	@PostMapping("/altaPermisoPeriodo")
 	public String altaPermisoPeriodo(@ModelAttribute("permisoPeriodoModel") PermisoPeriodoModel permisoPeriodoModel,
@@ -80,7 +84,8 @@ public class PermisoController {
 		return "redirect:/index/permiso";
 	}
 
-	// TRAER PERMISO
+	// TRAER PERMISO PERIODO
+
 	@PostMapping("/traerPermisoPeriodo")
 	public String traerPermisoPeriodo(@ModelAttribute("personaModel") PersonaModel personaModel, Model model,
 			RedirectAttributes redirectAttrs) {
@@ -89,13 +94,15 @@ public class PermisoController {
 				.addFlashAttribute("clase", "alert alert-success").addAttribute("page", 1);
 		return "redirect:/index/permiso";
 	}
-	
+
+	// TRAER PERMISO DIARIO
+
 	@PostMapping("/traerPermisoDiario")
 	public String traerPermisoDiario(@ModelAttribute("personaModel") PersonaModel personaModel, Model model,
 			RedirectAttributes redirectAttrs) {
 		logger.info("/traerPermisoDiario" + personaModel);
 		redirectAttrs.addFlashAttribute("pdiario", permisoService.findByPersonaDiario(personaModel.getDni()))
-				.addFlashAttribute("clase", "alert alert-success").addAttribute("page",0);
+				.addFlashAttribute("clase", "alert alert-success").addAttribute("page", 0);
 		return "redirect:/index/permiso";
 	}
 

@@ -1,6 +1,10 @@
 package com.webservice.app.services.implementation;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +19,7 @@ import com.webservice.app.entities.Lugar;
 import com.webservice.app.entities.Permiso;
 import com.webservice.app.entities.PermisoDiario;
 import com.webservice.app.entities.PermisoPeriodo;
+import com.webservice.app.models.FechaBusquedaModel;
 import com.webservice.app.models.PermisoDiarioModel;
 import com.webservice.app.models.PermisoModel;
 import com.webservice.app.models.PermisoPeriodoModel;
@@ -66,6 +71,8 @@ public class PermisoService implements IPermisoService {
 		return permisoRepository.findByIdPermiso(idPermiso);
 	}
 
+	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
 	// ALTA PERMISO
 
 	public void altaPermiso(PermisoModel permisoModel) throws Exception {
@@ -88,7 +95,7 @@ public class PermisoService implements IPermisoService {
 		}
 	}
 
-	// TRAER PERMISO POR PERSONA
+	// TRAER PERMISO PERIODO POR PERSONA
 
 	public PermisoPeriodoModel findByPersonaPeriodo(long dni) {
 		PermisoPeriodo permiso = (PermisoPeriodo) permisoRepository.findByPersona(personaService.findByDni(dni));
@@ -101,6 +108,8 @@ public class PermisoService implements IPermisoService {
 		return retorno;
 	}
 
+	// TRAER PERMISO DIARIO POR PERSONA
+
 	public PermisoDiarioModel findByPersonaDiario(long dni) {
 		PermisoDiario permiso = (PermisoDiario) permisoRepository.findByPersona(personaService.findByDni(dni));
 		PermisoDiarioModel retorno = permisoDiarioModel.entityToModel(permiso);
@@ -110,6 +119,8 @@ public class PermisoService implements IPermisoService {
 		}
 		return retorno;
 	}
+
+	// TRAER PERMISO PERIODO POR RODADO
 
 	public PermisoPeriodoModel findByRodado(RodadoModel rodadoModel) {
 		PermisoPeriodo permiso = (PermisoPeriodo) permisoPeriodoRepository
@@ -121,6 +132,31 @@ public class PermisoService implements IPermisoService {
 			retorno.getDesdeHasta().add(lugarModel.entityToModel(it.next()));
 		}
 		return retorno;
+	}
+
+	// TRAER PERMISO ACTIVO
+
+	public List<PermisoModel> findByActivoPermiso(FechaBusquedaModel fecha) {
+
+		List<PermisoModel> permisos = new ArrayList<PermisoModel>();
+
+		List<Permiso> lstPermiso = permisoRepository.findByActivoPermiso(
+				LocalDate.parse(fecha.getFechaDesde(), formatter), LocalDate.parse(fecha.getFechaHasta(), formatter));
+		for (Permiso p : lstPermiso) {
+			if (p instanceof PermisoPeriodo) {
+				PermisoPeriodo permiso = (PermisoPeriodo) p;
+				Hibernate.initialize(permiso.getRodado());
+				PermisoPeriodoModel retorno = permisoPeriodoModel.entityToModel(permiso);
+				Iterator<Lugar> it = p.getDesdeHasta().iterator();
+				while (it.hasNext()) {
+					retorno.getDesdeHasta().add(lugarModel.entityToModel(it.next()));
+				}
+				permisos.add(retorno);
+			}
+		}
+
+		return permisos;
+
 	}
 
 }
