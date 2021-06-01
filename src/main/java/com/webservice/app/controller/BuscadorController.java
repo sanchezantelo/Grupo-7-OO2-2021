@@ -36,6 +36,7 @@ public class BuscadorController {
 	public String buscador(Model model) {
 		model.addAttribute("rodadoModel", new RodadoModel());
 		model.addAttribute("fechaBusquedaModel", new FechaBusquedaModel());
+		model.addAttribute("lugares", lugarService.traerTodos());
 		return "buscador";
 	}
 

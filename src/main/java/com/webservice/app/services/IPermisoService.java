@@ -22,5 +22,5 @@ public interface IPermisoService {
 	PermisoDiarioModel findByPersonaDiario(long dni) throws Exception;
 
 	public List<PermisoModel> findByActivoPermiso(FechaBusquedaModel fecha) throws Exception;
-
+	
 }

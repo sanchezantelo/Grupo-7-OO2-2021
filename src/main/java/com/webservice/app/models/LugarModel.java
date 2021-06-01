@@ -53,5 +53,29 @@ public class LugarModel {
 	public String lugar() {
 		return lugar + "," + codigoPostal;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + idLugar;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		LugarModel other = (LugarModel) obj;
+		if (idLugar != other.idLugar)
+			return false;
+		return true;
+	}
+	
+	
 	
 }

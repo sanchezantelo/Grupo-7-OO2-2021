@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.webservice.app.entities.Lugar;
 import com.webservice.app.entities.Permiso;
 import com.webservice.app.entities.Persona;
 
@@ -21,5 +22,8 @@ public interface IPermisoRepository extends JpaRepository<Permiso, Serializable>
 	
 	@Query("SELECT p FROM Permiso p JOIN FETCH p.persona JOIN FETCH p.desdeHasta WHERE p.fecha between :fechaDesde AND :fechaHasta")
 	public abstract List<Permiso> findByActivoPermiso(@Param("fechaDesde") LocalDate fechaDesde, @Param("fechaHasta") LocalDate fechaHasta);
+	
+	@Query("SELECT p FROM Permiso p JOIN FETCH p.persona JOIN FETCH p.desdeHasta WHERE p.fecha between :fechaDesde AND :fechaHasta AND :lugarDesde IN p.desdeHasta")
+	public abstract List<Permiso> findByActivoPermisoLugar(@Param("fechaDesde") LocalDate fechaDesde, @Param("fechaHasta") LocalDate fechaHasta,@Param("lugarDesde") Lugar lugarDesde) ;
 
 }

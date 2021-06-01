@@ -7,6 +7,8 @@ public class FechaBusquedaModel {
 	private String fechaDesde;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private String fechaHasta;
+	private LugarModel lugarOrigenModel;
+	private LugarModel lugarDestinoModel;
 
 	public FechaBusquedaModel() {
 	}
@@ -15,6 +17,21 @@ public class FechaBusquedaModel {
 		super();
 		this.fechaDesde = fechaDesde;
 		this.fechaHasta = fechaHasta;
+	}
+
+	public FechaBusquedaModel(String fechaDesde, String fechaHasta, LugarModel lugarOrigenModel,
+			LugarModel lugarDestinoModel) {
+		super();
+		this.fechaDesde = fechaDesde;
+		this.fechaHasta = fechaHasta;
+		this.lugarOrigenModel = lugarOrigenModel;
+		this.lugarDestinoModel = lugarDestinoModel;
+	}
+
+	public FechaBusquedaModel(LugarModel lugarOrigenModel, LugarModel lugarDestinoModel) {
+		super();
+		this.lugarOrigenModel = lugarOrigenModel;
+		this.lugarDestinoModel = lugarDestinoModel;
 	}
 
 	public String getFechaDesde() {
@@ -33,9 +50,26 @@ public class FechaBusquedaModel {
 		this.fechaHasta = fechaHasta;
 	}
 
+	public LugarModel getLugarOrigenModel() {
+		return lugarOrigenModel;
+	}
+
+	public void setLugarOrigenModel(LugarModel lugarOrigenModel) {
+		this.lugarOrigenModel = lugarOrigenModel;
+	}
+
+	public LugarModel getLugarDestinoModel() {
+		return lugarDestinoModel;
+	}
+
+	public void setLugarDestinoModel(LugarModel lugarDestinoModel) {
+		this.lugarDestinoModel = lugarDestinoModel;
+	}
+
 	@Override
 	public String toString() {
-		return "FechaBusqueda [fechaDesde=" + fechaDesde + ", fechaHasta=" + fechaHasta + "]";
+		return "FechaBusquedaModel [fechaDesde=" + fechaDesde + ", fechaHasta=" + fechaHasta + ", lugarOrigenModel="
+				+ lugarOrigenModel + ", lugarDestinoModel=" + lugarDestinoModel + "]";
 	}
 
 }

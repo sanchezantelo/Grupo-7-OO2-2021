@@ -20,6 +20,7 @@ import com.webservice.app.entities.Permiso;
 import com.webservice.app.entities.PermisoDiario;
 import com.webservice.app.entities.PermisoPeriodo;
 import com.webservice.app.models.FechaBusquedaModel;
+import com.webservice.app.models.LugarModel;
 import com.webservice.app.models.PermisoDiarioModel;
 import com.webservice.app.models.PermisoModel;
 import com.webservice.app.models.PermisoPeriodoModel;
@@ -153,10 +154,19 @@ public class PermisoService implements IPermisoService {
 
 		try {
 			List<PermisoModel> permisos = new ArrayList<PermisoModel>();
-			List<Permiso> lstPermiso = permisoRepository.findByActivoPermiso(
-					LocalDate.parse(fecha.getFechaDesde(), formatter),
-					LocalDate.parse(fecha.getFechaHasta(), formatter));
+			List<Permiso> lstPermiso = new ArrayList<Permiso>();
 
+			if (fecha.getLugarOrigenModel().equals(new LugarModel())
+					&& fecha.getLugarDestinoModel().equals(new LugarModel())) {
+				lstPermiso = permisoRepository.findByActivoPermiso(LocalDate.parse(fecha.getFechaDesde(), formatter),
+						LocalDate.parse(fecha.getFechaHasta(), formatter));
+			} else {
+				lstPermiso = permisoRepository.findByActivoPermisoLugar(
+						LocalDate.parse(fecha.getFechaDesde(), formatter),
+						LocalDate.parse(fecha.getFechaHasta(), formatter),
+						lugarService.findById(fecha.getLugarOrigenModel().getIdLugar()));
+			}
+			
 			for (Permiso p : lstPermiso) {
 				if (p instanceof PermisoPeriodo) {
 					PermisoPeriodo permiso = (PermisoPeriodo) p;
@@ -170,6 +180,7 @@ public class PermisoService implements IPermisoService {
 						permisos.add(retorno);
 					}
 				}
+				
 				if (p instanceof PermisoDiario) {
 					PermisoDiario permiso = (PermisoDiario) p;
 					PermisoDiarioModel retorno = permisoDiarioModel.entityToModel(permiso);
@@ -180,13 +191,16 @@ public class PermisoService implements IPermisoService {
 					if (p.activo(p, LocalDate.parse(fecha.getFechaHasta(), formatter))) {
 						permisos.add(retorno);
 					}
+
 				}
+
 			}
+
 			return permisos;
+
 		} catch (Exception e) {
 			throw new Exception("No se ha encontrado resultados");
 		}
 
 	}
-
 }
