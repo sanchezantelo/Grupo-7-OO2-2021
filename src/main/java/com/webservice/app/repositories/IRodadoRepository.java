@@ -13,7 +13,7 @@ public interface IRodadoRepository extends JpaRepository<Rodado, Serializable> {
 
 	public abstract Rodado findByIdRodado(@Param("idRodado") int idRodado);
 
-	@Query("SELECT r FROM Rodado r WHERE (r.dominio LIKE :dominio AND r.vehiculo LIKE :vehiculo)")
-	public abstract Rodado findByDominioVehiculo(@Param("dominio") String dominio, @Param("vehiculo") String vehiculo);
+	@Query("SELECT r FROM Rodado r WHERE (r.dominio LIKE :dominio)")
+	public abstract Rodado findByDominioVehiculo(@Param("dominio") String dominio);
 
 }

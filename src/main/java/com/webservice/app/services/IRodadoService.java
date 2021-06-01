@@ -5,6 +5,6 @@ import com.webservice.app.models.RodadoModel;
 
 public interface IRodadoService {
 
-	Rodado findByDominioVehiculo(RodadoModel rodadoModel);
+	Rodado findByDominioVehiculo(RodadoModel rodadoModel) throws Exception;
 
 }

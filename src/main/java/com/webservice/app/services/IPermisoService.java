@@ -15,12 +15,12 @@ public interface IPermisoService {
 
 	void altaPermiso(PermisoModel permisoModel) throws Exception;
 
-	PermisoPeriodoModel findByPersonaPeriodo(long dni);
+	PermisoPeriodoModel findByPersonaPeriodo(long dni) throws Exception;
 
-	PermisoPeriodoModel findByRodado(RodadoModel rodadoModel);
+	PermisoPeriodoModel findByRodado(RodadoModel rodadoModel) throws Exception;
 
-	PermisoDiarioModel findByPersonaDiario(long dni);
+	PermisoDiarioModel findByPersonaDiario(long dni) throws Exception;
 
-	public List<PermisoModel> findByActivoPermiso(FechaBusquedaModel fecha);
+	public List<PermisoModel> findByActivoPermiso(FechaBusquedaModel fecha) throws Exception;
 
 }

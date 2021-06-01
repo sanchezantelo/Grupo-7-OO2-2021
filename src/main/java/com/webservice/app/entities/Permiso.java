@@ -27,14 +27,14 @@ public abstract class Permiso {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected int idPermiso;
 
-	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "persona_id", nullable = true)
 	protected Persona persona;
 
 	@Column(name = "fecha", nullable = false)
 	protected LocalDate fecha;
 
-	@ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	protected Set<Lugar> desdeHasta = new HashSet<Lugar>();
 
 	public Permiso() {
@@ -78,6 +78,30 @@ public abstract class Permiso {
 
 	public void setDesdeHasta(Set<Lugar> desdeHasta) {
 		this.desdeHasta = desdeHasta;
+	}
+
+	public abstract boolean activo(Permiso permiso, LocalDate dia);
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + idPermiso;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Permiso other = (Permiso) obj;
+		if (idPermiso != other.idPermiso)
+			return false;
+		return true;
 	}
 
 }

@@ -97,65 +97,95 @@ public class PermisoService implements IPermisoService {
 
 	// TRAER PERMISO PERIODO POR PERSONA
 
-	public PermisoPeriodoModel findByPersonaPeriodo(long dni) {
-		PermisoPeriodo permiso = (PermisoPeriodo) permisoRepository.findByPersona(personaService.findByDni(dni));
-		Hibernate.initialize(permiso.getRodado());
-		PermisoPeriodoModel retorno = permisoPeriodoModel.entityToModel(permiso);
-		Iterator<Lugar> it = permiso.getDesdeHasta().iterator();
-		while (it.hasNext()) {
-			retorno.getDesdeHasta().add(lugarModel.entityToModel(it.next()));
+	public PermisoPeriodoModel findByPersonaPeriodo(long dni) throws Exception {
+		try {
+			PermisoPeriodo permiso = (PermisoPeriodo) permisoRepository.findByPersona(personaService.findByDni(dni));
+			Hibernate.initialize(permiso.getRodado());
+			PermisoPeriodoModel retorno = permisoPeriodoModel.entityToModel(permiso);
+			Iterator<Lugar> it = permiso.getDesdeHasta().iterator();
+			while (it.hasNext()) {
+				retorno.getDesdeHasta().add(lugarModel.entityToModel(it.next()));
+			}
+			return retorno;
+		} catch (Exception e) {
+			throw new Exception("No se ha encontrado resultados");
 		}
-		return retorno;
 	}
 
 	// TRAER PERMISO DIARIO POR PERSONA
 
-	public PermisoDiarioModel findByPersonaDiario(long dni) {
-		PermisoDiario permiso = (PermisoDiario) permisoRepository.findByPersona(personaService.findByDni(dni));
-		PermisoDiarioModel retorno = permisoDiarioModel.entityToModel(permiso);
-		Iterator<Lugar> it = permiso.getDesdeHasta().iterator();
-		while (it.hasNext()) {
-			retorno.getDesdeHasta().add(lugarModel.entityToModel(it.next()));
+	public PermisoDiarioModel findByPersonaDiario(long dni) throws Exception {
+		try {
+			PermisoDiario permiso = (PermisoDiario) permisoRepository.findByPersona(personaService.findByDni(dni));
+			PermisoDiarioModel retorno = permisoDiarioModel.entityToModel(permiso);
+			Iterator<Lugar> it = permiso.getDesdeHasta().iterator();
+			while (it.hasNext()) {
+				retorno.getDesdeHasta().add(lugarModel.entityToModel(it.next()));
+			}
+			return retorno;
+		} catch (Exception e) {
+			throw new Exception("No se ha encontrado resultados");
 		}
-		return retorno;
 	}
 
 	// TRAER PERMISO PERIODO POR RODADO
 
-	public PermisoPeriodoModel findByRodado(RodadoModel rodadoModel) {
-		PermisoPeriodo permiso = (PermisoPeriodo) permisoPeriodoRepository
-				.findByRodado(rodadoService.findByDominioVehiculo(rodadoModel));
-		Hibernate.initialize(permiso.getRodado());
-		PermisoPeriodoModel retorno = permisoPeriodoModel.entityToModel(permiso);
-		Iterator<Lugar> it = permiso.getDesdeHasta().iterator();
-		while (it.hasNext()) {
-			retorno.getDesdeHasta().add(lugarModel.entityToModel(it.next()));
+	public PermisoPeriodoModel findByRodado(RodadoModel rodadoModel) throws Exception {
+		try {
+			PermisoPeriodo permiso = (PermisoPeriodo) permisoPeriodoRepository
+					.findByRodado(rodadoService.findByDominioVehiculo(rodadoModel));
+			Hibernate.initialize(permiso.getRodado());
+			PermisoPeriodoModel retorno = permisoPeriodoModel.entityToModel(permiso);
+			Iterator<Lugar> it = permiso.getDesdeHasta().iterator();
+			while (it.hasNext()) {
+				retorno.getDesdeHasta().add(lugarModel.entityToModel(it.next()));
+			}
+			return retorno;
+
+		} catch (Exception e) {
+			throw new Exception("No se ha encontrado resultados");
 		}
-		return retorno;
 	}
 
 	// TRAER PERMISO ACTIVO
 
-	public List<PermisoModel> findByActivoPermiso(FechaBusquedaModel fecha) {
+	public List<PermisoModel> findByActivoPermiso(FechaBusquedaModel fecha) throws Exception {
 
-		List<PermisoModel> permisos = new ArrayList<PermisoModel>();
+		try {
+			List<PermisoModel> permisos = new ArrayList<PermisoModel>();
+			List<Permiso> lstPermiso = permisoRepository.findByActivoPermiso(
+					LocalDate.parse(fecha.getFechaDesde(), formatter),
+					LocalDate.parse(fecha.getFechaHasta(), formatter));
 
-		List<Permiso> lstPermiso = permisoRepository.findByActivoPermiso(
-				LocalDate.parse(fecha.getFechaDesde(), formatter), LocalDate.parse(fecha.getFechaHasta(), formatter));
-		for (Permiso p : lstPermiso) {
-			if (p instanceof PermisoPeriodo) {
-				PermisoPeriodo permiso = (PermisoPeriodo) p;
-				Hibernate.initialize(permiso.getRodado());
-				PermisoPeriodoModel retorno = permisoPeriodoModel.entityToModel(permiso);
-				Iterator<Lugar> it = p.getDesdeHasta().iterator();
-				while (it.hasNext()) {
-					retorno.getDesdeHasta().add(lugarModel.entityToModel(it.next()));
+			for (Permiso p : lstPermiso) {
+				if (p instanceof PermisoPeriodo) {
+					PermisoPeriodo permiso = (PermisoPeriodo) p;
+					Hibernate.initialize(permiso.getRodado());
+					PermisoPeriodoModel retorno = permisoPeriodoModel.entityToModel(permiso);
+					Iterator<Lugar> it = p.getDesdeHasta().iterator();
+					while (it.hasNext()) {
+						retorno.getDesdeHasta().add(lugarModel.entityToModel(it.next()));
+					}
+					if (p.activo(p, LocalDate.parse(fecha.getFechaHasta(), formatter))) {
+						permisos.add(retorno);
+					}
 				}
-				permisos.add(retorno);
+				if (p instanceof PermisoDiario) {
+					PermisoDiario permiso = (PermisoDiario) p;
+					PermisoDiarioModel retorno = permisoDiarioModel.entityToModel(permiso);
+					Iterator<Lugar> it = p.getDesdeHasta().iterator();
+					while (it.hasNext()) {
+						retorno.getDesdeHasta().add(lugarModel.entityToModel(it.next()));
+					}
+					if (p.activo(p, LocalDate.parse(fecha.getFechaHasta(), formatter))) {
+						permisos.add(retorno);
+					}
+				}
 			}
+			return permisos;
+		} catch (Exception e) {
+			throw new Exception("No se ha encontrado resultados");
 		}
-
-		return permisos;
 
 	}
 

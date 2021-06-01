@@ -28,4 +28,20 @@ public class PermisoDiario extends Permiso {
 		this.motivo = motivo;
 	}
 
+	@SuppressWarnings("unlikely-arg-type")
+	@Override
+	public boolean activo(Permiso permiso, LocalDate dia) {
+		boolean habilitado = true;
+		LocalDate diaInicio = permiso.getFecha();
+		LocalDate diaHasta = permiso.getFecha().plusDays(1);
+		if (permiso.getDesdeHasta().contains(this)) {
+			if (diaInicio.equals(dia) || diaHasta.equals(dia)) {
+				habilitado = true;
+			} else if (dia.isAfter(diaInicio) && dia.isBefore(diaHasta)) {
+				habilitado = true;
+			}
+		}
+		return habilitado;
+	}
+
 }

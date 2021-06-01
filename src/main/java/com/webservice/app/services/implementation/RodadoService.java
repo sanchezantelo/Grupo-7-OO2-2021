@@ -19,8 +19,12 @@ public class RodadoService implements IRodadoService {
 	@Qualifier("rodadoRepository")
 	private IRodadoRepository rodadoRepository;
 
-	public Rodado findByDominioVehiculo(RodadoModel rodadoModel) {
-		return rodadoRepository.findByDominioVehiculo(rodadoModel.getDominio(), rodadoModel.getVehiculo());
+	public Rodado findByDominioVehiculo(RodadoModel rodadoModel) throws Exception {
+		try {	
+		return rodadoRepository.findByDominioVehiculo(rodadoModel.getDominio());
+	} catch (Exception e) {
+		throw new Exception("No se ha encontrado resultados");
+	}
 	}
 
 }

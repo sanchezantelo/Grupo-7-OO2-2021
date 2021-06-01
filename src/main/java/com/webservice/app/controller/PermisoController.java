@@ -57,7 +57,7 @@ public class PermisoController {
 		try {
 
 			permisoService.altaPermiso(permisoDiarioModel);
-			redirectAttrs.addFlashAttribute("mensaje", "Permiso agregado exitosamente!")
+			redirectAttrs.addFlashAttribute("mensaje", "Estimado/a hemos registrado su solicitud exitosamente!")
 					.addFlashAttribute("clase", "alert alert-success").addAttribute("page", 0);
 		} catch (Exception e) {
 			redirectAttrs.addFlashAttribute("error", e.getMessage()).addFlashAttribute("clase", "alert alert-danger")
@@ -75,7 +75,7 @@ public class PermisoController {
 		try {
 
 			permisoService.altaPermiso(permisoPeriodoModel);
-			redirectAttrs.addFlashAttribute("mensaje", "Permiso agregado exitosamente!")
+			redirectAttrs.addFlashAttribute("mensaje", "Estimado/a hemos registrado su solicitud exitosamente!")
 					.addFlashAttribute("clase", "alert alert-success").addAttribute("page", 1);
 		} catch (Exception e) {
 			redirectAttrs.addFlashAttribute("error", e.getMessage()).addFlashAttribute("clase", "alert alert-danger")
@@ -90,8 +90,14 @@ public class PermisoController {
 	public String traerPermisoPeriodo(@ModelAttribute("personaModel") PersonaModel personaModel, Model model,
 			RedirectAttributes redirectAttrs) {
 		logger.info("/traerPermisoPeriodo" + personaModel);
-		redirectAttrs.addFlashAttribute("pperiodo", permisoService.findByPersonaPeriodo(personaModel.getDni()))
-				.addFlashAttribute("clase", "alert alert-success").addAttribute("page", 1);
+		try {
+			redirectAttrs.addFlashAttribute("pperiodo", permisoService.findByPersonaPeriodo(personaModel.getDni()))
+					.addFlashAttribute("clase", "alert alert-success").addAttribute("page", 1);
+		} catch (Exception e) {
+			redirectAttrs.addFlashAttribute("error", e.getMessage()).addFlashAttribute("clase", "alert alert-danger")
+			.addAttribute("page", 1);
+
+		}
 		return "redirect:/index/permiso";
 	}
 
@@ -101,8 +107,14 @@ public class PermisoController {
 	public String traerPermisoDiario(@ModelAttribute("personaModel") PersonaModel personaModel, Model model,
 			RedirectAttributes redirectAttrs) {
 		logger.info("/traerPermisoDiario" + personaModel);
-		redirectAttrs.addFlashAttribute("pdiario", permisoService.findByPersonaDiario(personaModel.getDni()))
-				.addFlashAttribute("clase", "alert alert-success").addAttribute("page", 0);
+		try {
+			redirectAttrs.addFlashAttribute("pdiario", permisoService.findByPersonaDiario(personaModel.getDni()))
+					.addFlashAttribute("clase", "alert alert-success").addAttribute("page", 0);
+		} catch (Exception e) {
+			redirectAttrs.addFlashAttribute("error", e.getMessage()).addFlashAttribute("clase", "alert alert-danger")
+			.addAttribute("page", 0);
+
+		}
 		return "redirect:/index/permiso";
 	}
 
