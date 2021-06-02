@@ -14,3 +14,10 @@ Footer
     font-size: 30px;
     line-height: 60px;
 }
+
+.center {
+  display: block;
+  margin-left: 150px;
+  margin-right: 150px;
+  width: 90%;
+}

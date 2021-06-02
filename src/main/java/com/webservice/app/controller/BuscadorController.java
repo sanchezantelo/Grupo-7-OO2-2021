@@ -60,10 +60,10 @@ public class BuscadorController {
 
 	// TRAER PERMISO PERIODO ACTIVOS ENTRE FECHA Y FECHA
 
-	@PostMapping("/traerPermisoPeriodoActivo")
-	public String traerPermisoPeriodoActivo(@ModelAttribute("fechaBusquedaModel") FechaBusquedaModel fechaBusquedaModel,
+	@PostMapping("/traerPermisoActivo")
+	public String traerPermisoActivo(@ModelAttribute("fechaBusquedaModel") FechaBusquedaModel fechaBusquedaModel,
 			Model model, RedirectAttributes redirectAttrs) {
-		logger.info("/traerPermisoPeriodoActivo" + fechaBusquedaModel);
+		logger.info("/traerPermisoActivo" + fechaBusquedaModel);
 		try {
 			if(fechaBusquedaModel.getLugarOrigenModel().equals(new LugarModel()) && fechaBusquedaModel.getLugarDestinoModel().equals(new LugarModel())) {
 				redirectAttrs.addFlashAttribute("lstpermisos", permisoService.findByActivoPermiso(fechaBusquedaModel))
