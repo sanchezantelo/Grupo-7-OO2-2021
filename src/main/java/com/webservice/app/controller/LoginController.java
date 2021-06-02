@@ -39,8 +39,9 @@ public class LoginController {
 	}
 
 	@GetMapping("/logout")
-	public String logout(Model model) {
+	public String logout(Model model, HttpSession sesion) {
 		model.addAttribute("usuarioModel", new UsuarioModel());
+		sesion.removeAttribute("user");
 		return ViewRouteHelper.USER_LOGOUT;
 	}
 

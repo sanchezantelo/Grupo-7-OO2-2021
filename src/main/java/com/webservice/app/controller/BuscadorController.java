@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.webservice.app.models.FechaBusquedaModel;
+import com.webservice.app.models.LugarModel;
 import com.webservice.app.models.RodadoModel;
 import com.webservice.app.services.ILugarService;
 import com.webservice.app.services.IPermisoService;
@@ -64,8 +65,14 @@ public class BuscadorController {
 			Model model, RedirectAttributes redirectAttrs) {
 		logger.info("/traerPermisoPeriodoActivo" + fechaBusquedaModel);
 		try {
-			redirectAttrs.addFlashAttribute("lstpermisos", permisoService.findByActivoPermiso(fechaBusquedaModel))
-					.addFlashAttribute("clase", "alert alert-success").addAttribute("page", 1);
+			if(fechaBusquedaModel.getLugarOrigenModel().equals(new LugarModel()) && fechaBusquedaModel.getLugarDestinoModel().equals(new LugarModel())) {
+				redirectAttrs.addFlashAttribute("lstpermisos", permisoService.findByActivoPermiso(fechaBusquedaModel))
+				.addFlashAttribute("clase", "alert alert-success").addAttribute("page", 1);
+			}else {
+				redirectAttrs.addFlashAttribute("lstpermisos", permisoService.findByActivoPermisoLugares(fechaBusquedaModel))
+				.addFlashAttribute("clase", "alert alert-success").addAttribute("page", 1);
+
+			}
 		} catch (Exception e) {
 			redirectAttrs.addFlashAttribute("error", e.getMessage()).addFlashAttribute("clase", "alert alert-danger")
 					.addAttribute("page", 1);

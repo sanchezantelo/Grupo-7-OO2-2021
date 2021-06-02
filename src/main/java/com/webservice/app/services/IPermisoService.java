@@ -23,4 +23,7 @@ public interface IPermisoService {
 
 	public List<PermisoModel> findByActivoPermiso(FechaBusquedaModel fecha) throws Exception;
 	
+	public List<PermisoModel> findByActivoPermisoLugares(FechaBusquedaModel fecha) throws Exception;
+	
+	
 }

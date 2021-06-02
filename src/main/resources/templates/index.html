@@ -36,14 +36,19 @@
       <li class="nav-item">
       <a class="nav-link" th:href="@{/index/permiso?page=0}">Permiso Diario</a>
       </li>  
-      <li class="nav-item">
+      <li class="nav-item" >
       <a class="nav-link" th:href="@{/index/permiso?page=1}">Permiso Periodo</a>
       </li> 
       
-      <li class="nav-item">
-      <a class="nav-link" th:href="@{/buscador}">Permisos</a>
+      <li class="nav-item" th:if="${user}">
+      <a class="nav-link" th:if="${user.hasRole('ROL_AUDITOR')}" th:href="@{/buscador}">Permisos</a>
+
       </li> 
         <li class="nav-item">
+        <a class="nav-link" th:href="@{/login}">Iniciar sesión <i class='bx bxs-log-out-circle' ></i></a>     
+      </li>
+      </li> 
+        <li class="nav-item" th:if="${user}">
         <a class="nav-link" th:href="@{/logout}">Cerrar Sesión <i class='bx bxs-log-out-circle' ></i></a>     
       </li>
          
