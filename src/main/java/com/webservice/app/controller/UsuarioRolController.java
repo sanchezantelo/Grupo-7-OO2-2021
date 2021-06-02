@@ -2,8 +2,10 @@ package com.webservice.app.controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,9 +37,10 @@ public class UsuarioRolController {
 	Logger logger = LoggerFactory.getLogger(UsuarioRolController.class);
 
 	@GetMapping("/abm-rol")
-	public String abmRol(Model model) {
+	public String abmRol(Model model, @RequestParam("size") Optional<Integer> size,HttpSession sesion) {
 		model.addAttribute("usuarioRolModel", new UsuarioRolModel());
 		model.addAttribute("lstRoles", usuarioRolService.findAll());
+		model.addAttribute("user",sesion.getAttribute("user"));
 		return "abm-rol";
 	}
 

@@ -41,8 +41,9 @@
 	
 		<div class="alert alert-primary" role="alert" th:if="${mensaje}" th:unless="${error}" th:text="${mensaje}"></div>
 		<div class="alert alert-danger" role="alert" th:if="${error}" th:text="${error}"></div>
+		 <div th:object=${user}></div>
 		<div class="row mb-3">
-			<div class="col-4">
+			<div class="col-4" th:if="${user.hasRole('ROL_ADMIN')}" >
 				<h3>Datos de Rol</h3>
 				<div class="form-group">
 
@@ -100,18 +101,21 @@
 						<tr th:each="rol: ${lstRoles}">
 							<td><span th:text="${rol.rol}"></td>
 							<td><input type="hidden" th:value="${rol.id}"/></td>
-							<td><a th:href="@{'/admin/rol/bajaUsuarioRol?id=' + ${rol.id}}" class="btn-danger btn-sm"><img  th:src="@{'/images/trash.svg'}" th:text="Eliminar"/></a></td>
-							<td><a th:href="@{'/admin/rol/traerUsuarioRol?id=' + ${rol.id}}" class="btn-warning btn-sm"><img th:src="@{'/images/pencil-square.svg'}" th:text="Editar"/></a></td>
+							<td><a th:if="${user.hasRole('ROL_ADMIN')}" th:href="@{'/admin/rol/bajaUsuarioRol?id=' + ${rol.id}}" class="btn-danger btn-sm"><img  th:src="@{'/images/trash.svg'}" th:text="Eliminar"/></a></td>
+							<td><a th:if="${user.hasRole('ROL_ADMIN')}" th:href="@{'/admin/rol/traerUsuarioRol?id=' + ${rol.id}}" class="btn-warning btn-sm"><img th:src="@{'/images/pencil-square.svg'}" th:text="Editar"/></a></td>
+							
 							
 						</tr>
 					</tbody>
 					
 				</table>
+			
 			</div>
-			<a  th:href="@{usuarioRol/export/pdf}">Generar PDF</a>
-
+  	<a th:if="${user.hasRole('ROL_AUDITOR')}" th:href="@{usuarioRol/export/pdf}">Generar PDF</a>			
 		</div>
+		
 	</div>
+	
 	</div>
 	
 	<div class="jumbotron text-center" style="margin-bottom: 0">

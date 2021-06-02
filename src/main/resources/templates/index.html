@@ -87,9 +87,9 @@
         <li class="nav-item">
           <a class="nav-link active" th:if="${user}" th:href="@{'/admin/usuario/abm-usuario'}">Usuario</a>
         </li>
-      <div th:if="${user.hasRole('ROL_ADMIN')}">
+      <div>
         <li class="nav-item">
-          <a class="nav-link" th:if="${user}" th:href="@{'/admin/rol/abm-rol'}">Rol</a>
+          <a class="nav-link" th:if="${user}"  th:href="@{'/admin/rol/abm-rol'}">Rol</a>
         </li>
       </div>
       </ul>
