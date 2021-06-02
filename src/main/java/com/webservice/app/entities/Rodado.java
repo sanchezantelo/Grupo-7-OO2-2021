@@ -15,7 +15,7 @@ public class Rodado {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idRodado;
 
-	@Column(name = "dominio", nullable = false, length = 10)
+	@Column(name = "dominio", unique = true, length = 10)
 	private String dominio;
 
 	@Column(name = "vehiculo", nullable = false, length = 30)
