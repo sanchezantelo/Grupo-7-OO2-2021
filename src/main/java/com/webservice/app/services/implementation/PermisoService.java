@@ -158,6 +158,7 @@ public class PermisoService implements IPermisoService {
 					LocalDate.parse(fecha.getFechaHasta(), formatter));
 
 			for (Permiso p : lstPermiso) {
+				Hibernate.initialize(p.getDesdeHasta());
 				if (p instanceof PermisoPeriodo) {
 					PermisoPeriodo permiso = (PermisoPeriodo) p;
 					Hibernate.initialize(permiso.getRodado());
@@ -205,6 +206,7 @@ public class PermisoService implements IPermisoService {
 			Lugar lDestino = lugarService.findById(fecha.getLugarDestinoModel().getIdLugar());
 
 			for (Permiso p : lstPermiso) {
+				Hibernate.initialize(p.getDesdeHasta());
 				if (p instanceof PermisoPeriodo) {
 					PermisoPeriodo permiso = (PermisoPeriodo) p;
 					Hibernate.initialize(permiso.getRodado());

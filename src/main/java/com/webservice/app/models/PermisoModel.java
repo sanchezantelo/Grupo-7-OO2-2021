@@ -90,5 +90,7 @@ public abstract class PermisoModel {
 		return "PermisoModel [idPermiso=" + idPermiso + ", persona=" + persona + ", fecha=" + fecha
 				+ ", lugarOrigenModel=" + lugarOrigenModel + ", lugarDestinoModel=" + lugarDestinoModel + "]";
 	}
+	
+	public abstract String infAdicional();
 
 }

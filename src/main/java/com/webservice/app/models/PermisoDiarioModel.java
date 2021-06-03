@@ -29,5 +29,9 @@ public class PermisoDiarioModel extends PermisoModel {
 	public String toString() {
 		return "PermisoDiarioModel [motivo=" + motivo + "]";
 	}
+	
+	public String infAdicional() {
+		return this.motivo;
+	}
 
 }

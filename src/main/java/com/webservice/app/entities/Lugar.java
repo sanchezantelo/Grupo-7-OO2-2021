@@ -32,6 +32,12 @@ public class Lugar {
 		this.codigoPostal = codigoPostal;
 	}
 
+	public Lugar(String lugar, String codigoPostal) {
+		super();
+		this.lugar = lugar;
+		this.codigoPostal = codigoPostal;
+	}
+
 	public int getIdLugar() {
 		return idLugar;
 	}

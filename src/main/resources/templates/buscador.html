@@ -118,7 +118,7 @@
 					 <div class="form-group">				
 						<label>Lugar Origen</label>	
 							<select class="form-control form-control-sm" th:field="*{lugarOrigenModel.idLugar}">
-                              <option th:each="l : ${lugares}" th:value="${l.idLugar}" th:text="${l.lugar+','+ l.codigoPostal}">
+                              <option th:each="l : ${lugares}" th:value="${l.idLugar}" th:text="${l.lugar+' '+ l.codigoPostal}">
                               </option>
 							</select>
 					        
@@ -127,7 +127,7 @@
 						<div class="form-group">
 							<label>Lugar Destino</label> 
 							<select class="form-control form-control-sm" th:field="*{lugarDestinoModel.idLugar}">
-							 <option th:each="lugar : ${lugares}" th:value="${lugar.idLugar}" th:text="${lugar.lugar+','+ lugar.codigoPostal} ">
+							 <option th:each="lugar : ${lugares}" th:value="${lugar.idLugar}" th:text="${lugar.lugar+' '+ lugar.codigoPostal} ">
                               </option>
 							</select>
 			
@@ -149,7 +149,6 @@
 							<th scope="col">Fecha</th>
 							<th scope="col">Desde</th>
 							<th scope="col">Hasta</th>
-							<th scope="col"></th>
 							<th scope="col">Informacion Adicional</th>
 							<th scope="col"></th>
 							<th scope="col"></th>
@@ -171,10 +170,8 @@
 							<td><span th:text="${pperiodo.fecha}"></td>	
 							<td><span th:text="${pperiodo.desdeHasta[1].lugar()}"></td>	
 							<td><span th:text="${pperiodo.desdeHasta[0].lugar()}"></td>	
-							<td><span th:if="${pperiodo instanceof T(com.webservice.app.models.PermisoPeriodoModel)}" th:text="${pperiodo.cantDias}"></td>
-							<td><span th:if="${pperiodo instanceof T(com.webservice.app.models.PermisoPeriodoModel)}" th:text="${pperiodo.vacaciones}"></td>
-							<td><span th:if="${pperiodo instanceof T(com.webservice.app.models.PermisoPeriodoModel)}" th:text="${pperiodo.rodado.dominio}"></td>	
-							<td><span th:if="${pperiodo instanceof T(com.webservice.app.models.PermisoPeriodoModel)}" th:text="${pperiodo.rodado.vehiculo}"></td>		
+							<td><span th:text="${pperiodo.infAdicional()}"></td>	
+							
 							
 								
 						</tr>

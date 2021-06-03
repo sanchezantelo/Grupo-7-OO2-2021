@@ -86,7 +86,7 @@ public abstract class Permiso {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + idPermiso;
+		result = prime * result + ((desdeHasta == null) ? 0 : desdeHasta.hashCode());
 		return result;
 	}
 
@@ -99,9 +99,15 @@ public abstract class Permiso {
 		if (getClass() != obj.getClass())
 			return false;
 		Permiso other = (Permiso) obj;
-		if (idPermiso != other.idPermiso)
+		if (desdeHasta == null) {
+			if (other.desdeHasta != null)
+				return false;
+		} else if (!desdeHasta.equals(other.desdeHasta))
 			return false;
 		return true;
 	}
+	
+	
+	
 
 }

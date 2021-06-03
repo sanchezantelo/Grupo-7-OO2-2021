@@ -20,10 +20,10 @@ public interface IPermisoRepository extends JpaRepository<Permiso, Serializable>
 
 	public abstract Permiso findByPersona(@Param("persona") Persona persona);
 	
-	@Query("SELECT p FROM Permiso p JOIN FETCH p.persona JOIN FETCH p.desdeHasta WHERE p.fecha between :fechaDesde AND :fechaHasta")
+	@Query("SELECT p FROM Permiso p JOIN FETCH p.persona WHERE p.fecha between :fechaDesde AND :fechaHasta")
 	public abstract List<Permiso> findByActivoPermiso(@Param("fechaDesde") LocalDate fechaDesde, @Param("fechaHasta") LocalDate fechaHasta);
 	
-	@Query("SELECT p FROM Permiso p JOIN FETCH p.persona JOIN FETCH p.desdeHasta WHERE p.fecha between :fechaDesde AND :fechaHasta AND :lugarDesde IN p.desdeHasta")
+	@Query("SELECT p FROM Permiso p JOIN FETCH p.persona WHERE p.fecha between :fechaDesde AND :fechaHasta AND :lugarDesde IN p.desdeHasta")
 	public abstract List<Permiso> findByActivoPermisoLugar(@Param("fechaDesde") LocalDate fechaDesde, @Param("fechaHasta") LocalDate fechaHasta,@Param("lugarDesde") Lugar lugarDesde) ;
 
 }

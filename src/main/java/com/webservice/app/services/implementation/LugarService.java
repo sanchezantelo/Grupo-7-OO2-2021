@@ -27,7 +27,7 @@ public class LugarService implements ILugarService {
 	
 	public List<Lugar>  traerTodos(){
 		List<Lugar>lugares=new ArrayList<Lugar>();
-		lugares.add(new Lugar());
+		lugares.add(new Lugar("",""));
 	    Iterator<Lugar> it=lugarRepository.findAll().iterator();
 	    while(it.hasNext()) {
 	    	lugares.add(it.next());

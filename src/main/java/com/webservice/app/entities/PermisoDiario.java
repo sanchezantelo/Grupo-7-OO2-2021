@@ -28,7 +28,6 @@ public class PermisoDiario extends Permiso {
 		this.motivo = motivo;
 	}
 
-	@SuppressWarnings("unlikely-arg-type")
 	@Override
 	public boolean activo(Permiso permiso, LocalDate dia) {
 		boolean habilitado = true;

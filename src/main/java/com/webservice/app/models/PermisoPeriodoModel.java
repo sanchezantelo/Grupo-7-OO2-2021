@@ -53,4 +53,7 @@ public class PermisoPeriodoModel extends PermisoModel {
 		return "PermisoPeriodoModel [cantDias=" + cantDias + ", vacaciones=" + vacaciones + ", rodado=" + rodado + "]";
 	}
 
+	public String infAdicional() {
+		return "Cantidad de dias=" + cantDias + ", Vacaciones=" + vacaciones + ", Rodado=" + rodado + "";
+	}
 }
