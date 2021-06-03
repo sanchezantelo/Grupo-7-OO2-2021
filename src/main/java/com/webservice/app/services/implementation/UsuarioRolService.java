@@ -47,8 +47,9 @@ public class UsuarioRolService implements IUsuarioRolService {
 
 	public void bajaUsuarioRol(int id) throws Exception {
 		UsuarioRol usuarioRol = usuarioRolRepository.findById(id);
+		usuarioRol.setEnabled(false);
 		try {
-			usuarioRolRepository.delete(usuarioRol);
+			usuarioRolRepository.saveAndFlush(usuarioRol);
 		} catch (Exception e) {
 			throw new Exception("No se pudo completar la operación");
 		}
@@ -64,6 +65,6 @@ public class UsuarioRolService implements IUsuarioRolService {
 
 	public List<UsuarioRol> findAll() {
 
-		return usuarioRolRepository.findAll();
+		return usuarioRolRepository.findByEnabled();
 	}
 }

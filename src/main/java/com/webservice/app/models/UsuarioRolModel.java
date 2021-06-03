@@ -3,11 +3,15 @@ package com.webservice.app.models;
 public class UsuarioRolModel {
 	private int id;
 	private String rol;
+	private boolean enabled;
 
-	public UsuarioRolModel(int id, String rol) {
+	
+
+	public UsuarioRolModel(int id, String rol, boolean enabled) {
 		super();
 		this.id = id;
 		this.rol = rol;
+		this.enabled = enabled;
 	}
 
 	public UsuarioRolModel() {
@@ -30,9 +34,19 @@ public class UsuarioRolModel {
 		this.rol = rol;
 	}
 
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
 	@Override
 	public String toString() {
-		return "UsuarioRolModel [id=" + id + ", rol=" + rol + "]";
+		return "UsuarioRolModel [id=" + id + ", rol=" + rol + ", enabled=" + enabled + "]";
 	}
+
+	
 
 }

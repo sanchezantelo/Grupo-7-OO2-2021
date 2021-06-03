@@ -10,11 +10,11 @@ import com.webservice.app.models.UsuarioRolModel;
 public class UsuarioRolConverter {
 	
 	public UsuarioRolModel entityToModel(UsuarioRol usuarioRol){
-        return new UsuarioRolModel(usuarioRol.getId(),usuarioRol.getRol());
+        return new UsuarioRolModel(usuarioRol.getId(),usuarioRol.getRol(),true);
     }
 
     public UsuarioRol modelToEntity(UsuarioRolModel usuarioRolModel){
-        return new UsuarioRol(usuarioRolModel.getId(),usuarioRolModel.getRol());
+        return new UsuarioRol(usuarioRolModel.getId(),usuarioRolModel.getRol(),true);
     }
 
 }

@@ -34,11 +34,11 @@ public class Persona implements Serializable {
 	@Column(name = "apellido", nullable = false, length = 45)
 	private String apellido;
 
-	@Column(name = "tipoDocumento", nullable = false, length = 8)
+	@Column(name = "tipoDocumento", nullable = false)
 	@Enumerated(value = EnumType.STRING)
 	private TipoDocumento tipoDocumento;
 	
-	@Column(name = "dni", unique = true, nullable = false)
+	@Column(name = "dni", unique = true, nullable = false, length = 8)
 	private Long dni;
 	
 	@Column(name = "email", unique = true, nullable = false, length = 45)

@@ -26,8 +26,11 @@ public class UsuarioRol implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@Column(name = "rol",unique = true, nullable = false, length = 100)
+	@Column(name = "rol", unique = true, nullable = false, length = 100)
 	private String rol;
+
+	@Column(name = "enabled", columnDefinition = "boolean default true")
+	private boolean enabled;
 
 	@Column(name = "createdat", updatable = false)
 	@CreationTimestamp
@@ -45,10 +48,11 @@ public class UsuarioRol implements Serializable {
 		this.rol = rol;
 	}
 
-	public UsuarioRol(int id, String rol) {
+	public UsuarioRol(int id, String rol, boolean enabled) {
 		super();
 		this.id = id;
 		this.rol = rol;
+		this.enabled = enabled;
 	}
 
 	public int getId() {
@@ -67,6 +71,14 @@ public class UsuarioRol implements Serializable {
 		this.rol = rol;
 	}
 
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
 	public LocalDateTime getCreatedAt() {
 		return createdAt;
 	}
@@ -82,4 +94,5 @@ public class UsuarioRol implements Serializable {
 	public void setUpdatedAt(LocalDateTime updatedAt) {
 		this.updatedAt = updatedAt;
 	}
+
 }
