@@ -5,17 +5,15 @@ public class UsuarioRolModel {
 	private String rol;
 	private boolean enabled;
 
-	
+	public UsuarioRolModel() {
+		super();
+	}
 
 	public UsuarioRolModel(int id, String rol, boolean enabled) {
 		super();
 		this.id = id;
 		this.rol = rol;
 		this.enabled = enabled;
-	}
-
-	public UsuarioRolModel() {
-		super();
 	}
 
 	public int getId() {
@@ -46,7 +44,5 @@ public class UsuarioRolModel {
 	public String toString() {
 		return "UsuarioRolModel [id=" + id + ", rol=" + rol + ", enabled=" + enabled + "]";
 	}
-
-	
 
 }

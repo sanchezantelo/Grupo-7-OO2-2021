@@ -37,7 +37,7 @@ public class UsuarioRolController {
 	Logger logger = LoggerFactory.getLogger(UsuarioRolController.class);
 
 	@GetMapping("/abm-rol")
-	public String abmRol(Model model, @RequestParam("size") Optional<Integer> size,HttpSession sesion) {
+	public String abmRol(Model model,HttpSession sesion) {
 		model.addAttribute("usuarioRolModel", new UsuarioRolModel());
 		model.addAttribute("lstRoles", usuarioRolService.findAll());
 		model.addAttribute("user",sesion.getAttribute("user"));

@@ -45,7 +45,7 @@
 
       </li> 
         <li class="nav-item">
-        <a class="nav-link" th:href="@{/login}">Iniciar sesión <i class='bx bxs-log-out-circle' ></i></a>     
+        <a class="nav-link" th:if="${user} == null" th:href="@{/login}">Iniciar sesión <i class='bx bxs-log-out-circle' ></i></a>     
       </li>
       </li> 
         <li class="nav-item" th:if="${user}">

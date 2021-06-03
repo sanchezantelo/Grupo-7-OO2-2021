@@ -53,6 +53,10 @@
 							<label>Rol </label> <input type="text"
 								class="form-control form-control-sm" th:field="*{rol}">
 		               	</div>
+		               	<div class="form-group">
+							<input type="hidden"
+								class="form-control form-control-sm" th:field="*{enabled}">
+						</div>
 						<div class="form-group">
 							<input type="submit" class="btn-success form-control form-control-sm"/>
 						</div>
@@ -72,7 +76,12 @@
 						<div class="form-group">
 							<label>Rol </label> <input type="text"
 								class="form-control form-control-sm" th:field="*{rol}">
-                        </div>   
+                        </div> 
+                        <div class="form-group">
+							<input type="hidden"
+								class="form-control form-control-sm" th:field="*{enabled}">
+						</div>
+                          
 						<div class="form-group">
 							<input type="submit" class="btn-success form-control form-control-sm"/>
 						</div>
