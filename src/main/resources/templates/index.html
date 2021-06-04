@@ -26,7 +26,7 @@
   <h1>Website Grupo 07-OO2-2021</h1>
 </div>
 
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark navbar-right">
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark navbar-light">
   <a class="navbar-brand" href="#">Home</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
     <span class="navbar-toggler-icon"></span>
@@ -40,13 +40,20 @@
       <a class="nav-link" th:if="${user} == null" th:href="@{/index/permiso?page=1}">Permiso Periodo</a>
       </li> 
       
-      <li class="nav-item" th:if="${user}">
+        <li class="nav-item" th:if="${user}">
+          <a class="nav-link" th:if="${user}" th:href="@{'/admin/usuario/abm-usuario'}">Usuario</a>
+        </li>
+    
+        <li class="nav-item">
+          <a class="nav-link" th:if="${user}"  th:href="@{'/admin/rol/abm-rol'}">Rol</a>
+        </li>
+          <li class="nav-item" th:if="${user}">
       <a class="nav-link" th:if="${user.hasRole('ROL_AUDITOR')}" th:href="@{/buscador}">Permisos</a>
 
       </li> 
+
         <li class="nav-item">
         <a class="nav-link" th:if="${user} == null" th:href="@{/login}">Iniciar sesión <i class='bx bxs-log-out-circle' ></i></a>     
-      </li>
       </li> 
         <li class="nav-item" th:if="${user}">
         <a class="nav-link" th:href="@{/logout}">Cerrar Sesión <i class='bx bxs-log-out-circle' ></i></a>     
@@ -64,50 +71,21 @@
         <a class="nav-link" th:if="${user}" th:text="${user.persona.nombreApellido()}">
         </a>
       </li> 
-      </li> 
+    
       </ul>
       </div>
   
 </nav>
 
-<div class="container" style="margin-top:30px">
-  <div class="row">
-    <div class="col-sm-4" th:if="${user}">
-      <h2 id="aclaracion">ACLARACION</h2>
-      <h5>Cargar BD</h5>
-      <div class="fakeimg2"></div> 
-        <img alt="info" src="/images/info.png"> <br><br>
-         <p>Archivo: grupo-7-bdd-oo2-2021.sql</p><br>
-           
-      <h3>Links</h3>
-      <p>Seleccione opción:</p>
-      
-
-      <ul th:if="${user}" class="nav nav-pills flex-column">
-        <li class="nav-item">
-          <a class="nav-link active" th:if="${user}" th:href="@{'/admin/usuario/abm-usuario'}">Usuario</a>
-        </li>
-      <div>
-        <li class="nav-item">
-          <a class="nav-link" th:if="${user}"  th:href="@{'/admin/rol/abm-rol'}">Rol</a>
-        </li>
-      </div>
-      </ul>
-      <hr class="d-sm-none">
-    </div>
-    <div class="col-sm-8">
-      <div class="fakeimg2"></div>
-      <h2 id="nosotros">TRABAJO PRÁCTICO CUATRIMESTRAL</h2>
+    <div class="col-sm-12 text-center">
+      <div class="fakeimg2  text-center"></div>
+      <br>
+      <h2 id="nosotros">TRABAJO PRÁCTICO CUATRIMESTRAL </h2>
       <p style="text-align: center; ">
       <p>Esta es la primera y segunda parte que se desarrolo del trabajo práctico de la materia OO2 perteneciente a la UNLa.</p>
              <img alt="web-development" src="/images/web development.png" class="center">
       </div>
       
-  </div>
-</div>
-
-
-
 
 	<div class="jumbotron text-center" style="margin-bottom: 0">
 		<footer id="footer">

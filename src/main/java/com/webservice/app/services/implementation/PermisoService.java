@@ -19,6 +19,7 @@ import com.webservice.app.entities.Lugar;
 import com.webservice.app.entities.Permiso;
 import com.webservice.app.entities.PermisoDiario;
 import com.webservice.app.entities.PermisoPeriodo;
+import com.webservice.app.entities.Persona;
 import com.webservice.app.models.FechaBusquedaModel;
 import com.webservice.app.models.PermisoDiarioModel;
 import com.webservice.app.models.PermisoModel;
@@ -26,6 +27,7 @@ import com.webservice.app.models.PermisoPeriodoModel;
 import com.webservice.app.models.RodadoModel;
 import com.webservice.app.repositories.IPermisoPeriodoRepository;
 import com.webservice.app.repositories.IPermisoRepository;
+import com.webservice.app.repositories.IPersonaRepository;
 import com.webservice.app.services.IPermisoService;
 
 @Service("permisoService")
@@ -38,6 +40,10 @@ public class PermisoService implements IPermisoService {
 	@Autowired
 	@Qualifier("permisoPeriodoRepository")
 	private IPermisoPeriodoRepository permisoPeriodoRepository;
+	
+	@Autowired
+	@Qualifier("personaRepository")
+	private IPersonaRepository personaRepository;
 
 	@Autowired
 	@Qualifier("permisoDiarioModel")
@@ -82,6 +88,10 @@ public class PermisoService implements IPermisoService {
 				Permiso permiso = permisoDiarioModel.modelToEntity((PermisoDiarioModel) permisoModel);
 				permiso.getDesdeHasta().add(lugarService.findById(permisoModel.getLugarOrigenModel().getIdLugar()));
 				permiso.getDesdeHasta().add(lugarService.findById(permisoModel.getLugarDestinoModel().getIdLugar()));
+				Persona persona= personaRepository.findByDni(permisoModel.getPersona().getDni());
+				if(!persona.equals(null)) {
+					permiso.setPersona(persona);
+				}
 				permisoRepository.save(permiso);
 			}
 			if (permisoModel instanceof PermisoPeriodoModel) {

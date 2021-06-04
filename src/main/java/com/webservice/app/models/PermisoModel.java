@@ -92,5 +92,4 @@ public abstract class PermisoModel {
 	}
 	
 	public abstract String infAdicional();
-
 }
