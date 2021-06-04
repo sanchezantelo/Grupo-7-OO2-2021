@@ -204,21 +204,23 @@
 				</div>
 			<div class="col-8" th:if="${permisoPeriodoModel}">
 			<h3>Buscar Permiso Periodo</h3>
-			<form th:action="@{/index/traerPermisoPeriodo}" th:object="${personaModel}"
+			<form class="form-inline" th:action="@{/index/traerPermisoPeriodo}" th:object="${personaModel}"
 						method="post">
 						
-						<div class="form-group">
-							<label>DNI</label> <input type="text"
-								class="form-control form-control-sm" th:field="*{dni}"required>
+							
+						<div class="form-group mx-sm-1 mb-2">
+							<label for="dni" ></label> <input placeholder="Ingrese DNI" type="text"
+							class="form-control" id="dni" 
+								th:field="*{dni}">
 						</div>
-							<div class="form-group">
-							<input type="submit" class="btn-primary form-control form-control-sm" value="Buscar"/>
-						</div>
+							<button type="submit" class="btn btn-primary mb-2">Buscar
+							<img th:src="@{'/images/search.png'}"/>
+							</button>
 						
 			</form>			
 			<!--tabla-->
 			<div style="overflow-x: auto;">
-				<table class="table table-xl-12" th:if="${pperiodo}">
+				<table class="table table-striped" th:if="${pperiodo}">
 					<thead>
 						<tr>
 							<th scope="col">Nombre</th>
@@ -238,8 +240,7 @@
 					</thead>
 					<tbody >
 						<tr th:if="${pperiodo}">
-							<td colspan="2"></td>
-						</tr>
+					
 						<tr>
 							<td><span th:text="${pperiodo.persona.nombre}"></td>
 							<td><span th:text="${pperiodo.persona.apellido}"></td>
@@ -264,21 +265,24 @@
 	
 				<div class="col-8" th:if="${permisoDiarioModel}">
 			<h3>Buscar Permiso Diario</h3>
-			<form th:action="@{/index/traerPermisoDiario}" th:object="${personaModel}"
+			<form class="form-inline" th:action="@{/index/traerPermisoDiario}" th:object="${personaModel}"
 						method="post">
 						
-						<div class="form-group">
-							<label>DNI</label> <input type="text"
-								class="form-control form-control-sm" th:field="*{dni}"required>
+						<div class="form-group mx-sm-1 mb-2">
+							<label for="dni" ></label> <input placeholder="Ingrese DNI" type="text"
+							class="form-control" id="dni" 
+								th:field="*{dni}">
 						</div>
-							<div class="form-group">
-							<input type="submit" class="btn-primary form-control form-control-sm" value="Buscar"/>
-						</div>
+							<button type="submit" class="btn btn-primary mb-2">Buscar
+							<img th:src="@{'/images/search.png'}"/>
+							</button>
 						
-			</form>			
+						
+			</form>		
+ 	
 			<!--tabla-->
 			<div style="overflow-x: auto;">
-				<table class="table table-xl-12" th:if="${pdiario}">
+				<table class="table table-striped" th:if="${pdiario}">
 					<thead>
 						<tr>
 							<th scope="col">Nombre</th>
@@ -294,8 +298,7 @@
 					</thead>
 					<tbody >
 						<tr th:if="${pdiario}">
-							<td colspan="2"></td>
-						</tr>
+						
 						<tr>
 							<td><span th:text="${pdiario.persona.nombre}"></td>
 							<td><span th:text="${pdiario.persona.apellido}"></td>
