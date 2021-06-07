@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import com.webservice.app.converters.LugarConverter;
 import com.webservice.app.converters.PermisoDiarioConverter;
 import com.webservice.app.converters.PermisoPeriodoConverter;
+import com.webservice.app.converters.PersonaConverter;
 import com.webservice.app.converters.RodadoConverter;
 import com.webservice.app.entities.Lugar;
 import com.webservice.app.entities.Permiso;
@@ -24,6 +25,7 @@ import com.webservice.app.models.FechaBusquedaModel;
 import com.webservice.app.models.PermisoDiarioModel;
 import com.webservice.app.models.PermisoModel;
 import com.webservice.app.models.PermisoPeriodoModel;
+import com.webservice.app.models.PersonaModel;
 import com.webservice.app.models.RodadoModel;
 import com.webservice.app.repositories.IPermisoPeriodoRepository;
 import com.webservice.app.repositories.IPermisoRepository;
@@ -62,6 +64,10 @@ public class PermisoService implements IPermisoService {
 	private RodadoConverter rodadoConverter;
 
 	@Autowired
+	@Qualifier("personaModel")
+	private PersonaConverter personaConverter;
+	
+	@Autowired
 	@Qualifier("lugarService")
 	private LugarService lugarService;
 
@@ -73,12 +79,17 @@ public class PermisoService implements IPermisoService {
 	@Qualifier("rodadoService")
 	private RodadoService rodadoService;
 
-	public Permiso findByIdPermiso(int idPermiso) {
-		return permisoRepository.findByIdPermiso(idPermiso);
-	}
 
 	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
+	
+	public Permiso findByIdPermiso(int idPermiso) {
+		return permisoRepository.findByIdPermiso(idPermiso);
+	}
+	
+	public Permiso findByPersona(PersonaModel persona) {
+		return permisoRepository.findByPersona(personaRepository.findByDni(persona.getDni()));
+	}
 	// ALTA PERMISO
 
 	public void altaPermiso(PermisoModel permisoModel) throws Exception {

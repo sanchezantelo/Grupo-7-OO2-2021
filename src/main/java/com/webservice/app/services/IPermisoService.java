@@ -7,11 +7,14 @@ import com.webservice.app.models.FechaBusquedaModel;
 import com.webservice.app.models.PermisoDiarioModel;
 import com.webservice.app.models.PermisoModel;
 import com.webservice.app.models.PermisoPeriodoModel;
+import com.webservice.app.models.PersonaModel;
 import com.webservice.app.models.RodadoModel;
 
 public interface IPermisoService {
 
 	Permiso findByIdPermiso(int idPermiso);
+	
+	Permiso findByPersona(PersonaModel persona);
 
 	void altaPermiso(PermisoModel permisoModel) throws Exception;
 
