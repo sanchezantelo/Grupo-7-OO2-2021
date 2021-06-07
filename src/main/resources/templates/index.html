@@ -39,7 +39,9 @@
       <li class="nav-item" >
       <a class="nav-link" th:if="${user} == null" th:href="@{/index/permiso?page=1}">Permiso Periodo</a>
       </li> 
-      
+      <li class="nav-item" >
+      <a class="nav-link" th:if="${user} == null" th:href="@{/buscarPermiso}">Buscar Permiso</a>
+      </li>
         <li class="nav-item" th:if="${user}">
           <a class="nav-link" th:if="${user}" th:href="@{'/admin/usuario/abm-usuario'}">Usuario</a>
         </li>

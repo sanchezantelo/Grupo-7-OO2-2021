@@ -1,0 +1,125 @@
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<head>
+<title>Website Grupo 07</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<link href='https://unpkg.com/boxicons@2.0.5/css/boxicons.min.css'
+	rel='stylesheet'>
+	 
+<link rel="stylesheet" type="text/css" th:src="@{'/css/formularios.css}">
+<style>
+.fakeimg {
+	height: 200px;
+	background: grey;
+}
+</style>
+</head>
+
+
+<body>
+	<div class="jumbotron text-center" style="margin-bottom: 0">
+		<h1>Website Grupo 07-OO2-2021</h1>
+	</div>
+
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+		<a class="navbar-brand" th:href="@{'/index'}">Inicio</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#collapsibleNavbar">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+	</nav>
+
+	<main role="main" class="container">	
+					<div class="col-8" th:if="${permisoDiarioModel}">
+			<h3>Buscar Permiso Diario</h3>
+			<form class="form-inline" th:action="@{/buscarPermiso/traerPermisoQR}" th:object="${personaModel}"
+						method="post">
+						
+						<div class="form-group mx-sm-1 mb-2">
+							<label for="dni" ></label> <input placeholder="Ingrese DNI" type="text"
+							class="form-control" id="dni" 
+								th:field="*{dni}">
+						</div>
+							<button type="submit" class="btn btn-primary mb-2">Buscar
+							<img th:src="@{'/images/search.png'}"/>
+							</button>
+							<br>
+							<br>
+							<br>
+							<br>
+							<br>
+						
+						
+			</form>		
+ 	
+			<!--tabla-->
+			<div style="overflow-x: auto;">
+				<table class="table table-striped" th:if="${pdiario}">
+					<thead>
+						<tr>
+							<th scope="col">Nombre</th>
+							<th scope="col">Apellido</th>
+							<th scope="col">Tipo Documento</th>
+							<th scope="col">Num Documento</th>
+							<th scope="col">Email</th>
+							<th scope="col">Fecha</th>
+							<th scope="col">Desde</th>
+							<th scope="col">Hasta</th>
+							<th scope="col">Motivo</th>							
+						</tr>
+					</thead>
+					<tbody >
+						<tr th:if="${pdiario}">
+						
+						<tr>
+							<td><span th:text="${pdiario.persona.nombre}"></td>
+							<td><span th:text="${pdiario.persona.apellido}"></td>
+							<td><span th:text="${pdiario.persona.tipoDocumento}"></td>
+							<td><span th:text="${pdiario.persona.dni}"></td>
+							<td><span th:text="${pdiario.persona.email}"></td>				
+							<td><span th:text="${pdiario.fecha}"></td>	
+							<td><span th:text="${pdiario.desdeHasta[1].lugar()}"></td>	
+							<td><span th:text="${pdiario.desdeHasta[0].lugar()}"></td>	
+							<td><span th:text="${pdiario.motivo}"></td>
+															
+						</tr>
+					</tbody>
+				</table>
+		 	 
+	</div>	
+	</div>
+				
+	   	
+   	</main>
+	
+	<div class="jumbotron text-center" style="margin-bottom: 0">
+		<footer id="footer">
+			<div class="contenedor footer-content">
+				<div class="contact-us">
+					<h2 class="brand">Grupo 07-OO2-2021</h2>
+					<p>Sofia Sánchez Antelo </p>
+				</div>
+				<div class="social-media">
+					<a href="https://github.com/sanchezantelo/Grupo-7-OO2-2021"
+						class="social-media-icon" target="_blank"> <i
+						class='bx bxl-github'></i>
+					</a>
+				</div>
+			</div>
+		</footer>
+	</div>
+	
+</body> 
+
+</html>  
+
