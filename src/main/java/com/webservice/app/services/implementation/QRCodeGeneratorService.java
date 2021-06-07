@@ -13,13 +13,13 @@ import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
-import com.webservice.app.services.IQRGeneratorService;
+import com.webservice.app.services.IQRCodeGeneratorService;
 
 
 @Service("qrGeneratorService")
-public class QRGeneratorService implements IQRGeneratorService {
+public class QRCodeGeneratorService implements IQRCodeGeneratorService {
 
-	public static void generateQRCodeImage(String text, int width, int height, String filePath)
+	public void generateQRCodeImage(String text, int width, int height, String filePath)
             throws WriterException, IOException {
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
         BitMatrix bitMatrix = qrCodeWriter.encode(text, BarcodeFormat.QR_CODE, width, height);
@@ -30,7 +30,7 @@ public class QRGeneratorService implements IQRGeneratorService {
     }
 	
 	
-	public static byte[] getQRCodeImage(String text, int width, int height) throws WriterException, IOException {
+	public byte[] getQRCodeImage(String text, int width, int height) throws WriterException, IOException {
 	    QRCodeWriter qrCodeWriter = new QRCodeWriter();
 	    BitMatrix bitMatrix = qrCodeWriter.encode(text, BarcodeFormat.QR_CODE, width, height);
 	    
@@ -39,5 +39,6 @@ public class QRGeneratorService implements IQRGeneratorService {
 	    byte[] pngData = pngOutputStream.toByteArray(); 
 	    return pngData;
 	}
-	
+
 }
+	

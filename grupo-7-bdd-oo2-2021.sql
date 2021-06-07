@@ -1,6 +1,8 @@
+USE `sql10417743`;
+
 -- MySQL dump 10.13  Distrib 8.0.23, for Win64 (x86_64)
 --
--- Host: localhost    Database: grupo-7-bdd-oo2-2021
+-- Host: localhost    Database: sql10417743
 -- ------------------------------------------------------
 -- Server version	8.0.23
 
