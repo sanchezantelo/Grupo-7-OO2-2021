@@ -1,5 +1,7 @@
 package com.webservice.app.models;
 
+import javax.validation.constraints.Size;
+
 import com.webservice.app.entities.TipoDocumento;
 
 public class PersonaModel {
@@ -7,12 +9,13 @@ public class PersonaModel {
 	private String nombre;
 	private String apellido;
 	private TipoDocumento tipoDocumento;
-	private Long dni;
+	@Size(max = 8 ,message="No se puede ingresar mas de 8 digitos")
+	private String dni;
 	private String email;
 
 	public PersonaModel() {}
 	
-	public PersonaModel(int id, String nombre, String apellido, TipoDocumento tipoDocumento, Long dni, String email) {
+	public PersonaModel(int id, String nombre, String apellido, TipoDocumento tipoDocumento, String dni, String email) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -22,7 +25,7 @@ public class PersonaModel {
 		this.email = email;
 	}
 
-	public PersonaModel(String nombre, String apellido, TipoDocumento tipoDocumento, Long dni, String email) {
+	public PersonaModel(String nombre, String apellido, TipoDocumento tipoDocumento, String dni, String email) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -63,11 +66,11 @@ public class PersonaModel {
 		this.tipoDocumento = tipoDocumento;
 	}
 
-	public Long getDni() {
+	public String getDni() {
 		return dni;
 	}
 
-	public void setDni(Long dni) {
+	public void setDni(String dni) {
 		this.dni = dni;
 	}
 

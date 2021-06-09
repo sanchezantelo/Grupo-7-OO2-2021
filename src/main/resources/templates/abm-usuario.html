@@ -84,9 +84,10 @@
 						</div>
 
 						<div class="form-group">
-							<label>Numero de Documento</label> <input type="number"
-								class="form-control form-control-sm" th:field="*{persona.dni}"required>
-						</div>
+							<label>Numero de Documento</label> <input type="text"
+								class="form-control form-control-sm" th:field="*{persona.dni}"required>	
+								<div class="alert alert-danger" th:if="${errorDNI}" th:text="${errorDNI}"></div>					
+                          </div>
 
 						<div class="form-group">
 							<label>Email</label> <input type="email"
@@ -109,6 +110,7 @@
 						<div class="form-group">
 							<input type="submit" class="btn-success form-control form-control-sm"/>
 						</div>
+						
 
 					</form>
 					
@@ -154,8 +156,9 @@
 						</div>
 
 						<div class="form-group">
-							<label>Numero de Documento</label> <input type="number"
+							<label>Numero de Documento</label> <input type="text"
 								class="form-control form-control-sm" th:field="*{persona.dni}">
+								<div class="alert alert-danger" th:if="${errorDNI}" th:text="${errorDNI}"></div>					
 						</div>
 
 						<div class="form-group">
@@ -185,6 +188,7 @@
 			
 		</div>
 		</div>
+		
 		<div class="col-8">
 			<h3>Usuarios</h3>
 			<!--tabla-->
@@ -243,7 +247,7 @@
             
         </div> 
               
-		
+		</div>
 	</div>	
 	<div class="form-group">
                     

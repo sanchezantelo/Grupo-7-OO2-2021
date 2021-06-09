@@ -1,5 +1,8 @@
 package com.webservice.app.models;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
 import com.webservice.app.entities.UsuarioRol;
 
 public class UsuarioModel {
@@ -8,6 +11,8 @@ public class UsuarioModel {
 	private String clave;
 	private boolean enabled;
 	private UsuarioRol rol;
+	@NotNull
+    @Valid
 	private PersonaModel persona;
 
 	public UsuarioModel() {

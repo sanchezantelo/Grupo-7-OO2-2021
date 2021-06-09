@@ -12,11 +12,11 @@ public class PersonaConverter {
 
 
 	public PersonaModel entityToModel(Persona persona){
-        return new PersonaModel(persona.getId(), persona.getNombre(), persona.getApellido(),persona.getTipoDocumento(), persona.getDni(), persona.getEmail());
+        return new PersonaModel(persona.getId(), persona.getNombre(), persona.getApellido(),persona.getTipoDocumento(),String.valueOf(persona.getDni()), persona.getEmail());
     }
 
     public Persona modelToEntity(PersonaModel personaModel){
-        return new Persona(personaModel.getId(),personaModel.getNombre(), personaModel.getApellido() ,personaModel.getTipoDocumento(),personaModel.getDni(),personaModel.getEmail());
+        return new Persona(personaModel.getId(),personaModel.getNombre(), personaModel.getApellido() ,personaModel.getTipoDocumento(),Long.valueOf(personaModel.getDni()),personaModel.getEmail());
     }
 }
 

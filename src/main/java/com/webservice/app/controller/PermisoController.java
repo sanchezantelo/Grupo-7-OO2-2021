@@ -1,11 +1,14 @@
 package com.webservice.app.controller;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +24,7 @@ import com.webservice.app.services.IPermisoService;
 
 @Controller
 @RequestMapping("/index")
+@Validated
 public class PermisoController {
 
 	@Autowired
@@ -51,7 +55,7 @@ public class PermisoController {
 	// ALTA PERMISO DIARIO
 
 	@PostMapping("/altaPermisoDiario")
-	public String altaPermisoDiario(@ModelAttribute("permisoDiarioModel") PermisoDiarioModel permisoDiarioModel,
+	public String altaPermisoDiario(@Valid @ModelAttribute("permisoDiarioModel") PermisoDiarioModel permisoDiarioModel,
 			RedirectAttributes redirectAttrs) {
 		logger.info("/altaPermisoDiario " + permisoDiarioModel);
 		try {
@@ -69,9 +73,10 @@ public class PermisoController {
 	// ALTA PERMISO PERIODO
 
 	@PostMapping("/altaPermisoPeriodo")
-	public String altaPermisoPeriodo(@ModelAttribute("permisoPeriodoModel") PermisoPeriodoModel permisoPeriodoModel,
+	public String altaPermisoPeriodo(@Valid @ModelAttribute("permisoPeriodoModel") PermisoPeriodoModel permisoPeriodoModel,
 			RedirectAttributes redirectAttrs) {
 		logger.info("/altaPermisoPeriodo " + permisoPeriodoModel);
+	
 		try {
 
 			permisoService.altaPermiso(permisoPeriodoModel);
@@ -91,7 +96,7 @@ public class PermisoController {
 			RedirectAttributes redirectAttrs) {
 		logger.info("/traerPermisoPeriodo" + personaModel);
 		try {
-			redirectAttrs.addFlashAttribute("pperiodo", permisoService.findByPersonaPeriodo(personaModel.getDni()))
+			redirectAttrs.addFlashAttribute("pperiodo", permisoService.findByPersonaPeriodo(Long.valueOf(personaModel.getDni())))
 					.addFlashAttribute("clase", "alert alert-success").addAttribute("page", 1);
 		} catch (Exception e) {
 			redirectAttrs.addFlashAttribute("error", e.getMessage()).addFlashAttribute("clase", "alert alert-danger")
@@ -108,7 +113,7 @@ public class PermisoController {
 			RedirectAttributes redirectAttrs) {
 		logger.info("/traerPermisoDiario" + personaModel);
 		try {
-			redirectAttrs.addFlashAttribute("pdiario", permisoService.findByPersonaDiario(personaModel.getDni()))
+			redirectAttrs.addFlashAttribute("pdiario", permisoService.findByPersonaDiario(Long.valueOf(personaModel.getDni())))
 					.addFlashAttribute("clase", "alert alert-success").addAttribute("page", 0);
 		} catch (Exception e) {
 			redirectAttrs.addFlashAttribute("error", e.getMessage()).addFlashAttribute("clase", "alert alert-danger")

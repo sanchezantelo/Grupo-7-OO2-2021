@@ -1,8 +1,13 @@
 package com.webservice.app.models;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
 public class PermisoPeriodoModel extends PermisoModel {
 	private int cantDias;
 	private boolean vacaciones;
+	@NotNull
+    @Valid
 	private RodadoModel rodado;
 
 	public PermisoPeriodoModel() {

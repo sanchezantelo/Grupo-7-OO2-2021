@@ -20,7 +20,6 @@ import com.webservice.app.entities.Lugar;
 import com.webservice.app.entities.Permiso;
 import com.webservice.app.entities.PermisoDiario;
 import com.webservice.app.entities.PermisoPeriodo;
-import com.webservice.app.entities.Persona;
 import com.webservice.app.models.FechaBusquedaModel;
 import com.webservice.app.models.PermisoDiarioModel;
 import com.webservice.app.models.PermisoModel;
@@ -88,7 +87,7 @@ public class PermisoService implements IPermisoService {
 	}
 	
 	public Permiso findByPersona(PersonaModel persona) {
-		return permisoRepository.findByPersona(personaRepository.findByDni(persona.getDni()));
+		return permisoRepository.findByPersona(personaRepository.findByDni(Long.valueOf(persona.getDni())));
 	}
 	// ALTA PERMISO
 
@@ -99,10 +98,10 @@ public class PermisoService implements IPermisoService {
 				Permiso permiso = permisoDiarioModel.modelToEntity((PermisoDiarioModel) permisoModel);
 				permiso.getDesdeHasta().add(lugarService.findById(permisoModel.getLugarOrigenModel().getIdLugar()));
 				permiso.getDesdeHasta().add(lugarService.findById(permisoModel.getLugarDestinoModel().getIdLugar()));
-				Persona persona= personaRepository.findByDni(permisoModel.getPersona().getDni());
-				if(!persona.equals(null)) {
+				//Persona persona= personaRepository.findByDni(Long.parseLong(permisoModel.getPersona().getDni()));
+				/*if(!persona.equals(null)) {
 					permiso.setPersona(persona);
-				}
+				}*/
 				permisoRepository.save(permiso);
 			}
 			if (permisoModel instanceof PermisoPeriodoModel) {

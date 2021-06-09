@@ -1,8 +1,11 @@
 package com.webservice.app.models;
 
+import javax.validation.constraints.Size;
+
 public class RodadoModel {
 
 	private int idRodado;
+	@Size(max = 6 ,message="No se puede ingresar mas de 6 caracteres")
 	private String dominio;
 	private String vehiculo;
 

@@ -3,8 +3,13 @@ package com.webservice.app.models;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
 public abstract class PermisoModel {
 	protected int idPermiso;
+	@NotNull
+    @Valid
 	protected PersonaModel persona;
 	protected String fecha;
 	protected Set<LugarModel> desdeHasta = new HashSet<LugarModel>();

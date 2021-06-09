@@ -9,6 +9,7 @@ import java.util.stream.IntStream;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +19,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,6 +36,7 @@ import com.webservice.app.util.UsuarioPDF;
 
 @Controller
 @RequestMapping("/admin/usuario")
+@Validated
 public class UserController {
 
 	@Autowired
@@ -47,18 +50,18 @@ public class UserController {
 	Logger logger = LoggerFactory.getLogger(UserController.class);
 
 	@GetMapping("/abm-usuario")
-	public String abmUsuario(Model model,@RequestParam("page") Optional<Integer> page,
-			@RequestParam("size") Optional<Integer> size,HttpSession sesion ) {
-		   model.addAttribute("user",sesion.getAttribute("user"));
-		  
+	public String abmUsuario(Model model, @RequestParam("page") Optional<Integer> page,
+			@RequestParam("size") Optional<Integer> size, HttpSession sesion) {
+		model.addAttribute("user", sesion.getAttribute("user"));
+
 		model.addAttribute("usuarioModel", new UsuarioModel());
-		//model.addAttribute("lstUsuarios", usuarioService.findAll());
+		// model.addAttribute("lstUsuarios", usuarioService.findAll());
 		model.addAttribute("lstRoles", usuarioRolService.findAll());
 		model.addAttribute("pageNumbers", IntStream.rangeClosed(1, 5).boxed().collect(Collectors.toList()));
 
 		int currentPage = page.orElse(1);
 		int pageSize = size.orElse(5);
-		logger.info("page "+page+"size "+size);
+		logger.info("page " + page + "size " + size);
 
 		Page<Usuario> lstUsuarios = usuarioService.findPaginated(PageRequest.of(currentPage - 1, pageSize));
 
@@ -75,7 +78,7 @@ public class UserController {
 //ABM
 
 	@PostMapping("/altaUsuario")
-	public String altaUsuario(@ModelAttribute("usuarioModel") UsuarioModel usuarioModel,
+	public String altaUsuario(@Valid @ModelAttribute("usuarioModel") UsuarioModel usuarioModel,
 			RedirectAttributes redirectAttrs) {
 		logger.info("/altaUsuario" + usuarioModel);
 		try {
@@ -104,7 +107,7 @@ public class UserController {
 	}
 
 	@PostMapping("/modificacionUsuario")
-	public String modificacionUsuario(@ModelAttribute("usuarioModelUpdate") UsuarioModel usuarioModelUpdate,
+	public String modificacionUsuario(@Valid@ModelAttribute("usuarioModelUpdate") UsuarioModel usuarioModelUpdate,
 			RedirectAttributes redirectAttrs) {
 		logger.info("/modificacionUsuario" + usuarioModelUpdate);
 		try {
@@ -132,7 +135,7 @@ public class UserController {
 			@RequestParam("size") Optional<Integer> size) {
 		int currentPage = page.orElse(1);
 		int pageSize = size.orElse(5);
-		logger.info("page "+page+"size "+size);
+		logger.info("page " + page + "size " + size);
 
 		Page<Usuario> lstUsuarios = usuarioService.findPaginated(PageRequest.of(currentPage - 1, pageSize));
 
@@ -146,18 +149,19 @@ public class UserController {
 
 		return "redirect:/admin/usuario/abm-usuario";
 	}
-	 @GetMapping("/usuario/export/pdf")
-	    public void exportToPDF(HttpServletResponse response) throws DocumentException, IOException {
-	        response.setContentType("application/pdf");
-	       
-	        String headerKey = "Content-Disposition";
-	        String headerValue = "attachment; filename=usuarios.pdf";
-	        response.setHeader(headerKey, headerValue);
-	         
-	        List<Usuario> lstusuarios = usuarioService.findAll();
-	         
-	        UsuarioPDF exporter = new UsuarioPDF(lstusuarios);
-	        exporter.export(response);
-	         
-	    }
+
+	@GetMapping("/usuario/export/pdf")
+	public void exportToPDF(HttpServletResponse response) throws DocumentException, IOException {
+		response.setContentType("application/pdf");
+
+		String headerKey = "Content-Disposition";
+		String headerValue = "attachment; filename=usuarios.pdf";
+		response.setHeader(headerKey, headerValue);
+
+		List<Usuario> lstusuarios = usuarioService.findAll();
+
+		UsuarioPDF exporter = new UsuarioPDF(lstusuarios);
+		exporter.export(response);
+
+	}
 }
